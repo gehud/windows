@@ -1539,14 +1539,14 @@ impl RemoteSystemSession {
             (windows_core::Interface::vtable(this).ControllerDisplayName)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn Disconnected<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Disconnected<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemSession, RemoteSystemSessionDisconnectedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemSession>, windows_core::Ref<RemoteSystemSessionDisconnectedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Disconnected)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Disconnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemSession, RemoteSystemSessionDisconnectedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDisconnected(&self, token: i64) -> windows_core::Result<()> {
@@ -1623,14 +1623,14 @@ unsafe impl Sync for RemoteSystemSessionAddedEventArgs {}
 pub struct RemoteSystemSessionController(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(RemoteSystemSessionController, windows_core::IUnknown, windows_core::IInspectable);
 impl RemoteSystemSessionController {
-    pub fn JoinRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn JoinRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemSessionController, RemoteSystemSessionJoinRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemSessionController>, windows_core::Ref<RemoteSystemSessionJoinRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).JoinRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).JoinRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemSessionController, RemoteSystemSessionJoinRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveJoinRequested(&self, token: i64) -> windows_core::Result<()> {
@@ -1854,14 +1854,14 @@ impl RemoteSystemSessionInvitationListener {
         static SHARED: windows_core::imp::FactoryCache<RemoteSystemSessionInvitationListener, windows_core::imp::IGenericFactory> = windows_core::imp::FactoryCache::new();
         SHARED.call(callback)
     }
-    pub fn InvitationReceived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn InvitationReceived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemSessionInvitationListener, RemoteSystemSessionInvitationReceivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemSessionInvitationListener>, windows_core::Ref<RemoteSystemSessionInvitationReceivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).InvitationReceived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).InvitationReceived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemSessionInvitationListener, RemoteSystemSessionInvitationReceivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveInvitationReceived(&self, token: i64) -> windows_core::Result<()> {
@@ -2062,14 +2062,14 @@ impl RemoteSystemSessionMessageChannel {
             (windows_core::Interface::vtable(this).SendValueSetToParticipantsAsync)(windows_core::Interface::as_raw(this), messagedata.param().abi(), participants.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn ValueSetReceived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ValueSetReceived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemSessionMessageChannel, RemoteSystemSessionValueSetReceivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemSessionMessageChannel>, windows_core::Ref<RemoteSystemSessionValueSetReceivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ValueSetReceived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ValueSetReceived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemSessionMessageChannel, RemoteSystemSessionValueSetReceivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveValueSetReceived(&self, token: i64) -> windows_core::Result<()> {
@@ -2263,42 +2263,42 @@ impl RemoteSystemSessionParticipantWatcher {
             (windows_core::Interface::vtable(this).Status)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn Added<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Added<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemSessionParticipantWatcher, RemoteSystemSessionParticipantAddedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemSessionParticipantWatcher>, windows_core::Ref<RemoteSystemSessionParticipantAddedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemSessionParticipantWatcher, RemoteSystemSessionParticipantAddedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAdded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAdded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Removed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Removed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemSessionParticipantWatcher, RemoteSystemSessionParticipantRemovedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemSessionParticipantWatcher>, windows_core::Ref<RemoteSystemSessionParticipantRemovedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemSessionParticipantWatcher, RemoteSystemSessionParticipantRemovedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoved(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRemoved)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn EnumerationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn EnumerationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemSessionParticipantWatcher, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemSessionParticipantWatcher>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemSessionParticipantWatcher, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveEnumerationCompleted(&self, token: i64) -> windows_core::Result<()> {
@@ -2438,42 +2438,42 @@ impl RemoteSystemSessionWatcher {
             (windows_core::Interface::vtable(this).Status)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn Added<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Added<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemSessionWatcher, RemoteSystemSessionAddedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemSessionWatcher>, windows_core::Ref<RemoteSystemSessionAddedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemSessionWatcher, RemoteSystemSessionAddedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAdded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAdded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Updated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Updated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemSessionWatcher, RemoteSystemSessionUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemSessionWatcher>, windows_core::Ref<RemoteSystemSessionUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemSessionWatcher, RemoteSystemSessionUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Removed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Removed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemSessionWatcher, RemoteSystemSessionRemovedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemSessionWatcher>, windows_core::Ref<RemoteSystemSessionRemovedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemSessionWatcher, RemoteSystemSessionRemovedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoved(&self, token: i64) -> windows_core::Result<()> {
@@ -2612,70 +2612,70 @@ impl RemoteSystemWatcher {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).Stop)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn RemoteSystemAdded<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RemoteSystemAdded<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemWatcher, RemoteSystemAddedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemWatcher>, windows_core::Ref<RemoteSystemAddedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RemoteSystemAdded)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RemoteSystemAdded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemWatcher, RemoteSystemAddedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoteSystemAdded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRemoteSystemAdded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn RemoteSystemUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RemoteSystemUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemWatcher, RemoteSystemUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemWatcher>, windows_core::Ref<RemoteSystemUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RemoteSystemUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RemoteSystemUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemWatcher, RemoteSystemUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoteSystemUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRemoteSystemUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn RemoteSystemRemoved<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RemoteSystemRemoved<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemWatcher, RemoteSystemRemovedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemWatcher>, windows_core::Ref<RemoteSystemRemovedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RemoteSystemRemoved)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RemoteSystemRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemWatcher, RemoteSystemRemovedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoteSystemRemoved(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRemoteSystemRemoved)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn EnumerationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn EnumerationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemWatcher, RemoteSystemEnumerationCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemWatcher>, windows_core::Ref<RemoteSystemEnumerationCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IRemoteSystemWatcher2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemWatcher, RemoteSystemEnumerationCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveEnumerationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<IRemoteSystemWatcher2>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveEnumerationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ErrorOccurred<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ErrorOccurred<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RemoteSystemWatcher, RemoteSystemWatcherErrorOccurredEventArgs>>,
+        P0: FnMut(windows_core::Ref<RemoteSystemWatcher>, windows_core::Ref<RemoteSystemWatcherErrorOccurredEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IRemoteSystemWatcher2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ErrorOccurred)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ErrorOccurred)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RemoteSystemWatcher, RemoteSystemWatcherErrorOccurredEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveErrorOccurred(&self, token: i64) -> windows_core::Result<()> {

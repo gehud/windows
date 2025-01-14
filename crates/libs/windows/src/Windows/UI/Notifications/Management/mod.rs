@@ -45,14 +45,14 @@ impl UserNotificationListener {
             (windows_core::Interface::vtable(this).GetAccessStatus)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn NotificationChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NotificationChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<UserNotificationListener, super::UserNotificationChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserNotificationListener>, windows_core::Ref<super::UserNotificationChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NotificationChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NotificationChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<UserNotificationListener, super::UserNotificationChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNotificationChanged(&self, token: i64) -> windows_core::Result<()> {

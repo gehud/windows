@@ -336,14 +336,14 @@ impl WiFiDirectAdvertisementPublisher {
             (windows_core::Interface::vtable(this).Status)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn StatusChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StatusChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<WiFiDirectAdvertisementPublisher, WiFiDirectAdvertisementPublisherStatusChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<WiFiDirectAdvertisementPublisher>, windows_core::Ref<WiFiDirectAdvertisementPublisherStatusChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StatusChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StatusChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<WiFiDirectAdvertisementPublisher, WiFiDirectAdvertisementPublisherStatusChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStatusChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -444,14 +444,14 @@ impl WiFiDirectConnectionListener {
         static SHARED: windows_core::imp::FactoryCache<WiFiDirectConnectionListener, windows_core::imp::IGenericFactory> = windows_core::imp::FactoryCache::new();
         SHARED.call(callback)
     }
-    pub fn ConnectionRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ConnectionRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<WiFiDirectConnectionListener, WiFiDirectConnectionRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<WiFiDirectConnectionListener>, windows_core::Ref<WiFiDirectConnectionRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ConnectionRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ConnectionRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<WiFiDirectConnectionListener, WiFiDirectConnectionRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveConnectionRequested(&self, token: i64) -> windows_core::Result<()> {
@@ -639,14 +639,14 @@ impl WiFiDirectDevice {
             (windows_core::Interface::vtable(this).DeviceId)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn ConnectionStatusChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ConnectionStatusChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<WiFiDirectDevice, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<WiFiDirectDevice>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ConnectionStatusChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ConnectionStatusChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<WiFiDirectDevice, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveConnectionStatusChanged(&self, token: i64) -> windows_core::Result<()> {

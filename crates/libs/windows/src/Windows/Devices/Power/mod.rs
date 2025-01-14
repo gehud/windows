@@ -17,14 +17,14 @@ impl Battery {
             (windows_core::Interface::vtable(this).GetReport)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn ReportUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ReportUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<Battery, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<Battery>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ReportUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ReportUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<Battery, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveReportUpdated(&self, token: i64) -> windows_core::Result<()> {
@@ -259,13 +259,13 @@ impl PowerGridForecast {
             (windows_core::Interface::vtable(this).GetForecast)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn ForecastUpdated<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn ForecastUpdated<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IPowerGridForecastStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ForecastUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ForecastUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveForecastUpdated(token: i64) -> windows_core::Result<()> {

@@ -78,25 +78,25 @@ impl CoreApplication {
             (windows_core::Interface::vtable(this).Id)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         })
     }
-    pub fn Suspending<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn Suspending<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<super::SuspendingEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<super::SuspendingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::ICoreApplication(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Suspending)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Suspending)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<super::SuspendingEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveSuspending(token: i64) -> windows_core::Result<()> {
         Self::ICoreApplication(|this| unsafe { (windows_core::Interface::vtable(this).RemoveSuspending)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn Resuming<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn Resuming<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::ICoreApplication(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Resuming)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Resuming)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveResuming(token: i64) -> windows_core::Result<()> {
@@ -128,37 +128,37 @@ impl CoreApplication {
         Self::ICoreApplication(|this| unsafe { (windows_core::Interface::vtable(this).RunWithActivationFactories)(windows_core::Interface::as_raw(this), activationfactorycallback.param().abi()).ok() })
     }
     #[cfg(feature = "ApplicationModel_Activation")]
-    pub fn BackgroundActivated<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn BackgroundActivated<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<super::Activation::BackgroundActivatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<super::Activation::BackgroundActivatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::ICoreApplication2(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).BackgroundActivated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).BackgroundActivated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<super::Activation::BackgroundActivatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveBackgroundActivated(token: i64) -> windows_core::Result<()> {
         Self::ICoreApplication2(|this| unsafe { (windows_core::Interface::vtable(this).RemoveBackgroundActivated)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn LeavingBackground<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn LeavingBackground<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<super::LeavingBackgroundEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<super::LeavingBackgroundEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::ICoreApplication2(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).LeavingBackground)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).LeavingBackground)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<super::LeavingBackgroundEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveLeavingBackground(token: i64) -> windows_core::Result<()> {
         Self::ICoreApplication2(|this| unsafe { (windows_core::Interface::vtable(this).RemoveLeavingBackground)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn EnteredBackground<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn EnteredBackground<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<super::EnteredBackgroundEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<super::EnteredBackgroundEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::ICoreApplication2(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).EnteredBackground)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).EnteredBackground)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<super::EnteredBackgroundEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveEnteredBackground(token: i64) -> windows_core::Result<()> {
@@ -186,25 +186,25 @@ impl CoreApplication {
     pub fn Exit() -> windows_core::Result<()> {
         Self::ICoreApplicationExit(|this| unsafe { (windows_core::Interface::vtable(this).Exit)(windows_core::Interface::as_raw(this)).ok() })
     }
-    pub fn Exiting<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn Exiting<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::ICoreApplicationExit(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Exiting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Exiting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveExiting(token: i64) -> windows_core::Result<()> {
         Self::ICoreApplicationExit(|this| unsafe { (windows_core::Interface::vtable(this).RemoveExiting)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn UnhandledErrorDetected<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn UnhandledErrorDetected<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<UnhandledErrorDetectedEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<UnhandledErrorDetectedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::ICoreApplicationUnhandledError(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UnhandledErrorDetected)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UnhandledErrorDetected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<UnhandledErrorDetectedEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveUnhandledErrorDetected(token: i64) -> windows_core::Result<()> {
@@ -304,14 +304,14 @@ impl CoreApplicationView {
         }
     }
     #[cfg(feature = "ApplicationModel_Activation")]
-    pub fn Activated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Activated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<CoreApplicationView, super::Activation::IActivatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreApplicationView>, windows_core::Ref<super::Activation::IActivatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Activated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Activated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<CoreApplicationView, super::Activation::IActivatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveActivated(&self, token: i64) -> windows_core::Result<()> {
@@ -354,14 +354,14 @@ impl CoreApplicationView {
             (windows_core::Interface::vtable(this).TitleBar)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn HostedViewClosing<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn HostedViewClosing<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<CoreApplicationView, HostedViewClosingEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreApplicationView>, windows_core::Ref<HostedViewClosingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<ICoreApplicationView3>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HostedViewClosing)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HostedViewClosing)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<CoreApplicationView, HostedViewClosingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHostedViewClosing(&self, token: i64) -> windows_core::Result<()> {
@@ -432,14 +432,14 @@ impl CoreApplicationViewTitleBar {
             (windows_core::Interface::vtable(this).Height)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn LayoutMetricsChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn LayoutMetricsChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<CoreApplicationViewTitleBar, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<CoreApplicationViewTitleBar>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).LayoutMetricsChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).LayoutMetricsChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<CoreApplicationViewTitleBar, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveLayoutMetricsChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -453,14 +453,14 @@ impl CoreApplicationViewTitleBar {
             (windows_core::Interface::vtable(this).IsVisible)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn IsVisibleChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn IsVisibleChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<CoreApplicationViewTitleBar, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<CoreApplicationViewTitleBar>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).IsVisibleChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).IsVisibleChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<CoreApplicationViewTitleBar, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveIsVisibleChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -611,14 +611,14 @@ impl windows_core::RuntimeType for ICoreApplicationUnhandledError {
 }
 windows_core::imp::interface_hierarchy!(ICoreApplicationUnhandledError, windows_core::IUnknown, windows_core::IInspectable);
 impl ICoreApplicationUnhandledError {
-    pub fn UnhandledErrorDetected<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UnhandledErrorDetected<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<UnhandledErrorDetectedEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<UnhandledErrorDetectedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UnhandledErrorDetected)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UnhandledErrorDetected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<UnhandledErrorDetectedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUnhandledErrorDetected(&self, token: i64) -> windows_core::Result<()> {

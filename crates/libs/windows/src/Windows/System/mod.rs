@@ -153,56 +153,56 @@ unsafe impl Sync for AppDiagnosticInfo {}
 pub struct AppDiagnosticInfoWatcher(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(AppDiagnosticInfoWatcher, windows_core::IUnknown, windows_core::IInspectable);
 impl AppDiagnosticInfoWatcher {
-    pub fn Added<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Added<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<AppDiagnosticInfoWatcher, AppDiagnosticInfoWatcherEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppDiagnosticInfoWatcher>, windows_core::Ref<AppDiagnosticInfoWatcherEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<AppDiagnosticInfoWatcher, AppDiagnosticInfoWatcherEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAdded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAdded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Removed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Removed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<AppDiagnosticInfoWatcher, AppDiagnosticInfoWatcherEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppDiagnosticInfoWatcher>, windows_core::Ref<AppDiagnosticInfoWatcherEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<AppDiagnosticInfoWatcher, AppDiagnosticInfoWatcherEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoved(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRemoved)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn EnumerationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn EnumerationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<AppDiagnosticInfoWatcher, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AppDiagnosticInfoWatcher>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<AppDiagnosticInfoWatcher, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveEnumerationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveEnumerationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Stopped<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Stopped<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<AppDiagnosticInfoWatcher, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AppDiagnosticInfoWatcher>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Stopped)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Stopped)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<AppDiagnosticInfoWatcher, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStopped(&self, token: i64) -> windows_core::Result<()> {
@@ -568,70 +568,70 @@ unsafe impl Sync for AppResourceGroupInfo {}
 pub struct AppResourceGroupInfoWatcher(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(AppResourceGroupInfoWatcher, windows_core::IUnknown, windows_core::IInspectable);
 impl AppResourceGroupInfoWatcher {
-    pub fn Added<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Added<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<AppResourceGroupInfoWatcher, AppResourceGroupInfoWatcherEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppResourceGroupInfoWatcher>, windows_core::Ref<AppResourceGroupInfoWatcherEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<AppResourceGroupInfoWatcher, AppResourceGroupInfoWatcherEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAdded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAdded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Removed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Removed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<AppResourceGroupInfoWatcher, AppResourceGroupInfoWatcherEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppResourceGroupInfoWatcher>, windows_core::Ref<AppResourceGroupInfoWatcherEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<AppResourceGroupInfoWatcher, AppResourceGroupInfoWatcherEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoved(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRemoved)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn EnumerationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn EnumerationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<AppResourceGroupInfoWatcher, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AppResourceGroupInfoWatcher>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<AppResourceGroupInfoWatcher, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveEnumerationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveEnumerationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Stopped<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Stopped<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<AppResourceGroupInfoWatcher, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AppResourceGroupInfoWatcher>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Stopped)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Stopped)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<AppResourceGroupInfoWatcher, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStopped(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveStopped)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ExecutionStateChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ExecutionStateChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<AppResourceGroupInfoWatcher, AppResourceGroupInfoWatcherExecutionStateChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppResourceGroupInfoWatcher>, windows_core::Ref<AppResourceGroupInfoWatcherExecutionStateChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ExecutionStateChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ExecutionStateChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<AppResourceGroupInfoWatcher, AppResourceGroupInfoWatcherExecutionStateChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveExecutionStateChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -1089,48 +1089,48 @@ impl DispatcherQueue {
             (windows_core::Interface::vtable(this).CreateTimer)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn TryEnqueue<P0>(&self, callback: P0) -> windows_core::Result<bool>
+    pub fn TryEnqueue<P0>(&self, callback: Option<P0>) -> windows_core::Result<bool>
     where
-        P0: windows_core::Param<DispatcherQueueHandler>,
+        P0: FnMut() -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TryEnqueue)(windows_core::Interface::as_raw(this), callback.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TryEnqueue)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&callback.map(|closure| DispatcherQueueHandler::new(closure))), &mut result__).map(|| result__)
         }
     }
-    pub fn TryEnqueueWithPriority<P1>(&self, priority: DispatcherQueuePriority, callback: P1) -> windows_core::Result<bool>
+    pub fn TryEnqueueWithPriority<P1>(&self, priority: DispatcherQueuePriority, callback: Option<P1>) -> windows_core::Result<bool>
     where
-        P1: windows_core::Param<DispatcherQueueHandler>,
+        P1: FnMut() -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TryEnqueueWithPriority)(windows_core::Interface::as_raw(this), priority, callback.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TryEnqueueWithPriority)(windows_core::Interface::as_raw(this), priority, core::mem::transmute_copy(&callback.map(|closure| DispatcherQueueHandler::new(closure))), &mut result__).map(|| result__)
         }
     }
-    pub fn ShutdownStarting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ShutdownStarting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<DispatcherQueue, DispatcherQueueShutdownStartingEventArgs>>,
+        P0: FnMut(windows_core::Ref<DispatcherQueue>, windows_core::Ref<DispatcherQueueShutdownStartingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ShutdownStarting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ShutdownStarting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<DispatcherQueue, DispatcherQueueShutdownStartingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveShutdownStarting(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveShutdownStarting)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ShutdownCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ShutdownCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<DispatcherQueue, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DispatcherQueue>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ShutdownCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ShutdownCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<DispatcherQueue, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveShutdownCompleted(&self, token: i64) -> windows_core::Result<()> {
@@ -1355,14 +1355,14 @@ impl DispatcherQueueTimer {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).Stop)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn Tick<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Tick<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<DispatcherQueueTimer, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DispatcherQueueTimer>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Tick)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Tick)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<DispatcherQueueTimer, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTick(&self, token: i64) -> windows_core::Result<()> {
@@ -3269,37 +3269,37 @@ impl MemoryManager {
             (windows_core::Interface::vtable(this).AppMemoryUsageLevel)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         })
     }
-    pub fn AppMemoryUsageIncreased<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn AppMemoryUsageIncreased<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IMemoryManagerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AppMemoryUsageIncreased)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AppMemoryUsageIncreased)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveAppMemoryUsageIncreased(token: i64) -> windows_core::Result<()> {
         Self::IMemoryManagerStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveAppMemoryUsageIncreased)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn AppMemoryUsageDecreased<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn AppMemoryUsageDecreased<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IMemoryManagerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AppMemoryUsageDecreased)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AppMemoryUsageDecreased)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveAppMemoryUsageDecreased(token: i64) -> windows_core::Result<()> {
         Self::IMemoryManagerStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveAppMemoryUsageDecreased)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn AppMemoryUsageLimitChanging<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn AppMemoryUsageLimitChanging<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::EventHandler<AppMemoryUsageLimitChangingEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<AppMemoryUsageLimitChangingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IMemoryManagerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AppMemoryUsageLimitChanging)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AppMemoryUsageLimitChanging)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::EventHandler::<AppMemoryUsageLimitChangingEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveAppMemoryUsageLimitChanging(token: i64) -> windows_core::Result<()> {
@@ -4043,13 +4043,13 @@ impl UserDeviceAssociation {
             (windows_core::Interface::vtable(this).FindUserFromDeviceId)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(deviceid), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn UserDeviceAssociationChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn UserDeviceAssociationChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::EventHandler<UserDeviceAssociationChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<UserDeviceAssociationChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IUserDeviceAssociationStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UserDeviceAssociationChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UserDeviceAssociationChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::EventHandler::<UserDeviceAssociationChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveUserDeviceAssociationChanged(token: i64) -> windows_core::Result<()> {
@@ -4220,98 +4220,98 @@ impl UserWatcher {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).Stop)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn Added<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Added<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<UserWatcher, UserChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserWatcher>, windows_core::Ref<UserChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<UserWatcher, UserChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAdded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAdded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Removed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Removed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<UserWatcher, UserChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserWatcher>, windows_core::Ref<UserChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<UserWatcher, UserChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoved(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRemoved)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Updated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Updated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<UserWatcher, UserChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserWatcher>, windows_core::Ref<UserChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<UserWatcher, UserChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn AuthenticationStatusChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AuthenticationStatusChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<UserWatcher, UserChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserWatcher>, windows_core::Ref<UserChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AuthenticationStatusChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AuthenticationStatusChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<UserWatcher, UserChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAuthenticationStatusChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAuthenticationStatusChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn AuthenticationStatusChanging<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AuthenticationStatusChanging<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<UserWatcher, UserAuthenticationStatusChangingEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserWatcher>, windows_core::Ref<UserAuthenticationStatusChangingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AuthenticationStatusChanging)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AuthenticationStatusChanging)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<UserWatcher, UserAuthenticationStatusChangingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAuthenticationStatusChanging(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAuthenticationStatusChanging)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn EnumerationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn EnumerationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<UserWatcher, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<UserWatcher>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<UserWatcher, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveEnumerationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveEnumerationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Stopped<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Stopped<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<UserWatcher, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<UserWatcher>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Stopped)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Stopped)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<UserWatcher, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStopped(&self, token: i64) -> windows_core::Result<()> {

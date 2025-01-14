@@ -1304,76 +1304,76 @@ impl windows_core::RuntimeName for SuspendingOperation {
 pub struct WebUIApplication;
 impl WebUIApplication {
     #[cfg(feature = "ApplicationModel_Activation")]
-    pub fn Activated<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn Activated<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<ActivatedEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<super::super::ApplicationModel::Activation::IActivatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IWebUIActivationStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Activated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Activated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| ActivatedEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveActivated(token: i64) -> windows_core::Result<()> {
         Self::IWebUIActivationStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveActivated)(windows_core::Interface::as_raw(this), token).ok() })
     }
     #[cfg(feature = "ApplicationModel")]
-    pub fn Suspending<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn Suspending<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<SuspendingEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<super::super::ApplicationModel::ISuspendingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IWebUIActivationStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Suspending)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Suspending)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| SuspendingEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveSuspending(token: i64) -> windows_core::Result<()> {
         Self::IWebUIActivationStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveSuspending)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn Resuming<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn Resuming<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<ResumingEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IWebUIActivationStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Resuming)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Resuming)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| ResumingEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveResuming(token: i64) -> windows_core::Result<()> {
         Self::IWebUIActivationStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveResuming)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn Navigated<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn Navigated<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<NavigatedEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<IWebUINavigatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IWebUIActivationStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Navigated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Navigated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| NavigatedEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveNavigated(token: i64) -> windows_core::Result<()> {
         Self::IWebUIActivationStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveNavigated)(windows_core::Interface::as_raw(this), token).ok() })
     }
     #[cfg(feature = "ApplicationModel")]
-    pub fn LeavingBackground<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn LeavingBackground<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<LeavingBackgroundEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<super::super::ApplicationModel::ILeavingBackgroundEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IWebUIActivationStatics2(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).LeavingBackground)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).LeavingBackground)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| LeavingBackgroundEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveLeavingBackground(token: i64) -> windows_core::Result<()> {
         Self::IWebUIActivationStatics2(|this| unsafe { (windows_core::Interface::vtable(this).RemoveLeavingBackground)(windows_core::Interface::as_raw(this), token).ok() })
     }
     #[cfg(feature = "ApplicationModel")]
-    pub fn EnteredBackground<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn EnteredBackground<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<EnteredBackgroundEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<super::super::ApplicationModel::IEnteredBackgroundEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IWebUIActivationStatics2(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).EnteredBackground)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).EnteredBackground)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| EnteredBackgroundEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveEnteredBackground(token: i64) -> windows_core::Result<()> {
@@ -1399,26 +1399,26 @@ impl WebUIApplication {
             (windows_core::Interface::vtable(this).RequestRestartForUserAsync)(windows_core::Interface::as_raw(this), user.param().abi(), core::mem::transmute_copy(launcharguments), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn NewWebUIViewCreated<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn NewWebUIViewCreated<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<NewWebUIViewCreatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<NewWebUIViewCreatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IWebUIActivationStatics4(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NewWebUIViewCreated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NewWebUIViewCreated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<NewWebUIViewCreatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveNewWebUIViewCreated(token: i64) -> windows_core::Result<()> {
         Self::IWebUIActivationStatics4(|this| unsafe { (windows_core::Interface::vtable(this).RemoveNewWebUIViewCreated)(windows_core::Interface::as_raw(this), token).ok() })
     }
     #[cfg(feature = "ApplicationModel_Activation")]
-    pub fn BackgroundActivated<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn BackgroundActivated<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<BackgroundActivatedEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<super::super::ApplicationModel::Activation::IBackgroundActivatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IWebUIActivationStatics4(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).BackgroundActivated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).BackgroundActivated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| BackgroundActivatedEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveBackgroundActivated(token: i64) -> windows_core::Result<()> {
@@ -1896,14 +1896,14 @@ impl WebUIBackgroundTaskInstanceRuntimeClass {
             (windows_core::Interface::vtable(this).TriggerDetails)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn Canceled<P0>(&self, cancelhandler: P0) -> windows_core::Result<i64>
+    pub fn Canceled<P0>(&self, cancelhandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::ApplicationModel::Background::BackgroundTaskCanceledEventHandler>,
+        P0: FnMut(windows_core::Ref<super::super::ApplicationModel::Background::IBackgroundTaskInstance>, super::super::ApplicationModel::Background::BackgroundTaskCancellationReason) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::ApplicationModel::Background::IBackgroundTaskInstance>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Canceled)(windows_core::Interface::as_raw(this), cancelhandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Canceled)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&cancelhandler.map(|closure| super::super::ApplicationModel::Background::BackgroundTaskCanceledEventHandler::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCanceled(&self, cookie: i64) -> windows_core::Result<()> {
@@ -4712,14 +4712,14 @@ impl WebUIView {
             (windows_core::Interface::vtable(this).ApplicationViewId)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn Closed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Closed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<WebUIView, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<WebUIView>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<WebUIView, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveClosed(&self, token: i64) -> windows_core::Result<()> {
@@ -4727,14 +4727,14 @@ impl WebUIView {
         unsafe { (windows_core::Interface::vtable(this).RemoveClosed)(windows_core::Interface::as_raw(this), token).ok() }
     }
     #[cfg(feature = "ApplicationModel_Activation")]
-    pub fn Activated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Activated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<WebUIView, super::super::ApplicationModel::Activation::IActivatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<WebUIView>, windows_core::Ref<super::super::ApplicationModel::Activation::IActivatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Activated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Activated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<WebUIView, super::super::ApplicationModel::Activation::IActivatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveActivated(&self, token: i64) -> windows_core::Result<()> {
@@ -4920,238 +4920,238 @@ impl WebUIView {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).GetDeferredPermissionRequestById)(windows_core::Interface::as_raw(this), id, result as *mut _ as _).ok() }
     }
-    pub fn NavigationStarting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NavigationStarting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlNavigationStartingEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlNavigationStartingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NavigationStarting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NavigationStarting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlNavigationStartingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNavigationStarting(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveNavigationStarting)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ContentLoading<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ContentLoading<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlContentLoadingEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlContentLoadingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ContentLoading)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ContentLoading)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlContentLoadingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveContentLoading(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveContentLoading)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DOMContentLoaded<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DOMContentLoaded<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlDOMContentLoadedEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlDOMContentLoadedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DOMContentLoaded)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DOMContentLoaded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlDOMContentLoadedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDOMContentLoaded(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveDOMContentLoaded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn NavigationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NavigationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlNavigationCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlNavigationCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NavigationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NavigationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlNavigationCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNavigationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveNavigationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn FrameNavigationStarting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FrameNavigationStarting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlNavigationStartingEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlNavigationStartingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FrameNavigationStarting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FrameNavigationStarting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlNavigationStartingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFrameNavigationStarting(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveFrameNavigationStarting)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn FrameContentLoading<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FrameContentLoading<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlContentLoadingEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlContentLoadingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FrameContentLoading)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FrameContentLoading)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlContentLoadingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFrameContentLoading(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveFrameContentLoading)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn FrameDOMContentLoaded<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FrameDOMContentLoaded<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlDOMContentLoadedEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlDOMContentLoadedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FrameDOMContentLoaded)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FrameDOMContentLoaded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlDOMContentLoadedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFrameDOMContentLoaded(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveFrameDOMContentLoaded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn FrameNavigationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FrameNavigationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlNavigationCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlNavigationCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FrameNavigationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FrameNavigationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlNavigationCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFrameNavigationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveFrameNavigationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ScriptNotify<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ScriptNotify<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlScriptNotifyEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlScriptNotifyEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ScriptNotify)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ScriptNotify)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlScriptNotifyEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveScriptNotify(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveScriptNotify)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn LongRunningScriptDetected<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn LongRunningScriptDetected<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlLongRunningScriptDetectedEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlLongRunningScriptDetectedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).LongRunningScriptDetected)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).LongRunningScriptDetected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlLongRunningScriptDetectedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveLongRunningScriptDetected(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveLongRunningScriptDetected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn UnsafeContentWarningDisplaying<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UnsafeContentWarningDisplaying<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UnsafeContentWarningDisplaying)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UnsafeContentWarningDisplaying)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUnsafeContentWarningDisplaying(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveUnsafeContentWarningDisplaying)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn UnviewableContentIdentified<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UnviewableContentIdentified<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlUnviewableContentIdentifiedEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlUnviewableContentIdentifiedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UnviewableContentIdentified)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UnviewableContentIdentified)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlUnviewableContentIdentifiedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUnviewableContentIdentified(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveUnviewableContentIdentified)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn PermissionRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PermissionRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlPermissionRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlPermissionRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PermissionRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PermissionRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlPermissionRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePermissionRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemovePermissionRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn UnsupportedUriSchemeIdentified<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UnsupportedUriSchemeIdentified<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlUnsupportedUriSchemeIdentifiedEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlUnsupportedUriSchemeIdentifiedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UnsupportedUriSchemeIdentified)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UnsupportedUriSchemeIdentified)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlUnsupportedUriSchemeIdentifiedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUnsupportedUriSchemeIdentified(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveUnsupportedUriSchemeIdentified)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn NewWindowRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NewWindowRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlNewWindowRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlNewWindowRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NewWindowRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NewWindowRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlNewWindowRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNewWindowRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveNewWindowRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ContainsFullScreenElementChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ContainsFullScreenElementChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ContainsFullScreenElementChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ContainsFullScreenElementChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveContainsFullScreenElementChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveContainsFullScreenElementChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn WebResourceRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn WebResourceRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlWebResourceRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<super::super::Web::UI::IWebViewControl>, windows_core::Ref<super::super::Web::UI::WebViewControlWebResourceRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::super::Web::UI::IWebViewControl>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).WebResourceRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).WebResourceRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<super::super::Web::UI::IWebViewControl, super::super::Web::UI::WebViewControlWebResourceRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveWebResourceRequested(&self, token: i64) -> windows_core::Result<()> {

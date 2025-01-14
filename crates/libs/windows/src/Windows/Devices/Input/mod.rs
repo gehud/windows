@@ -328,14 +328,14 @@ impl windows_core::RuntimeType for MouseDelta {
 pub struct MouseDevice(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(MouseDevice, windows_core::IUnknown, windows_core::IInspectable);
 impl MouseDevice {
-    pub fn MouseMoved<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn MouseMoved<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MouseDevice, MouseEventArgs>>,
+        P0: FnMut(windows_core::Ref<MouseDevice>, windows_core::Ref<MouseEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MouseMoved)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MouseMoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MouseDevice, MouseEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMouseMoved(&self, cookie: i64) -> windows_core::Result<()> {
@@ -398,56 +398,56 @@ impl PenButtonListener {
             (windows_core::Interface::vtable(this).IsSupported)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn IsSupportedChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn IsSupportedChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PenButtonListener, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<PenButtonListener>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).IsSupportedChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).IsSupportedChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PenButtonListener, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveIsSupportedChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveIsSupportedChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn TailButtonClicked<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn TailButtonClicked<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PenButtonListener, PenTailButtonClickedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PenButtonListener>, windows_core::Ref<PenTailButtonClickedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TailButtonClicked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TailButtonClicked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PenButtonListener, PenTailButtonClickedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTailButtonClicked(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveTailButtonClicked)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn TailButtonDoubleClicked<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn TailButtonDoubleClicked<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PenButtonListener, PenTailButtonDoubleClickedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PenButtonListener>, windows_core::Ref<PenTailButtonDoubleClickedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TailButtonDoubleClicked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TailButtonDoubleClicked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PenButtonListener, PenTailButtonDoubleClickedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTailButtonDoubleClicked(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveTailButtonDoubleClicked)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn TailButtonLongPressed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn TailButtonLongPressed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PenButtonListener, PenTailButtonLongPressedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PenButtonListener>, windows_core::Ref<PenTailButtonLongPressedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TailButtonLongPressed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TailButtonLongPressed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PenButtonListener, PenTailButtonLongPressedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTailButtonLongPressed(&self, token: i64) -> windows_core::Result<()> {
@@ -532,42 +532,42 @@ impl PenDockListener {
             (windows_core::Interface::vtable(this).IsSupported)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn IsSupportedChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn IsSupportedChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PenDockListener, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<PenDockListener>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).IsSupportedChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).IsSupportedChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PenDockListener, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveIsSupportedChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveIsSupportedChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Docked<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Docked<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PenDockListener, PenDockedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PenDockListener>, windows_core::Ref<PenDockedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Docked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Docked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PenDockListener, PenDockedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDocked(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDocked)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Undocked<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Undocked<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PenDockListener, PenUndockedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PenDockListener>, windows_core::Ref<PenUndockedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Undocked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Undocked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PenDockListener, PenUndockedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUndocked(&self, token: i64) -> windows_core::Result<()> {

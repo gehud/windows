@@ -35,14 +35,14 @@ impl CustomSensor {
             (windows_core::Interface::vtable(this).DeviceId)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn ReadingChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ReadingChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CustomSensor, CustomSensorReadingChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CustomSensor>, windows_core::Ref<CustomSensorReadingChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ReadingChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ReadingChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CustomSensor, CustomSensorReadingChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveReadingChanged(&self, token: i64) -> windows_core::Result<()> {

@@ -613,13 +613,13 @@ impl PlatformDiagnosticsAndUsageDataSettings {
             (windows_core::Interface::vtable(this).CollectionLevel)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         })
     }
-    pub fn CollectionLevelChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn CollectionLevelChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IPlatformDiagnosticsAndUsageDataSettingsStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CollectionLevelChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CollectionLevelChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveCollectionLevelChanged(token: i64) -> windows_core::Result<()> {
@@ -696,13 +696,13 @@ impl SmartAppControlPolicy {
             (windows_core::Interface::vtable(this).IsEnabled)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         })
     }
-    pub fn Changed<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn Changed<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::ISmartAppControlPolicyStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Changed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Changed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveChanged(token: i64) -> windows_core::Result<()> {
@@ -811,13 +811,13 @@ impl SystemSetupInfo {
             (windows_core::Interface::vtable(this).OutOfBoxExperienceState)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         })
     }
-    pub fn OutOfBoxExperienceStateChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn OutOfBoxExperienceStateChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::ISystemSetupInfoStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).OutOfBoxExperienceStateChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).OutOfBoxExperienceStateChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveOutOfBoxExperienceStateChanged(token: i64) -> windows_core::Result<()> {
@@ -935,13 +935,13 @@ impl WindowsIntegrityPolicy {
             (windows_core::Interface::vtable(this).IsDisableSupported)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         })
     }
-    pub fn PolicyChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn PolicyChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IWindowsIntegrityPolicyStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PolicyChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PolicyChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemovePolicyChanged(token: i64) -> windows_core::Result<()> {

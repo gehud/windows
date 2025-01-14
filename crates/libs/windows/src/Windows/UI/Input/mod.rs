@@ -170,42 +170,42 @@ impl windows_core::RuntimeType for DraggingState {
 pub struct EdgeGesture(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(EdgeGesture, windows_core::IUnknown, windows_core::IInspectable);
 impl EdgeGesture {
-    pub fn Starting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Starting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<EdgeGesture, EdgeGestureEventArgs>>,
+        P0: FnMut(windows_core::Ref<EdgeGesture>, windows_core::Ref<EdgeGestureEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Starting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Starting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<EdgeGesture, EdgeGestureEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStarting(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveStarting)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Completed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Completed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<EdgeGesture, EdgeGestureEventArgs>>,
+        P0: FnMut(windows_core::Ref<EdgeGesture>, windows_core::Ref<EdgeGestureEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Completed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Completed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<EdgeGesture, EdgeGestureEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Canceled<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Canceled<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<EdgeGesture, EdgeGestureEventArgs>>,
+        P0: FnMut(windows_core::Ref<EdgeGesture>, windows_core::Ref<EdgeGestureEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Canceled)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Canceled)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<EdgeGesture, EdgeGestureEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCanceled(&self, token: i64) -> windows_core::Result<()> {
@@ -530,126 +530,126 @@ impl GestureRecognizer {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).CompleteGesture)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn Tapped<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Tapped<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<GestureRecognizer, TappedEventArgs>>,
+        P0: FnMut(windows_core::Ref<GestureRecognizer>, windows_core::Ref<TappedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Tapped)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Tapped)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<GestureRecognizer, TappedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTapped(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveTapped)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn RightTapped<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RightTapped<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<GestureRecognizer, RightTappedEventArgs>>,
+        P0: FnMut(windows_core::Ref<GestureRecognizer>, windows_core::Ref<RightTappedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RightTapped)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RightTapped)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<GestureRecognizer, RightTappedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRightTapped(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRightTapped)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Holding<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Holding<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<GestureRecognizer, HoldingEventArgs>>,
+        P0: FnMut(windows_core::Ref<GestureRecognizer>, windows_core::Ref<HoldingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Holding)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Holding)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<GestureRecognizer, HoldingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHolding(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveHolding)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Dragging<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Dragging<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<GestureRecognizer, DraggingEventArgs>>,
+        P0: FnMut(windows_core::Ref<GestureRecognizer>, windows_core::Ref<DraggingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Dragging)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Dragging)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<GestureRecognizer, DraggingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDragging(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDragging)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ManipulationStarted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ManipulationStarted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<GestureRecognizer, ManipulationStartedEventArgs>>,
+        P0: FnMut(windows_core::Ref<GestureRecognizer>, windows_core::Ref<ManipulationStartedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ManipulationStarted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ManipulationStarted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<GestureRecognizer, ManipulationStartedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveManipulationStarted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveManipulationStarted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ManipulationUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ManipulationUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<GestureRecognizer, ManipulationUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<GestureRecognizer>, windows_core::Ref<ManipulationUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ManipulationUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ManipulationUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<GestureRecognizer, ManipulationUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveManipulationUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveManipulationUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ManipulationInertiaStarting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ManipulationInertiaStarting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<GestureRecognizer, ManipulationInertiaStartingEventArgs>>,
+        P0: FnMut(windows_core::Ref<GestureRecognizer>, windows_core::Ref<ManipulationInertiaStartingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ManipulationInertiaStarting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ManipulationInertiaStarting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<GestureRecognizer, ManipulationInertiaStartingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveManipulationInertiaStarting(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveManipulationInertiaStarting)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ManipulationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ManipulationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<GestureRecognizer, ManipulationCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<GestureRecognizer>, windows_core::Ref<ManipulationCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ManipulationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ManipulationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<GestureRecognizer, ManipulationCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveManipulationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveManipulationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn CrossSliding<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CrossSliding<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<GestureRecognizer, CrossSlidingEventArgs>>,
+        P0: FnMut(windows_core::Ref<GestureRecognizer>, windows_core::Ref<CrossSlidingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CrossSliding)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CrossSliding)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<GestureRecognizer, CrossSlidingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCrossSliding(&self, token: i64) -> windows_core::Result<()> {
@@ -1999,14 +1999,14 @@ impl InputActivationListener {
             (windows_core::Interface::vtable(this).State)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn InputActivationChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn InputActivationChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<InputActivationListener, InputActivationListenerActivationChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<InputActivationListener>, windows_core::Ref<InputActivationListenerActivationChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).InputActivationChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).InputActivationChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<InputActivationListener, InputActivationListenerActivationChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveInputActivationChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -2083,14 +2083,14 @@ impl KeyboardDeliveryInterceptor {
         unsafe { (windows_core::Interface::vtable(this).SetIsInterceptionEnabledWhenInForeground)(windows_core::Interface::as_raw(this), value).ok() }
     }
     #[cfg(feature = "UI_Core")]
-    pub fn KeyDown<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn KeyDown<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<KeyboardDeliveryInterceptor, super::Core::KeyEventArgs>>,
+        P0: FnMut(windows_core::Ref<KeyboardDeliveryInterceptor>, windows_core::Ref<super::Core::KeyEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).KeyDown)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).KeyDown)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<KeyboardDeliveryInterceptor, super::Core::KeyEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveKeyDown(&self, token: i64) -> windows_core::Result<()> {
@@ -2098,14 +2098,14 @@ impl KeyboardDeliveryInterceptor {
         unsafe { (windows_core::Interface::vtable(this).RemoveKeyDown)(windows_core::Interface::as_raw(this), token).ok() }
     }
     #[cfg(feature = "UI_Core")]
-    pub fn KeyUp<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn KeyUp<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<KeyboardDeliveryInterceptor, super::Core::KeyEventArgs>>,
+        P0: FnMut(windows_core::Ref<KeyboardDeliveryInterceptor>, windows_core::Ref<super::Core::KeyEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).KeyUp)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).KeyUp)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<KeyboardDeliveryInterceptor, super::Core::KeyEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveKeyUp(&self, token: i64) -> windows_core::Result<()> {
@@ -2588,70 +2588,70 @@ impl PhysicalGestureRecognizer {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).CompleteGesture)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn ManipulationStarted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ManipulationStarted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PhysicalGestureRecognizer, ManipulationStartedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PhysicalGestureRecognizer>, windows_core::Ref<ManipulationStartedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ManipulationStarted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ManipulationStarted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PhysicalGestureRecognizer, ManipulationStartedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveManipulationStarted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveManipulationStarted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ManipulationUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ManipulationUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PhysicalGestureRecognizer, ManipulationUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PhysicalGestureRecognizer>, windows_core::Ref<ManipulationUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ManipulationUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ManipulationUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PhysicalGestureRecognizer, ManipulationUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveManipulationUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveManipulationUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ManipulationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ManipulationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PhysicalGestureRecognizer, ManipulationCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PhysicalGestureRecognizer>, windows_core::Ref<ManipulationCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ManipulationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ManipulationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PhysicalGestureRecognizer, ManipulationCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveManipulationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveManipulationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Tapped<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Tapped<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PhysicalGestureRecognizer, TappedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PhysicalGestureRecognizer>, windows_core::Ref<TappedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Tapped)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Tapped)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PhysicalGestureRecognizer, TappedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTapped(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveTapped)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Holding<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Holding<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PhysicalGestureRecognizer, HoldingEventArgs>>,
+        P0: FnMut(windows_core::Ref<PhysicalGestureRecognizer>, windows_core::Ref<HoldingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Holding)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Holding)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PhysicalGestureRecognizer, HoldingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHolding(&self, token: i64) -> windows_core::Result<()> {
@@ -3089,140 +3089,140 @@ impl RadialController {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).SetUseAutomaticHapticFeedback)(windows_core::Interface::as_raw(this), value).ok() }
     }
-    pub fn ScreenContactStarted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ScreenContactStarted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RadialController, RadialControllerScreenContactStartedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RadialController>, windows_core::Ref<RadialControllerScreenContactStartedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ScreenContactStarted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ScreenContactStarted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RadialController, RadialControllerScreenContactStartedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveScreenContactStarted(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveScreenContactStarted)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn ScreenContactEnded<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ScreenContactEnded<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RadialController, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<RadialController>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ScreenContactEnded)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ScreenContactEnded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RadialController, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveScreenContactEnded(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveScreenContactEnded)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn ScreenContactContinued<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ScreenContactContinued<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RadialController, RadialControllerScreenContactContinuedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RadialController>, windows_core::Ref<RadialControllerScreenContactContinuedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ScreenContactContinued)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ScreenContactContinued)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RadialController, RadialControllerScreenContactContinuedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveScreenContactContinued(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveScreenContactContinued)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn ControlLost<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ControlLost<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RadialController, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<RadialController>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ControlLost)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ControlLost)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RadialController, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveControlLost(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveControlLost)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn RotationChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RotationChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RadialController, RadialControllerRotationChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RadialController>, windows_core::Ref<RadialControllerRotationChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RotationChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RotationChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RadialController, RadialControllerRotationChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRotationChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRotationChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ButtonClicked<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ButtonClicked<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RadialController, RadialControllerButtonClickedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RadialController>, windows_core::Ref<RadialControllerButtonClickedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ButtonClicked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ButtonClicked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RadialController, RadialControllerButtonClickedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveButtonClicked(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveButtonClicked)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ControlAcquired<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ControlAcquired<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RadialController, RadialControllerControlAcquiredEventArgs>>,
+        P0: FnMut(windows_core::Ref<RadialController>, windows_core::Ref<RadialControllerControlAcquiredEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ControlAcquired)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ControlAcquired)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RadialController, RadialControllerControlAcquiredEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveControlAcquired(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveControlAcquired)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn ButtonPressed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ButtonPressed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RadialController, RadialControllerButtonPressedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RadialController>, windows_core::Ref<RadialControllerButtonPressedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IRadialController2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ButtonPressed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ButtonPressed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RadialController, RadialControllerButtonPressedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveButtonPressed(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<IRadialController2>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveButtonPressed)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ButtonHolding<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ButtonHolding<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RadialController, RadialControllerButtonHoldingEventArgs>>,
+        P0: FnMut(windows_core::Ref<RadialController>, windows_core::Ref<RadialControllerButtonHoldingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IRadialController2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ButtonHolding)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ButtonHolding)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RadialController, RadialControllerButtonHoldingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveButtonHolding(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<IRadialController2>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveButtonHolding)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ButtonReleased<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ButtonReleased<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RadialController, RadialControllerButtonReleasedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RadialController>, windows_core::Ref<RadialControllerButtonReleasedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IRadialController2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ButtonReleased)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ButtonReleased)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RadialController, RadialControllerButtonReleasedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveButtonReleased(&self, token: i64) -> windows_core::Result<()> {
@@ -3611,14 +3611,14 @@ impl RadialControllerMenuItem {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).SetTag)(windows_core::Interface::as_raw(this), value.param().abi()).ok() }
     }
-    pub fn Invoked<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Invoked<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RadialControllerMenuItem, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<RadialControllerMenuItem>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Invoked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Invoked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RadialControllerMenuItem, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveInvoked(&self, token: i64) -> windows_core::Result<()> {
@@ -3953,56 +3953,56 @@ impl SystemButtonEventController {
         let this = &windows_core::Interface::cast::<super::super::Foundation::IClosable>(self)?;
         unsafe { (windows_core::Interface::vtable(this).Close)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn SystemFunctionButtonPressed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SystemFunctionButtonPressed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SystemButtonEventController, SystemFunctionButtonEventArgs>>,
+        P0: FnMut(windows_core::Ref<SystemButtonEventController>, windows_core::Ref<SystemFunctionButtonEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SystemFunctionButtonPressed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SystemFunctionButtonPressed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<SystemButtonEventController, SystemFunctionButtonEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSystemFunctionButtonPressed(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSystemFunctionButtonPressed)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SystemFunctionButtonReleased<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SystemFunctionButtonReleased<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SystemButtonEventController, SystemFunctionButtonEventArgs>>,
+        P0: FnMut(windows_core::Ref<SystemButtonEventController>, windows_core::Ref<SystemFunctionButtonEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SystemFunctionButtonReleased)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SystemFunctionButtonReleased)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<SystemButtonEventController, SystemFunctionButtonEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSystemFunctionButtonReleased(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSystemFunctionButtonReleased)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SystemFunctionLockChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SystemFunctionLockChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SystemButtonEventController, SystemFunctionLockChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SystemButtonEventController>, windows_core::Ref<SystemFunctionLockChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SystemFunctionLockChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SystemFunctionLockChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<SystemButtonEventController, SystemFunctionLockChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSystemFunctionLockChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSystemFunctionLockChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SystemFunctionLockIndicatorChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SystemFunctionLockIndicatorChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SystemButtonEventController, SystemFunctionLockIndicatorChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SystemButtonEventController>, windows_core::Ref<SystemFunctionLockIndicatorChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SystemFunctionLockIndicatorChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SystemFunctionLockIndicatorChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<SystemButtonEventController, SystemFunctionLockIndicatorChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSystemFunctionLockIndicatorChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -4231,14 +4231,14 @@ impl TouchpadGesturesController {
         unsafe { (windows_core::Interface::vtable(this).SetSupportedGestures)(windows_core::Interface::as_raw(this), value).ok() }
     }
     #[cfg(feature = "UI_Core")]
-    pub fn PointerPressed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PointerPressed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<TouchpadGesturesController, super::Core::PointerEventArgs>>,
+        P0: FnMut(windows_core::Ref<TouchpadGesturesController>, windows_core::Ref<super::Core::PointerEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PointerPressed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PointerPressed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<TouchpadGesturesController, super::Core::PointerEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePointerPressed(&self, token: i64) -> windows_core::Result<()> {
@@ -4246,14 +4246,14 @@ impl TouchpadGesturesController {
         unsafe { (windows_core::Interface::vtable(this).RemovePointerPressed)(windows_core::Interface::as_raw(this), token).ok() }
     }
     #[cfg(feature = "UI_Core")]
-    pub fn PointerMoved<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PointerMoved<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<TouchpadGesturesController, super::Core::PointerEventArgs>>,
+        P0: FnMut(windows_core::Ref<TouchpadGesturesController>, windows_core::Ref<super::Core::PointerEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PointerMoved)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PointerMoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<TouchpadGesturesController, super::Core::PointerEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePointerMoved(&self, token: i64) -> windows_core::Result<()> {
@@ -4261,28 +4261,28 @@ impl TouchpadGesturesController {
         unsafe { (windows_core::Interface::vtable(this).RemovePointerMoved)(windows_core::Interface::as_raw(this), token).ok() }
     }
     #[cfg(feature = "UI_Core")]
-    pub fn PointerReleased<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PointerReleased<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<TouchpadGesturesController, super::Core::PointerEventArgs>>,
+        P0: FnMut(windows_core::Ref<TouchpadGesturesController>, windows_core::Ref<super::Core::PointerEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PointerReleased)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PointerReleased)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<TouchpadGesturesController, super::Core::PointerEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePointerReleased(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemovePointerReleased)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn TouchpadGlobalActionPerformed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn TouchpadGlobalActionPerformed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<TouchpadGesturesController, TouchpadGlobalActionEventArgs>>,
+        P0: FnMut(windows_core::Ref<TouchpadGesturesController>, windows_core::Ref<TouchpadGlobalActionEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TouchpadGlobalActionPerformed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TouchpadGlobalActionPerformed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<TouchpadGesturesController, TouchpadGlobalActionEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTouchpadGlobalActionPerformed(&self, token: i64) -> windows_core::Result<()> {

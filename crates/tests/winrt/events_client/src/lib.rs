@@ -2,7 +2,7 @@
 
 mod bindings;
 use bindings::*;
-use windows::{core::*, Foundation::*};
+use windows::{core::*};
 
 #[test]
 fn test() -> Result<()> {
@@ -13,7 +13,7 @@ fn test() -> Result<()> {
     // The signal value is passed to each delegate.
     assert_eq!(0, class.Signal(1)?);
 
-    let token = class.Event(&TypedEventHandler::new(
+    let token = class.Event(Some(
         move |sender: Ref<Class>, args: i32| {
             assert_eq!(sender.as_ref().unwrap(), class);
             assert_eq!(args, 2);
@@ -25,7 +25,7 @@ fn test() -> Result<()> {
     class.RemoveEvent(token)?;
     assert_eq!(0, class.Signal(3)?);
 
-    class.Event(&TypedEventHandler::new(
+    class.Event(Some(
         // TODO: ideally generics also use Ref<T> here
         move |sender: Ref<Class>, args: i32| {
             assert_eq!(sender.as_ref().unwrap(), class);
@@ -34,7 +34,7 @@ fn test() -> Result<()> {
         },
     ))?;
 
-    class.Event(&TypedEventHandler::new(
+    class.Event(Some(
         move |sender: Ref<Class>, args: i32| {
             assert_eq!(sender.as_ref().unwrap(), class);
             assert_eq!(args, 4);
@@ -50,7 +50,7 @@ fn test() -> Result<()> {
 fn test_static() -> Result<()> {
     assert_eq!(0, Class::StaticSignal(1)?);
 
-    let token = Class::StaticEvent(&EventHandler::new(move |_, args| {
+    let token = Class::StaticEvent(Some(move |_, args| {
         assert_eq!(args, 2);
         Ok(())
     }))?;
@@ -59,12 +59,12 @@ fn test_static() -> Result<()> {
     Class::RemoveStaticEvent(token)?;
     assert_eq!(0, Class::StaticSignal(3)?);
 
-    Class::StaticEvent(&EventHandler::new(move |_, args| {
+    Class::StaticEvent(Some(move |_, args| {
         assert_eq!(args, 4);
         Ok(())
     }))?;
 
-    Class::StaticEvent(&EventHandler::new(move |_, args| {
+    Class::StaticEvent(Some(move |_, args| {
         assert_eq!(args, 4);
         Ok(())
     }))?;

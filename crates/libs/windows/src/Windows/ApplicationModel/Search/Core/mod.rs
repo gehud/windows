@@ -228,28 +228,28 @@ impl SearchSuggestionManager {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).ClearHistory)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn SuggestionsRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SuggestionsRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SearchSuggestionManager, SearchSuggestionsRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SearchSuggestionManager>, windows_core::Ref<SearchSuggestionsRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SuggestionsRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SuggestionsRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SearchSuggestionManager, SearchSuggestionsRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSuggestionsRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSuggestionsRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn RequestingFocusOnKeyboardInput<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RequestingFocusOnKeyboardInput<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SearchSuggestionManager, RequestingFocusOnKeyboardInputEventArgs>>,
+        P0: FnMut(windows_core::Ref<SearchSuggestionManager>, windows_core::Ref<RequestingFocusOnKeyboardInputEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RequestingFocusOnKeyboardInput)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RequestingFocusOnKeyboardInput)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SearchSuggestionManager, RequestingFocusOnKeyboardInputEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRequestingFocusOnKeyboardInput(&self, token: i64) -> windows_core::Result<()> {

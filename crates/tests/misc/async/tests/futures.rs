@@ -6,14 +6,14 @@ use windows::{core::*, Storage::Streams::*, System::Threading::*};
 // A simple example of blocking synchronously with the `get` method.
 #[test]
 fn simple_sync() -> Result<()> {
-    ThreadPool::RunAsync(&WorkItemHandler::new(|_| Ok(())))?.get()
+    ThreadPool::RunAsync(Some(|_| Ok(())))?.get()
 }
 
 // A simple example of awaiting with an async function.
 #[test]
 fn simple_async() -> Result<()> {
     futures::executor::block_on(async {
-        ThreadPool::RunAsync(&WorkItemHandler::new(|_| Ok(())))?.await
+        ThreadPool::RunAsync(Some(|_| Ok(())))?.await
     })
 }
 
@@ -21,7 +21,7 @@ fn simple_async() -> Result<()> {
 #[test]
 fn stream_async() -> Result<()> {
     futures::executor::block_on(async {
-        let stream = &InMemoryRandomAccessStream::new()?;
+        let stream = Some()?;
 
         let writer = DataWriter::CreateDataWriter(stream)?;
         writer.WriteByte(1)?;
@@ -52,7 +52,7 @@ fn switch_context() -> Result<()> {
     let mut pool = LocalPool::new();
     let (sender, receiver) = std::sync::mpsc::channel::<()>();
 
-    let async_future = ThreadPool::RunAsync(&WorkItemHandler::new(move |_| {
+    let async_future = ThreadPool::RunAsync(Some(move |_| {
         receiver.recv().unwrap();
         Ok(())
     }))?

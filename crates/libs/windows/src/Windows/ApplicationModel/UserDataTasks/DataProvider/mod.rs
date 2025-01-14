@@ -140,70 +140,70 @@ pub struct IUserDataTaskListSyncManagerSyncRequestEventArgs_Vtbl {
 pub struct UserDataTaskDataProviderConnection(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(UserDataTaskDataProviderConnection, windows_core::IUnknown, windows_core::IInspectable);
 impl UserDataTaskDataProviderConnection {
-    pub fn CreateOrUpdateTaskRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CreateOrUpdateTaskRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<UserDataTaskDataProviderConnection, UserDataTaskListCreateOrUpdateTaskRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserDataTaskDataProviderConnection>, windows_core::Ref<UserDataTaskListCreateOrUpdateTaskRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateOrUpdateTaskRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CreateOrUpdateTaskRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<UserDataTaskDataProviderConnection, UserDataTaskListCreateOrUpdateTaskRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCreateOrUpdateTaskRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCreateOrUpdateTaskRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SyncRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SyncRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<UserDataTaskDataProviderConnection, UserDataTaskListSyncManagerSyncRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserDataTaskDataProviderConnection>, windows_core::Ref<UserDataTaskListSyncManagerSyncRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SyncRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SyncRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<UserDataTaskDataProviderConnection, UserDataTaskListSyncManagerSyncRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSyncRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSyncRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SkipOccurrenceRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SkipOccurrenceRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<UserDataTaskDataProviderConnection, UserDataTaskListSkipOccurrenceRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserDataTaskDataProviderConnection>, windows_core::Ref<UserDataTaskListSkipOccurrenceRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SkipOccurrenceRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SkipOccurrenceRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<UserDataTaskDataProviderConnection, UserDataTaskListSkipOccurrenceRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSkipOccurrenceRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSkipOccurrenceRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn CompleteTaskRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CompleteTaskRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<UserDataTaskDataProviderConnection, UserDataTaskListCompleteTaskRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserDataTaskDataProviderConnection>, windows_core::Ref<UserDataTaskListCompleteTaskRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CompleteTaskRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CompleteTaskRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<UserDataTaskDataProviderConnection, UserDataTaskListCompleteTaskRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCompleteTaskRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCompleteTaskRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DeleteTaskRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DeleteTaskRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<UserDataTaskDataProviderConnection, UserDataTaskListDeleteTaskRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserDataTaskDataProviderConnection>, windows_core::Ref<UserDataTaskListDeleteTaskRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DeleteTaskRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DeleteTaskRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<UserDataTaskDataProviderConnection, UserDataTaskListDeleteTaskRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDeleteTaskRequested(&self, token: i64) -> windows_core::Result<()> {

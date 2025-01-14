@@ -99,28 +99,28 @@ impl CachedFileUpdaterUI {
             (windows_core::Interface::vtable(this).UpdateTarget)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn FileUpdateRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FileUpdateRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<CachedFileUpdaterUI, FileUpdateRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CachedFileUpdaterUI>, windows_core::Ref<FileUpdateRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FileUpdateRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FileUpdateRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<CachedFileUpdaterUI, FileUpdateRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFileUpdateRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveFileUpdateRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn UIRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UIRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<CachedFileUpdaterUI, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<CachedFileUpdaterUI>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UIRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UIRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<CachedFileUpdaterUI, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUIRequested(&self, token: i64) -> windows_core::Result<()> {
@@ -553,14 +553,14 @@ impl IStorageProviderKnownFolderSyncInfoSource {
             (windows_core::Interface::vtable(this).GetKnownFolderSyncInfo)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn KnownFolderSyncInfoChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn KnownFolderSyncInfoChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IStorageProviderKnownFolderSyncInfoSource, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<IStorageProviderKnownFolderSyncInfoSource>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).KnownFolderSyncInfoChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).KnownFolderSyncInfoChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<IStorageProviderKnownFolderSyncInfoSource, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveKnownFolderSyncInfoChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -936,14 +936,14 @@ impl IStorageProviderStatusUISource {
             (windows_core::Interface::vtable(this).GetStatusUI)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn StatusUIChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StatusUIChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IStorageProviderStatusUISource, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<IStorageProviderStatusUISource>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StatusUIChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StatusUIChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<IStorageProviderStatusUISource, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStatusUIChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -1879,12 +1879,12 @@ impl StorageProviderKnownFolderSyncInfo {
             (windows_core::Interface::vtable(this).SyncRequested)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn SetSyncRequested<P0>(&self, value: P0) -> windows_core::Result<()>
+    pub fn SetSyncRequested<P0>(&self, value: Option<P0>) -> windows_core::Result<()>
     where
-        P0: windows_core::Param<StorageProviderKnownFolderSyncRequestedHandler>,
+        P0: FnMut(windows_core::Ref<StorageProviderKnownFolderSyncRequestArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
-        unsafe { (windows_core::Interface::vtable(this).SetSyncRequested)(windows_core::Interface::as_raw(this), value.param().abi()).ok() }
+        unsafe { (windows_core::Interface::vtable(this).SetSyncRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| StorageProviderKnownFolderSyncRequestedHandler::new(closure)))).ok() }
     }
 }
 impl windows_core::RuntimeType for StorageProviderKnownFolderSyncInfo {

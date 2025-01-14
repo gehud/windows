@@ -1107,14 +1107,14 @@ impl DownloadOperation {
             (windows_core::Interface::vtable(this).GetDownloadedRanges)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn RangesDownloaded<P0>(&self, eventhandler: P0) -> windows_core::Result<i64>
+    pub fn RangesDownloaded<P0>(&self, eventhandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DownloadOperation, BackgroundTransferRangesDownloadedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DownloadOperation>, windows_core::Ref<BackgroundTransferRangesDownloadedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IDownloadOperation3>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RangesDownloaded)(windows_core::Interface::as_raw(this), eventhandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RangesDownloaded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&eventhandler.map(|closure| super::super::Foundation::TypedEventHandler::<DownloadOperation, BackgroundTransferRangesDownloadedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRangesDownloaded(&self, eventcookie: i64) -> windows_core::Result<()> {

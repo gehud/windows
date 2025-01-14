@@ -601,14 +601,14 @@ pub struct IPrinting3DTextureResource_Vtbl {
 pub struct Print3DManager(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(Print3DManager, windows_core::IUnknown, windows_core::IInspectable);
 impl Print3DManager {
-    pub fn TaskRequested<P0>(&self, eventhandler: P0) -> windows_core::Result<i64>
+    pub fn TaskRequested<P0>(&self, eventhandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<Print3DManager, Print3DTaskRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<Print3DManager>, windows_core::Ref<Print3DTaskRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TaskRequested)(windows_core::Interface::as_raw(this), eventhandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TaskRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&eventhandler.map(|closure| super::super::Foundation::TypedEventHandler::<Print3DManager, Print3DTaskRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTaskRequested(&self, token: i64) -> windows_core::Result<()> {
@@ -656,42 +656,42 @@ impl Print3DTask {
             (windows_core::Interface::vtable(this).Source)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn Submitting<P0>(&self, eventhandler: P0) -> windows_core::Result<i64>
+    pub fn Submitting<P0>(&self, eventhandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<Print3DTask, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<Print3DTask>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Submitting)(windows_core::Interface::as_raw(this), eventhandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Submitting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&eventhandler.map(|closure| super::super::Foundation::TypedEventHandler::<Print3DTask, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSubmitting(&self, eventcookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSubmitting)(windows_core::Interface::as_raw(this), eventcookie).ok() }
     }
-    pub fn Completed<P0>(&self, eventhandler: P0) -> windows_core::Result<i64>
+    pub fn Completed<P0>(&self, eventhandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<Print3DTask, Print3DTaskCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<Print3DTask>, windows_core::Ref<Print3DTaskCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Completed)(windows_core::Interface::as_raw(this), eventhandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Completed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&eventhandler.map(|closure| super::super::Foundation::TypedEventHandler::<Print3DTask, Print3DTaskCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCompleted(&self, eventcookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCompleted)(windows_core::Interface::as_raw(this), eventcookie).ok() }
     }
-    pub fn SourceChanged<P0>(&self, eventhandler: P0) -> windows_core::Result<i64>
+    pub fn SourceChanged<P0>(&self, eventhandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<Print3DTask, Print3DTaskSourceChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<Print3DTask>, windows_core::Ref<Print3DTaskSourceChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SourceChanged)(windows_core::Interface::as_raw(this), eventhandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SourceChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&eventhandler.map(|closure| super::super::Foundation::TypedEventHandler::<Print3DTask, Print3DTaskSourceChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSourceChanged(&self, eventcookie: i64) -> windows_core::Result<()> {
@@ -782,14 +782,14 @@ impl windows_core::RuntimeType for Print3DTaskDetail {
 pub struct Print3DTaskRequest(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(Print3DTaskRequest, windows_core::IUnknown, windows_core::IInspectable);
 impl Print3DTaskRequest {
-    pub fn CreateTask<P2>(&self, title: &windows_core::HSTRING, printerid: &windows_core::HSTRING, handler: P2) -> windows_core::Result<Print3DTask>
+    pub fn CreateTask<P2>(&self, title: &windows_core::HSTRING, printerid: &windows_core::HSTRING, handler: Option<P2>) -> windows_core::Result<Print3DTask>
     where
-        P2: windows_core::Param<Print3DTaskSourceRequestedHandler>,
+        P2: FnMut(windows_core::Ref<Print3DTaskSourceRequestedArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateTask)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(title), core::mem::transmute_copy(printerid), handler.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateTask)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(title), core::mem::transmute_copy(printerid), core::mem::transmute_copy(&handler.map(|closure| Print3DTaskSourceRequestedHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
 }

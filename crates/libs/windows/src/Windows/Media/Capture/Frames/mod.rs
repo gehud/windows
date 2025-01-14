@@ -694,14 +694,14 @@ impl MediaFrameReader {
         let this = &windows_core::Interface::cast::<super::super::super::Foundation::IClosable>(self)?;
         unsafe { (windows_core::Interface::vtable(this).Close)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn FrameArrived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FrameArrived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<MediaFrameReader, MediaFrameArrivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MediaFrameReader>, windows_core::Ref<MediaFrameArrivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FrameArrived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FrameArrived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<MediaFrameReader, MediaFrameArrivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFrameArrived(&self, token: i64) -> windows_core::Result<()> {
@@ -914,14 +914,14 @@ impl MediaFrameSource {
             (windows_core::Interface::vtable(this).SetFormatAsync)(windows_core::Interface::as_raw(this), format.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn FormatChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FormatChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<MediaFrameSource, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MediaFrameSource>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FormatChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FormatChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<MediaFrameSource, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFormatChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -1297,14 +1297,14 @@ impl MultiSourceMediaFrameReader {
         let this = &windows_core::Interface::cast::<super::super::super::Foundation::IClosable>(self)?;
         unsafe { (windows_core::Interface::vtable(this).Close)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn FrameArrived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FrameArrived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<MultiSourceMediaFrameReader, MultiSourceMediaFrameArrivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MultiSourceMediaFrameReader>, windows_core::Ref<MultiSourceMediaFrameArrivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FrameArrived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FrameArrived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<MultiSourceMediaFrameReader, MultiSourceMediaFrameArrivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFrameArrived(&self, token: i64) -> windows_core::Result<()> {

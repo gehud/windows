@@ -113,56 +113,56 @@ unsafe impl Sync for GazeDeviceWatcherAddedPreviewEventArgs {}
 pub struct GazeDeviceWatcherPreview(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(GazeDeviceWatcherPreview, windows_core::IUnknown, windows_core::IInspectable);
 impl GazeDeviceWatcherPreview {
-    pub fn Added<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Added<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GazeDeviceWatcherPreview, GazeDeviceWatcherAddedPreviewEventArgs>>,
+        P0: FnMut(windows_core::Ref<GazeDeviceWatcherPreview>, windows_core::Ref<GazeDeviceWatcherAddedPreviewEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GazeDeviceWatcherPreview, GazeDeviceWatcherAddedPreviewEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAdded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAdded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Removed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Removed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GazeDeviceWatcherPreview, GazeDeviceWatcherRemovedPreviewEventArgs>>,
+        P0: FnMut(windows_core::Ref<GazeDeviceWatcherPreview>, windows_core::Ref<GazeDeviceWatcherRemovedPreviewEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GazeDeviceWatcherPreview, GazeDeviceWatcherRemovedPreviewEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoved(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRemoved)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Updated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Updated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GazeDeviceWatcherPreview, GazeDeviceWatcherUpdatedPreviewEventArgs>>,
+        P0: FnMut(windows_core::Ref<GazeDeviceWatcherPreview>, windows_core::Ref<GazeDeviceWatcherUpdatedPreviewEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GazeDeviceWatcherPreview, GazeDeviceWatcherUpdatedPreviewEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn EnumerationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn EnumerationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GazeDeviceWatcherPreview, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<GazeDeviceWatcherPreview>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GazeDeviceWatcherPreview, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveEnumerationCompleted(&self, token: i64) -> windows_core::Result<()> {
@@ -317,42 +317,42 @@ unsafe impl Sync for GazeExitedPreviewEventArgs {}
 pub struct GazeInputSourcePreview(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(GazeInputSourcePreview, windows_core::IUnknown, windows_core::IInspectable);
 impl GazeInputSourcePreview {
-    pub fn GazeMoved<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn GazeMoved<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GazeInputSourcePreview, GazeMovedPreviewEventArgs>>,
+        P0: FnMut(windows_core::Ref<GazeInputSourcePreview>, windows_core::Ref<GazeMovedPreviewEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).GazeMoved)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).GazeMoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GazeInputSourcePreview, GazeMovedPreviewEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveGazeMoved(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveGazeMoved)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn GazeEntered<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn GazeEntered<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GazeInputSourcePreview, GazeEnteredPreviewEventArgs>>,
+        P0: FnMut(windows_core::Ref<GazeInputSourcePreview>, windows_core::Ref<GazeEnteredPreviewEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).GazeEntered)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).GazeEntered)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GazeInputSourcePreview, GazeEnteredPreviewEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveGazeEntered(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveGazeEntered)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn GazeExited<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn GazeExited<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GazeInputSourcePreview, GazeExitedPreviewEventArgs>>,
+        P0: FnMut(windows_core::Ref<GazeInputSourcePreview>, windows_core::Ref<GazeExitedPreviewEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).GazeExited)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).GazeExited)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GazeInputSourcePreview, GazeExitedPreviewEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveGazeExited(&self, token: i64) -> windows_core::Result<()> {

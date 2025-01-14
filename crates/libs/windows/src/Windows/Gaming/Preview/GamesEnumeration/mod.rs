@@ -14,37 +14,37 @@ impl GameList {
             (windows_core::Interface::vtable(this).FindAllAsyncPackageFamilyName)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(packagefamilyname), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn GameAdded<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn GameAdded<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<GameListChangedEventHandler>,
+        P0: FnMut(windows_core::Ref<GameListEntry>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IGameListStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).GameAdded)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).GameAdded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| GameListChangedEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveGameAdded(token: i64) -> windows_core::Result<()> {
         Self::IGameListStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveGameAdded)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn GameRemoved<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn GameRemoved<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<GameListRemovedEventHandler>,
+        P0: FnMut(&windows_core::HSTRING) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IGameListStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).GameRemoved)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).GameRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| GameListRemovedEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveGameRemoved(token: i64) -> windows_core::Result<()> {
         Self::IGameListStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveGameRemoved)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn GameUpdated<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn GameUpdated<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<GameListChangedEventHandler>,
+        P0: FnMut(windows_core::Ref<GameListEntry>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IGameListStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).GameUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).GameUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| GameListChangedEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveGameUpdated(token: i64) -> windows_core::Result<()> {

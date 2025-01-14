@@ -322,7 +322,13 @@ impl Method {
                             quote! { #name.len().try_into().unwrap(), core::mem::transmute(#name.as_ptr()) }
                         }
                     } else if param.0.is_convertible() {
-                        quote! { #name.param().abi() }
+                        if let Type::Delegate(ty) = &param.0 {
+                            let ty = ty.type_name().write(writer, &ty.generics, true);
+
+                            quote! { core::mem::transmute_copy(&#name.map(|closure|#ty::new(closure))) }
+                        } else {
+                            quote! { #name.param().abi() }
+                        }
                     } else if param.0.is_copyable() {
                         if param.0.is_const_ref() {
                             quote! { &#name }
@@ -389,9 +395,13 @@ impl Method {
                 .filter_map(|(position, (ty, def))| {
                     if is_convertible(ty, *def) {
                         let name: TokenStream = format!("P{position}").into();
-                        let ty = ty.write_name(writer);
-
-                        Some(quote! { #name: windows_core::Param<#ty>, })
+                        if let Type::Delegate(ty) = ty {
+                            let signature = ty.method().write_impl_signature(writer, false, false);
+                            Some(quote! { #name: FnMut #signature + Send + 'static, })
+                        } else {
+                            let ty = ty.write_name(writer);
+                            Some(quote! { #name: windows_core::Param<#ty>, })
+                        }
                     } else {
                         None
                     }
@@ -415,7 +425,12 @@ impl Method {
                     quote! { #name: &[#default_type], }
                 } else if is_convertible(&param.0, param.1) {
                     let kind: TokenStream = format!("P{position}").into();
-                    quote! { #name: #kind, }
+
+                    if let Type::Delegate(..) = param.0 {
+                        quote! { #name: Option<#kind>, }
+                    } else {
+                        quote! { #name: #kind, }
+                    }
                 } else if param.0.is_copyable() {
                     quote! { #name: #kind, }
                 } else {

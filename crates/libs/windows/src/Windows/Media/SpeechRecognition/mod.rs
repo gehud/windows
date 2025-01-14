@@ -623,28 +623,28 @@ impl SpeechContinuousRecognitionSession {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).Resume)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn Completed<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn Completed<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SpeechContinuousRecognitionSession, SpeechContinuousRecognitionCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpeechContinuousRecognitionSession>, windows_core::Ref<SpeechContinuousRecognitionCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Completed)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Completed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<SpeechContinuousRecognitionSession, SpeechContinuousRecognitionCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCompleted(&self, value: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCompleted)(windows_core::Interface::as_raw(this), value).ok() }
     }
-    pub fn ResultGenerated<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn ResultGenerated<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SpeechContinuousRecognitionSession, SpeechContinuousRecognitionResultGeneratedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpeechContinuousRecognitionSession>, windows_core::Ref<SpeechContinuousRecognitionResultGeneratedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ResultGenerated)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ResultGenerated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<SpeechContinuousRecognitionSession, SpeechContinuousRecognitionResultGeneratedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveResultGenerated(&self, value: i64) -> windows_core::Result<()> {
@@ -1376,28 +1376,28 @@ impl SpeechRecognizer {
             (windows_core::Interface::vtable(this).RecognizeWithUIAsync)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn RecognitionQualityDegrading<P0>(&self, speechrecognitionqualitydegradinghandler: P0) -> windows_core::Result<i64>
+    pub fn RecognitionQualityDegrading<P0>(&self, speechrecognitionqualitydegradinghandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SpeechRecognizer, SpeechRecognitionQualityDegradingEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpeechRecognizer>, windows_core::Ref<SpeechRecognitionQualityDegradingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RecognitionQualityDegrading)(windows_core::Interface::as_raw(this), speechrecognitionqualitydegradinghandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RecognitionQualityDegrading)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&speechrecognitionqualitydegradinghandler.map(|closure| super::super::Foundation::TypedEventHandler::<SpeechRecognizer, SpeechRecognitionQualityDegradingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRecognitionQualityDegrading(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRecognitionQualityDegrading)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn StateChanged<P0>(&self, statechangedhandler: P0) -> windows_core::Result<i64>
+    pub fn StateChanged<P0>(&self, statechangedhandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SpeechRecognizer, SpeechRecognizerStateChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpeechRecognizer>, windows_core::Ref<SpeechRecognizerStateChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StateChanged)(windows_core::Interface::as_raw(this), statechangedhandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StateChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&statechangedhandler.map(|closure| super::super::Foundation::TypedEventHandler::<SpeechRecognizer, SpeechRecognizerStateChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStateChanged(&self, cookie: i64) -> windows_core::Result<()> {
@@ -1425,14 +1425,14 @@ impl SpeechRecognizer {
             (windows_core::Interface::vtable(this).StopRecognitionAsync)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn HypothesisGenerated<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HypothesisGenerated<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SpeechRecognizer, SpeechRecognitionHypothesisGeneratedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpeechRecognizer>, windows_core::Ref<SpeechRecognitionHypothesisGeneratedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<ISpeechRecognizer2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HypothesisGenerated)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HypothesisGenerated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<SpeechRecognizer, SpeechRecognitionHypothesisGeneratedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHypothesisGenerated(&self, value: i64) -> windows_core::Result<()> {

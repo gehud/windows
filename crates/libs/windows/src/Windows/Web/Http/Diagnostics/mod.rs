@@ -11,42 +11,42 @@ impl HttpDiagnosticProvider {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).Stop)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn RequestSent<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RequestSent<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<HttpDiagnosticProvider, HttpDiagnosticProviderRequestSentEventArgs>>,
+        P0: FnMut(windows_core::Ref<HttpDiagnosticProvider>, windows_core::Ref<HttpDiagnosticProviderRequestSentEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RequestSent)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RequestSent)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<HttpDiagnosticProvider, HttpDiagnosticProviderRequestSentEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRequestSent(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRequestSent)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ResponseReceived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ResponseReceived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<HttpDiagnosticProvider, HttpDiagnosticProviderResponseReceivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<HttpDiagnosticProvider>, windows_core::Ref<HttpDiagnosticProviderResponseReceivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ResponseReceived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ResponseReceived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<HttpDiagnosticProvider, HttpDiagnosticProviderResponseReceivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveResponseReceived(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveResponseReceived)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn RequestResponseCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RequestResponseCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<HttpDiagnosticProvider, HttpDiagnosticProviderRequestResponseCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<HttpDiagnosticProvider>, windows_core::Ref<HttpDiagnosticProviderRequestResponseCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RequestResponseCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RequestResponseCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<HttpDiagnosticProvider, HttpDiagnosticProviderRequestResponseCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRequestResponseCompleted(&self, token: i64) -> windows_core::Result<()> {

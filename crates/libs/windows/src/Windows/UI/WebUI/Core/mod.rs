@@ -464,42 +464,42 @@ impl WebUICommandBar {
             (windows_core::Interface::vtable(this).SecondaryCommands)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn MenuOpened<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn MenuOpened<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<MenuOpenedEventHandler>,
+        P0: FnMut() -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MenuOpened)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MenuOpened)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| MenuOpenedEventHandler::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMenuOpened(&self, value: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveMenuOpened)(windows_core::Interface::as_raw(this), value).ok() }
     }
-    pub fn MenuClosed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn MenuClosed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<MenuClosedEventHandler>,
+        P0: FnMut() -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MenuClosed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MenuClosed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| MenuClosedEventHandler::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMenuClosed(&self, value: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveMenuClosed)(windows_core::Interface::as_raw(this), value).ok() }
     }
-    pub fn SizeChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SizeChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<SizeChangedEventHandler>,
+        P0: FnMut(windows_core::Ref<WebUICommandBarSizeChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SizeChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SizeChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| SizeChangedEventHandler::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSizeChanged(&self, value: i64) -> windows_core::Result<()> {
@@ -620,14 +620,14 @@ impl WebUICommandBarConfirmationButton {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).SetText)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(value)).ok() }
     }
-    pub fn ItemInvoked<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ItemInvoked<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<WebUICommandBarConfirmationButton, WebUICommandBarItemInvokedEventArgs>>,
+        P0: FnMut(windows_core::Ref<WebUICommandBarConfirmationButton>, windows_core::Ref<WebUICommandBarItemInvokedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ItemInvoked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ItemInvoked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<WebUICommandBarConfirmationButton, WebUICommandBarItemInvokedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveItemInvoked(&self, token: i64) -> windows_core::Result<()> {
@@ -718,14 +718,14 @@ impl WebUICommandBarIconButton {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).SetIcon)(windows_core::Interface::as_raw(this), value.param().abi()).ok() }
     }
-    pub fn ItemInvoked<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ItemInvoked<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<WebUICommandBarIconButton, WebUICommandBarItemInvokedEventArgs>>,
+        P0: FnMut(windows_core::Ref<WebUICommandBarIconButton>, windows_core::Ref<WebUICommandBarItemInvokedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ItemInvoked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ItemInvoked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<WebUICommandBarIconButton, WebUICommandBarItemInvokedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveItemInvoked(&self, token: i64) -> windows_core::Result<()> {

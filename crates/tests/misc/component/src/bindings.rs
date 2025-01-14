@@ -218,12 +218,18 @@ impl Class {
             .map(|| result__.assume_init())
         }
     }
-    pub fn Input<P0, P1, P2, P3>(&self, a: P0, b: P1, c: P2, d: P3) -> windows_core::Result<()>
+    pub fn Input<P0, P1, P2, P3>(
+        &self,
+        a: P0,
+        b: P1,
+        c: P2,
+        d: Option<P3>,
+    ) -> windows_core::Result<()>
     where
         P0: windows_core::Param<windows_core::IInspectable>,
         P1: windows_core::Param<Class>,
         P2: windows_core::Param<windows::Foundation::IStringable>,
-        P3: windows_core::Param<Callback>,
+        P3: FnMut(i32) -> windows_core::Result<i32> + Send + 'static,
     {
         let this = self;
         unsafe {
@@ -232,7 +238,7 @@ impl Class {
                 a.param().abi(),
                 b.param().abi(),
                 c.param().abi(),
-                d.param().abi(),
+                core::mem::transmute_copy(&d.map(|closure| Callback::new(closure))),
             )
             .ok()
         }

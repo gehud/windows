@@ -70,12 +70,12 @@ impl IUICommand {
             (windows_core::Interface::vtable(this).Invoked)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn SetInvoked<P0>(&self, value: P0) -> windows_core::Result<()>
+    pub fn SetInvoked<P0>(&self, value: Option<P0>) -> windows_core::Result<()>
     where
-        P0: windows_core::Param<UICommandInvokedHandler>,
+        P0: FnMut(windows_core::Ref<IUICommand>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
-        unsafe { (windows_core::Interface::vtable(this).SetInvoked)(windows_core::Interface::as_raw(this), value.param().abi()).ok() }
+        unsafe { (windows_core::Interface::vtable(this).SetInvoked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| UICommandInvokedHandler::new(closure)))).ok() }
     }
     pub fn Id(&self) -> windows_core::Result<windows_core::IInspectable> {
         let this = self;
@@ -443,12 +443,12 @@ impl UICommand {
             (windows_core::Interface::vtable(this).Invoked)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn SetInvoked<P0>(&self, value: P0) -> windows_core::Result<()>
+    pub fn SetInvoked<P0>(&self, value: Option<P0>) -> windows_core::Result<()>
     where
-        P0: windows_core::Param<UICommandInvokedHandler>,
+        P0: FnMut(windows_core::Ref<IUICommand>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
-        unsafe { (windows_core::Interface::vtable(this).SetInvoked)(windows_core::Interface::as_raw(this), value.param().abi()).ok() }
+        unsafe { (windows_core::Interface::vtable(this).SetInvoked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| UICommandInvokedHandler::new(closure)))).ok() }
     }
     pub fn Id(&self) -> windows_core::Result<windows_core::IInspectable> {
         let this = self;
@@ -470,23 +470,23 @@ impl UICommand {
             (windows_core::Interface::vtable(this).Create)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(label), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn CreateWithHandler<P1>(label: &windows_core::HSTRING, action: P1) -> windows_core::Result<UICommand>
+    pub fn CreateWithHandler<P1>(label: &windows_core::HSTRING, action: Option<P1>) -> windows_core::Result<UICommand>
     where
-        P1: windows_core::Param<UICommandInvokedHandler>,
+        P1: FnMut(windows_core::Ref<IUICommand>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IUICommandFactory(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateWithHandler)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(label), action.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateWithHandler)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(label), core::mem::transmute_copy(&action.map(|closure| UICommandInvokedHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn CreateWithHandlerAndId<P1, P2>(label: &windows_core::HSTRING, action: P1, commandid: P2) -> windows_core::Result<UICommand>
+    pub fn CreateWithHandlerAndId<P1, P2>(label: &windows_core::HSTRING, action: Option<P1>, commandid: P2) -> windows_core::Result<UICommand>
     where
-        P1: windows_core::Param<UICommandInvokedHandler>,
+        P1: FnMut(windows_core::Ref<IUICommand>) -> windows_core::Result<()> + Send + 'static,
         P2: windows_core::Param<windows_core::IInspectable>,
     {
         Self::IUICommandFactory(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateWithHandlerAndId)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(label), action.param().abi(), commandid.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateWithHandlerAndId)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(label), core::mem::transmute_copy(&action.map(|closure| UICommandInvokedHandler::new(closure))), commandid.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
     fn IUICommandFactory<R, F: FnOnce(&IUICommandFactory) -> windows_core::Result<R>>(callback: F) -> windows_core::Result<R> {
@@ -604,12 +604,12 @@ impl UICommandSeparator {
             (windows_core::Interface::vtable(this).Invoked)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn SetInvoked<P0>(&self, value: P0) -> windows_core::Result<()>
+    pub fn SetInvoked<P0>(&self, value: Option<P0>) -> windows_core::Result<()>
     where
-        P0: windows_core::Param<UICommandInvokedHandler>,
+        P0: FnMut(windows_core::Ref<IUICommand>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
-        unsafe { (windows_core::Interface::vtable(this).SetInvoked)(windows_core::Interface::as_raw(this), value.param().abi()).ok() }
+        unsafe { (windows_core::Interface::vtable(this).SetInvoked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| UICommandInvokedHandler::new(closure)))).ok() }
     }
     pub fn Id(&self) -> windows_core::Result<windows_core::IInspectable> {
         let this = self;

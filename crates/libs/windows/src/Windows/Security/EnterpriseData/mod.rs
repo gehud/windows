@@ -1275,37 +1275,37 @@ impl ProtectionPolicyManager {
             (windows_core::Interface::vtable(this).GetForCurrentView)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn ProtectedAccessSuspending<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn ProtectedAccessSuspending<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<ProtectedAccessSuspendingEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<ProtectedAccessSuspendingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IProtectionPolicyManagerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ProtectedAccessSuspending)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ProtectedAccessSuspending)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<ProtectedAccessSuspendingEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveProtectedAccessSuspending(token: i64) -> windows_core::Result<()> {
         Self::IProtectionPolicyManagerStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveProtectedAccessSuspending)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn ProtectedAccessResumed<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn ProtectedAccessResumed<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<ProtectedAccessResumedEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<ProtectedAccessResumedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IProtectionPolicyManagerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ProtectedAccessResumed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ProtectedAccessResumed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<ProtectedAccessResumedEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveProtectedAccessResumed(token: i64) -> windows_core::Result<()> {
         Self::IProtectionPolicyManagerStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveProtectedAccessResumed)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn ProtectedContentRevoked<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn ProtectedContentRevoked<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<ProtectedContentRevokedEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<ProtectedContentRevokedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IProtectionPolicyManagerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ProtectedContentRevoked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ProtectedContentRevoked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<ProtectedContentRevokedEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveProtectedContentRevoked(token: i64) -> windows_core::Result<()> {
@@ -1359,13 +1359,13 @@ impl ProtectionPolicyManager {
             (windows_core::Interface::vtable(this).IsProtectionUnderLockRequired)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(identity), &mut result__).map(|| result__)
         })
     }
-    pub fn PolicyChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn PolicyChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IProtectionPolicyManagerStatics2(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PolicyChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PolicyChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemovePolicyChanged(token: i64) -> windows_core::Result<()> {

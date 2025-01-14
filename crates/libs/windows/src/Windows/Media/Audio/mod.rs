@@ -284,14 +284,14 @@ impl AudioEffectsPackConfiguration {
             (windows_core::Interface::vtable(this).Status)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn StatusChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StatusChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioEffectsPackConfiguration, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AudioEffectsPackConfiguration>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StatusChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StatusChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioEffectsPackConfiguration, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStatusChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -426,14 +426,14 @@ impl AudioFileInputNode {
             (windows_core::Interface::vtable(this).SourceFile)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn FileCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FileCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioFileInputNode, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AudioFileInputNode>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FileCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FileCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioFileInputNode, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFileCompleted(&self, token: i64) -> windows_core::Result<()> {
@@ -748,28 +748,28 @@ impl AudioFrameInputNode {
             (windows_core::Interface::vtable(this).QueuedSampleCount)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn AudioFrameCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AudioFrameCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioFrameInputNode, AudioFrameCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<AudioFrameInputNode>, windows_core::Ref<AudioFrameCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AudioFrameCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AudioFrameCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioFrameInputNode, AudioFrameCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAudioFrameCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAudioFrameCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn QuantumStarted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn QuantumStarted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioFrameInputNode, FrameInputNodeQuantumStartedEventArgs>>,
+        P0: FnMut(windows_core::Ref<AudioFrameInputNode>, windows_core::Ref<FrameInputNodeQuantumStartedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).QuantumStarted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).QuantumStarted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioFrameInputNode, FrameInputNodeQuantumStartedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveQuantumStarted(&self, token: i64) -> windows_core::Result<()> {
@@ -1135,42 +1135,42 @@ impl AudioGraph {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).ResetAllNodes)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn QuantumStarted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn QuantumStarted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioGraph, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AudioGraph>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).QuantumStarted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).QuantumStarted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioGraph, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveQuantumStarted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveQuantumStarted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn QuantumProcessed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn QuantumProcessed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioGraph, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AudioGraph>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).QuantumProcessed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).QuantumProcessed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioGraph, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveQuantumProcessed(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveQuantumProcessed)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn UnrecoverableErrorOccurred<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UnrecoverableErrorOccurred<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioGraph, AudioGraphUnrecoverableErrorOccurredEventArgs>>,
+        P0: FnMut(windows_core::Ref<AudioGraph>, windows_core::Ref<AudioGraphUnrecoverableErrorOccurredEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UnrecoverableErrorOccurred)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UnrecoverableErrorOccurred)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioGraph, AudioGraphUnrecoverableErrorOccurredEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUnrecoverableErrorOccurred(&self, token: i64) -> windows_core::Result<()> {
@@ -2077,14 +2077,14 @@ impl AudioPlaybackConnection {
             (windows_core::Interface::vtable(this).OpenAsync)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn StateChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StateChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioPlaybackConnection, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AudioPlaybackConnection>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StateChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StateChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioPlaybackConnection, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStateChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -2189,14 +2189,14 @@ impl windows_core::RuntimeType for AudioPlaybackConnectionState {
 pub struct AudioStateMonitor(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(AudioStateMonitor, windows_core::IUnknown, windows_core::IInspectable);
 impl AudioStateMonitor {
-    pub fn SoundLevelChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SoundLevelChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioStateMonitor, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AudioStateMonitor>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SoundLevelChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SoundLevelChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioStateMonitor, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSoundLevelChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -4794,14 +4794,14 @@ impl MediaSourceAudioInputNode {
             (windows_core::Interface::vtable(this).MediaSource)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn MediaSourceCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn MediaSourceCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaSourceAudioInputNode, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MediaSourceAudioInputNode>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MediaSourceCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MediaSourceCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaSourceAudioInputNode, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMediaSourceCompleted(&self, token: i64) -> windows_core::Result<()> {
@@ -5261,14 +5261,14 @@ impl SpatialAudioDeviceConfiguration {
             (windows_core::Interface::vtable(this).SetDefaultSpatialAudioFormatAsync)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(subtype), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn ConfigurationChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ConfigurationChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SpatialAudioDeviceConfiguration, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<SpatialAudioDeviceConfiguration>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ConfigurationChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ConfigurationChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<SpatialAudioDeviceConfiguration, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveConfigurationChanged(&self, token: i64) -> windows_core::Result<()> {

@@ -40,7 +40,7 @@ impl IAsyncInfo_Impl for Async_Impl {
 fn test() -> Result<()> {
     let a: IAsyncAction = Async.into();
     let a_clone = a.clone();
-    a.SetCompleted(&AsyncActionCompletedHandler::new(move |sender, status| {
+    a.SetCompleted(Some(move |sender, status| {
         assert_eq!(&a_clone, sender.unwrap());
         assert_eq!(status, AsyncStatus::Completed);
         Ok(())

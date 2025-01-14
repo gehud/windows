@@ -1959,14 +1959,14 @@ impl VpnChannel {
             (windows_core::Interface::vtable(this).Configuration)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn ActivityChange<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ActivityChange<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<VpnChannel, VpnChannelActivityEventArgs>>,
+        P0: FnMut(windows_core::Ref<VpnChannel>, windows_core::Ref<VpnChannelActivityEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ActivityChange)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ActivityChange)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<VpnChannel, VpnChannelActivityEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveActivityChange(&self, token: i64) -> windows_core::Result<()> {
@@ -2038,14 +2038,14 @@ impl VpnChannel {
         let this = &windows_core::Interface::cast::<IVpnChannel2>(self)?;
         unsafe { (windows_core::Interface::vtable(this).StartExistingTransports)(windows_core::Interface::as_raw(this), assignedclientipv4list.param().abi(), assignedclientipv6list.param().abi(), vpninterfaceid.param().abi(), assignedroutes.param().abi(), assigneddomainname.param().abi(), mtusize, maxframesize, reserved).ok() }
     }
-    pub fn ActivityStateChange<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ActivityStateChange<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<VpnChannel, VpnChannelActivityStateChangedArgs>>,
+        P0: FnMut(windows_core::Ref<VpnChannel>, windows_core::Ref<VpnChannelActivityStateChangedArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IVpnChannel2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ActivityStateChange)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ActivityStateChange)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<VpnChannel, VpnChannelActivityStateChangedArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveActivityStateChange(&self, token: i64) -> windows_core::Result<()> {

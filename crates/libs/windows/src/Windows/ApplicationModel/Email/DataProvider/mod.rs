@@ -3,210 +3,210 @@
 pub struct EmailDataProviderConnection(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(EmailDataProviderConnection, windows_core::IUnknown, windows_core::IInspectable);
 impl EmailDataProviderConnection {
-    pub fn MailboxSyncRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn MailboxSyncRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxSyncManagerSyncRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxSyncManagerSyncRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MailboxSyncRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MailboxSyncRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxSyncManagerSyncRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMailboxSyncRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveMailboxSyncRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DownloadMessageRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DownloadMessageRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxDownloadMessageRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxDownloadMessageRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DownloadMessageRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DownloadMessageRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxDownloadMessageRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDownloadMessageRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDownloadMessageRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DownloadAttachmentRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DownloadAttachmentRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxDownloadAttachmentRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxDownloadAttachmentRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DownloadAttachmentRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DownloadAttachmentRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxDownloadAttachmentRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDownloadAttachmentRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDownloadAttachmentRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn CreateFolderRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CreateFolderRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxCreateFolderRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxCreateFolderRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateFolderRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CreateFolderRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxCreateFolderRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCreateFolderRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCreateFolderRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DeleteFolderRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DeleteFolderRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxDeleteFolderRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxDeleteFolderRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DeleteFolderRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DeleteFolderRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxDeleteFolderRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDeleteFolderRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDeleteFolderRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn EmptyFolderRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn EmptyFolderRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxEmptyFolderRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxEmptyFolderRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).EmptyFolderRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).EmptyFolderRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxEmptyFolderRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveEmptyFolderRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveEmptyFolderRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn MoveFolderRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn MoveFolderRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxMoveFolderRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxMoveFolderRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MoveFolderRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MoveFolderRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxMoveFolderRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMoveFolderRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveMoveFolderRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn UpdateMeetingResponseRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UpdateMeetingResponseRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxUpdateMeetingResponseRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxUpdateMeetingResponseRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UpdateMeetingResponseRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UpdateMeetingResponseRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxUpdateMeetingResponseRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUpdateMeetingResponseRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveUpdateMeetingResponseRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ForwardMeetingRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ForwardMeetingRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxForwardMeetingRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxForwardMeetingRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ForwardMeetingRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ForwardMeetingRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxForwardMeetingRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveForwardMeetingRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveForwardMeetingRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ProposeNewTimeForMeetingRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ProposeNewTimeForMeetingRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxProposeNewTimeForMeetingRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxProposeNewTimeForMeetingRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ProposeNewTimeForMeetingRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ProposeNewTimeForMeetingRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxProposeNewTimeForMeetingRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveProposeNewTimeForMeetingRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveProposeNewTimeForMeetingRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SetAutoReplySettingsRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SetAutoReplySettingsRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxSetAutoReplySettingsRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxSetAutoReplySettingsRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SetAutoReplySettingsRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SetAutoReplySettingsRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxSetAutoReplySettingsRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSetAutoReplySettingsRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSetAutoReplySettingsRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn GetAutoReplySettingsRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn GetAutoReplySettingsRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxGetAutoReplySettingsRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxGetAutoReplySettingsRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).GetAutoReplySettingsRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).GetAutoReplySettingsRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxGetAutoReplySettingsRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveGetAutoReplySettingsRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveGetAutoReplySettingsRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ResolveRecipientsRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ResolveRecipientsRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxResolveRecipientsRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxResolveRecipientsRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ResolveRecipientsRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ResolveRecipientsRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxResolveRecipientsRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveResolveRecipientsRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveResolveRecipientsRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ValidateCertificatesRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ValidateCertificatesRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxValidateCertificatesRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxValidateCertificatesRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ValidateCertificatesRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ValidateCertificatesRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxValidateCertificatesRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveValidateCertificatesRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveValidateCertificatesRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ServerSearchReadBatchRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ServerSearchReadBatchRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<EmailDataProviderConnection, EmailMailboxServerSearchReadBatchRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailDataProviderConnection>, windows_core::Ref<EmailMailboxServerSearchReadBatchRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ServerSearchReadBatchRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ServerSearchReadBatchRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<EmailDataProviderConnection, EmailMailboxServerSearchReadBatchRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveServerSearchReadBatchRequested(&self, token: i64) -> windows_core::Result<()> {

@@ -107,14 +107,14 @@ impl HdmiDisplayInformation {
             (windows_core::Interface::vtable(this).RequestSetCurrentDisplayModeWithHdrAndMetadataAsync)(windows_core::Interface::as_raw(this), mode.param().abi(), hdroption, hdrmetadata, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn DisplayModesChanged<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn DisplayModesChanged<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<HdmiDisplayInformation, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<HdmiDisplayInformation>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DisplayModesChanged)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DisplayModesChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::super::Foundation::TypedEventHandler::<HdmiDisplayInformation, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDisplayModesChanged(&self, token: i64) -> windows_core::Result<()> {

@@ -205,42 +205,42 @@ impl NotesWindowManagerPreview {
             (windows_core::Interface::vtable(this).SetNotesThumbnailAsync)(windows_core::Interface::as_raw(this), thumbnail.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn SystemLockStateChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SystemLockStateChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<NotesWindowManagerPreview, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<NotesWindowManagerPreview>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SystemLockStateChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SystemLockStateChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<NotesWindowManagerPreview, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSystemLockStateChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSystemLockStateChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn NotePlacementChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NotePlacementChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<NotesWindowManagerPreview, NotePlacementChangedPreviewEventArgs>>,
+        P0: FnMut(windows_core::Ref<NotesWindowManagerPreview>, windows_core::Ref<NotePlacementChangedPreviewEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NotePlacementChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NotePlacementChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<NotesWindowManagerPreview, NotePlacementChangedPreviewEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNotePlacementChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveNotePlacementChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn NoteVisibilityChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NoteVisibilityChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<NotesWindowManagerPreview, NoteVisibilityChangedPreviewEventArgs>>,
+        P0: FnMut(windows_core::Ref<NotesWindowManagerPreview>, windows_core::Ref<NoteVisibilityChangedPreviewEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NoteVisibilityChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NoteVisibilityChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<NotesWindowManagerPreview, NoteVisibilityChangedPreviewEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNoteVisibilityChanged(&self, token: i64) -> windows_core::Result<()> {

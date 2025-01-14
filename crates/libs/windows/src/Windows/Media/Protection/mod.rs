@@ -189,14 +189,14 @@ impl HdcpSession {
             (windows_core::Interface::vtable(this).SetDesiredMinProtectionAsync)(windows_core::Interface::as_raw(this), protection, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn ProtectionChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ProtectionChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<HdcpSession, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<HdcpSession>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ProtectionChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ProtectionChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<HdcpSession, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveProtectionChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -452,42 +452,42 @@ impl MediaProtectionManager {
         static SHARED: windows_core::imp::FactoryCache<MediaProtectionManager, windows_core::imp::IGenericFactory> = windows_core::imp::FactoryCache::new();
         SHARED.call(callback)
     }
-    pub fn ServiceRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ServiceRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<ServiceRequestedEventHandler>,
+        P0: FnMut(windows_core::Ref<MediaProtectionManager>, windows_core::Ref<ServiceRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ServiceRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ServiceRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| ServiceRequestedEventHandler::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveServiceRequested(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveServiceRequested)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn RebootNeeded<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RebootNeeded<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<RebootNeededEventHandler>,
+        P0: FnMut(windows_core::Ref<MediaProtectionManager>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RebootNeeded)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RebootNeeded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| RebootNeededEventHandler::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRebootNeeded(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRebootNeeded)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn ComponentLoadFailed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ComponentLoadFailed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<ComponentLoadFailedEventHandler>,
+        P0: FnMut(windows_core::Ref<MediaProtectionManager>, windows_core::Ref<ComponentLoadFailedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ComponentLoadFailed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ComponentLoadFailed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| ComponentLoadFailedEventHandler::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveComponentLoadFailed(&self, cookie: i64) -> windows_core::Result<()> {

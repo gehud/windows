@@ -2898,42 +2898,42 @@ impl ToastNotification {
             (windows_core::Interface::vtable(this).ExpirationTime)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn Dismissed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Dismissed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ToastNotification, ToastDismissedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ToastNotification>, windows_core::Ref<ToastDismissedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Dismissed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Dismissed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ToastNotification, ToastDismissedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDismissed(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDismissed)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Activated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Activated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ToastNotification, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<ToastNotification>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Activated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Activated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ToastNotification, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveActivated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveActivated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Failed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Failed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ToastNotification, ToastFailedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ToastNotification>, windows_core::Ref<ToastFailedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Failed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Failed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ToastNotification, ToastFailedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFailed(&self, token: i64) -> windows_core::Result<()> {
@@ -3314,14 +3314,14 @@ impl ToastNotificationManagerForUser {
             (windows_core::Interface::vtable(this).NotificationMode)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn NotificationModeChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NotificationModeChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ToastNotificationManagerForUser, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<ToastNotificationManagerForUser>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IToastNotificationManagerForUser3>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NotificationModeChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NotificationModeChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ToastNotificationManagerForUser, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNotificationModeChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -3436,14 +3436,14 @@ impl ToastNotifier {
             (windows_core::Interface::vtable(this).UpdateWithTag)(windows_core::Interface::as_raw(this), data.param().abi(), core::mem::transmute_copy(tag), &mut result__).map(|| result__)
         }
     }
-    pub fn ScheduledToastNotificationShowing<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ScheduledToastNotificationShowing<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ToastNotifier, ScheduledToastNotificationShowingEventArgs>>,
+        P0: FnMut(windows_core::Ref<ToastNotifier>, windows_core::Ref<ScheduledToastNotificationShowingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IToastNotifier3>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ScheduledToastNotificationShowing)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ScheduledToastNotificationShowing)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ToastNotifier, ScheduledToastNotificationShowingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveScheduledToastNotificationShowing(&self, token: i64) -> windows_core::Result<()> {

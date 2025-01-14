@@ -30,15 +30,17 @@ impl Deferral {
                 .ok()
         }
     }
-    pub fn Create<P0>(handler: P0) -> windows_core::Result<Deferral>
+    pub fn Create<P0>(handler: Option<P0>) -> windows_core::Result<Deferral>
     where
-        P0: windows_core::Param<DeferralCompletedHandler>,
+        P0: FnMut() -> windows_core::Result<()> + Send + 'static,
     {
         Self::IDeferralFactory(|this| unsafe {
             let mut result__ = core::mem::zeroed();
             (windows_core::Interface::vtable(this).Create)(
                 windows_core::Interface::as_raw(this),
-                handler.param().abi(),
+                core::mem::transmute_copy(
+                    &handler.map(|closure| DeferralCompletedHandler::new(closure)),
+                ),
                 &mut result__,
             )
             .and_then(|| windows_core::Type::from_abi(result__))

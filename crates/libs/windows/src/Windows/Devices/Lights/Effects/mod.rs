@@ -332,14 +332,14 @@ impl LampArrayBitmapEffect {
             (windows_core::Interface::vtable(this).SuggestedBitmapSize)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn BitmapRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn BitmapRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<LampArrayBitmapEffect, LampArrayBitmapRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<LampArrayBitmapEffect>, windows_core::Ref<LampArrayBitmapRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).BitmapRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).BitmapRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<LampArrayBitmapEffect, LampArrayBitmapRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveBitmapRequested(&self, token: i64) -> windows_core::Result<()> {
@@ -666,14 +666,14 @@ impl LampArrayCustomEffect {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).SetUpdateInterval)(windows_core::Interface::as_raw(this), value).ok() }
     }
-    pub fn UpdateRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UpdateRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<LampArrayCustomEffect, LampArrayUpdateRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<LampArrayCustomEffect>, windows_core::Ref<LampArrayUpdateRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UpdateRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UpdateRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<LampArrayCustomEffect, LampArrayUpdateRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUpdateRequested(&self, token: i64) -> windows_core::Result<()> {

@@ -15,13 +15,13 @@ impl AsyncCausalityTracer {
     pub fn TraceSynchronousWorkCompletion(tracelevel: CausalityTraceLevel, source: CausalitySource, work: CausalitySynchronousWork) -> windows_core::Result<()> {
         Self::IAsyncCausalityTracerStatics(|this| unsafe { (windows_core::Interface::vtable(this).TraceSynchronousWorkCompletion)(windows_core::Interface::as_raw(this), tracelevel, source, work).ok() })
     }
-    pub fn TracingStatusChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn TracingStatusChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::EventHandler<TracingStatusChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<TracingStatusChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IAsyncCausalityTracerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TracingStatusChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TracingStatusChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::EventHandler::<TracingStatusChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveTracingStatusChanged(cookie: i64) -> windows_core::Result<()> {
@@ -237,14 +237,14 @@ impl FileLoggingSession {
             (windows_core::Interface::vtable(this).CloseAndSaveToFileAsync)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn LogFileGenerated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn LogFileGenerated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::TypedEventHandler<IFileLoggingSession, LogFileGeneratedEventArgs>>,
+        P0: FnMut(windows_core::Ref<IFileLoggingSession>, windows_core::Ref<LogFileGeneratedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).LogFileGenerated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).LogFileGenerated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::TypedEventHandler::<IFileLoggingSession, LogFileGeneratedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveLogFileGenerated(&self, token: i64) -> windows_core::Result<()> {
@@ -413,14 +413,14 @@ impl IFileLoggingSession {
             (windows_core::Interface::vtable(this).CloseAndSaveToFileAsync)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn LogFileGenerated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn LogFileGenerated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::TypedEventHandler<IFileLoggingSession, LogFileGeneratedEventArgs>>,
+        P0: FnMut(windows_core::Ref<IFileLoggingSession>, windows_core::Ref<LogFileGeneratedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).LogFileGenerated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).LogFileGenerated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::TypedEventHandler::<IFileLoggingSession, LogFileGeneratedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveLogFileGenerated(&self, token: i64) -> windows_core::Result<()> {
@@ -637,14 +637,14 @@ impl ILoggingChannel {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).LogValuePairWithLevel)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(value1), value2, level).ok() }
     }
-    pub fn LoggingEnabled<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn LoggingEnabled<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::TypedEventHandler<ILoggingChannel, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<ILoggingChannel>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).LoggingEnabled)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).LoggingEnabled)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::TypedEventHandler::<ILoggingChannel, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveLoggingEnabled(&self, token: i64) -> windows_core::Result<()> {
@@ -1636,14 +1636,14 @@ impl LoggingChannel {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).LogValuePairWithLevel)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(value1), value2, level).ok() }
     }
-    pub fn LoggingEnabled<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn LoggingEnabled<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::TypedEventHandler<ILoggingChannel, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<ILoggingChannel>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).LoggingEnabled)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).LoggingEnabled)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::TypedEventHandler::<ILoggingChannel, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveLoggingEnabled(&self, token: i64) -> windows_core::Result<()> {

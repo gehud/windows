@@ -196,14 +196,14 @@ impl ChatConversation {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).NotifyRemoteParticipantComposing)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(transportid), core::mem::transmute_copy(participantaddress), iscomposing).ok() }
     }
-    pub fn RemoteParticipantComposingChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RemoteParticipantComposingChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ChatConversation, RemoteParticipantComposingChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ChatConversation>, windows_core::Ref<RemoteParticipantComposingChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RemoteParticipantComposingChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RemoteParticipantComposingChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ChatConversation, RemoteParticipantComposingChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoteParticipantComposingChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -1282,14 +1282,14 @@ impl ChatMessageStore {
             (windows_core::Interface::vtable(this).ValidateMessage)(windows_core::Interface::as_raw(this), chatmessage.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn MessageChanged<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn MessageChanged<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ChatMessageStore, ChatMessageChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ChatMessageStore>, windows_core::Ref<ChatMessageChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MessageChanged)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MessageChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<ChatMessageStore, ChatMessageChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMessageChanged(&self, value: i64) -> windows_core::Result<()> {
@@ -1430,14 +1430,14 @@ impl ChatMessageStore {
             (windows_core::Interface::vtable(this).TryCancelSendMessageAsync)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(localchatmessageid), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn StoreChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StoreChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ChatMessageStore, ChatMessageStoreChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ChatMessageStore>, windows_core::Ref<ChatMessageStoreChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IChatMessageStore2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StoreChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StoreChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ChatMessageStore, ChatMessageStoreChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStoreChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -3000,14 +3000,14 @@ unsafe impl Sync for RcsEndUserMessageAvailableTriggerDetails {}
 pub struct RcsEndUserMessageManager(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(RcsEndUserMessageManager, windows_core::IUnknown, windows_core::IInspectable);
 impl RcsEndUserMessageManager {
-    pub fn MessageAvailableChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn MessageAvailableChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RcsEndUserMessageManager, RcsEndUserMessageAvailableEventArgs>>,
+        P0: FnMut(windows_core::Ref<RcsEndUserMessageManager>, windows_core::Ref<RcsEndUserMessageAvailableEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MessageAvailableChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MessageAvailableChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RcsEndUserMessageManager, RcsEndUserMessageAvailableEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMessageAvailableChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -3057,13 +3057,13 @@ impl RcsManager {
             (windows_core::Interface::vtable(this).LeaveConversationAsync)(windows_core::Interface::as_raw(this), conversation.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn TransportListChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn TransportListChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IRcsManagerStatics2(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TransportListChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TransportListChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveTransportListChanged(token: i64) -> windows_core::Result<()> {
@@ -3176,14 +3176,14 @@ impl RcsTransport {
             (windows_core::Interface::vtable(this).IsServiceKindSupported)(windows_core::Interface::as_raw(this), servicekind, &mut result__).map(|| result__)
         }
     }
-    pub fn ServiceKindSupportedChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ServiceKindSupportedChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<RcsTransport, RcsServiceKindSupportedChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<RcsTransport>, windows_core::Ref<RcsServiceKindSupportedChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ServiceKindSupportedChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ServiceKindSupportedChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<RcsTransport, RcsServiceKindSupportedChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveServiceKindSupportedChanged(&self, token: i64) -> windows_core::Result<()> {

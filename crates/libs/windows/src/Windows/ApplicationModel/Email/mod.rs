@@ -1239,14 +1239,14 @@ impl EmailMailbox {
             (windows_core::Interface::vtable(this).TryProposeNewTimeForMeetingAsync)(windows_core::Interface::as_raw(this), meeting.param().abi(), newstarttime, newduration, core::mem::transmute_copy(subject), core::mem::transmute_copy(comment), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn MailboxChanged<P0>(&self, phandler: P0) -> windows_core::Result<i64>
+    pub fn MailboxChanged<P0>(&self, phandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<EmailMailbox, EmailMailboxChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<EmailMailbox>, windows_core::Ref<EmailMailboxChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MailboxChanged)(windows_core::Interface::as_raw(this), phandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MailboxChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&phandler.map(|closure| super::super::Foundation::TypedEventHandler::<EmailMailbox, EmailMailboxChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMailboxChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -2214,14 +2214,14 @@ impl EmailMailboxSyncManager {
             (windows_core::Interface::vtable(this).SyncAsync)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn SyncStatusChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SyncStatusChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<EmailMailboxSyncManager, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<EmailMailboxSyncManager>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SyncStatusChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SyncStatusChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<EmailMailboxSyncManager, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSyncStatusChanged(&self, token: i64) -> windows_core::Result<()> {

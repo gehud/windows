@@ -158,42 +158,42 @@ impl BrightnessOverride {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).StopOverride)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn IsSupportedChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn IsSupportedChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<BrightnessOverride, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<BrightnessOverride>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).IsSupportedChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).IsSupportedChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<BrightnessOverride, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveIsSupportedChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveIsSupportedChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn IsOverrideActiveChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn IsOverrideActiveChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<BrightnessOverride, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<BrightnessOverride>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).IsOverrideActiveChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).IsOverrideActiveChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<BrightnessOverride, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveIsOverrideActiveChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveIsOverrideActiveChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn BrightnessLevelChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn BrightnessLevelChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<BrightnessOverride, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<BrightnessOverride>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).BrightnessLevelChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).BrightnessLevelChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<BrightnessOverride, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveBrightnessLevelChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -476,42 +476,42 @@ impl DisplayEnhancementOverride {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).StopOverride)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn CanOverrideChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CanOverrideChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DisplayEnhancementOverride, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DisplayEnhancementOverride>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CanOverrideChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CanOverrideChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DisplayEnhancementOverride, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCanOverrideChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCanOverrideChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn IsOverrideActiveChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn IsOverrideActiveChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DisplayEnhancementOverride, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DisplayEnhancementOverride>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).IsOverrideActiveChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).IsOverrideActiveChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DisplayEnhancementOverride, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveIsOverrideActiveChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveIsOverrideActiveChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DisplayEnhancementOverrideCapabilitiesChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DisplayEnhancementOverrideCapabilitiesChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DisplayEnhancementOverride, DisplayEnhancementOverrideCapabilitiesChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DisplayEnhancementOverride>, windows_core::Ref<DisplayEnhancementOverrideCapabilitiesChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DisplayEnhancementOverrideCapabilitiesChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DisplayEnhancementOverrideCapabilitiesChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DisplayEnhancementOverride, DisplayEnhancementOverrideCapabilitiesChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDisplayEnhancementOverrideCapabilitiesChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -625,14 +625,14 @@ impl DisplayInformation {
             (windows_core::Interface::vtable(this).NativeOrientation)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn OrientationChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn OrientationChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DisplayInformation, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DisplayInformation>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).OrientationChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).OrientationChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DisplayInformation, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveOrientationChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -667,14 +667,14 @@ impl DisplayInformation {
             (windows_core::Interface::vtable(this).RawDpiY)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn DpiChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DpiChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DisplayInformation, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DisplayInformation>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DpiChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DpiChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DisplayInformation, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDpiChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -688,14 +688,14 @@ impl DisplayInformation {
             (windows_core::Interface::vtable(this).StereoEnabled)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn StereoEnabledChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StereoEnabledChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DisplayInformation, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DisplayInformation>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StereoEnabledChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StereoEnabledChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DisplayInformation, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStereoEnabledChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -710,14 +710,14 @@ impl DisplayInformation {
             (windows_core::Interface::vtable(this).GetColorProfileAsync)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn ColorProfileChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ColorProfileChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DisplayInformation, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DisplayInformation>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ColorProfileChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ColorProfileChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DisplayInformation, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveColorProfileChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -759,14 +759,14 @@ impl DisplayInformation {
             (windows_core::Interface::vtable(this).GetAdvancedColorInfo)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn AdvancedColorInfoChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AdvancedColorInfoChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DisplayInformation, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DisplayInformation>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IDisplayInformation5>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AdvancedColorInfoChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AdvancedColorInfoChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DisplayInformation, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAdvancedColorInfoChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -788,13 +788,13 @@ impl DisplayInformation {
     pub fn SetAutoRotationPreferences(value: DisplayOrientations) -> windows_core::Result<()> {
         Self::IDisplayInformationStatics(|this| unsafe { (windows_core::Interface::vtable(this).SetAutoRotationPreferences)(windows_core::Interface::as_raw(this), value).ok() })
     }
-    pub fn DisplayContentsInvalidated<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn DisplayContentsInvalidated<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DisplayInformation, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DisplayInformation>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IDisplayInformationStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DisplayContentsInvalidated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DisplayContentsInvalidated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DisplayInformation, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveDisplayContentsInvalidated(token: i64) -> windows_core::Result<()> {
@@ -891,13 +891,13 @@ impl DisplayProperties {
     pub fn SetAutoRotationPreferences(value: DisplayOrientations) -> windows_core::Result<()> {
         Self::IDisplayPropertiesStatics(|this| unsafe { (windows_core::Interface::vtable(this).SetAutoRotationPreferences)(windows_core::Interface::as_raw(this), value).ok() })
     }
-    pub fn OrientationChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn OrientationChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<DisplayPropertiesEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IDisplayPropertiesStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).OrientationChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).OrientationChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| DisplayPropertiesEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveOrientationChanged(token: i64) -> windows_core::Result<()> {
@@ -915,13 +915,13 @@ impl DisplayProperties {
             (windows_core::Interface::vtable(this).LogicalDpi)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         })
     }
-    pub fn LogicalDpiChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn LogicalDpiChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<DisplayPropertiesEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IDisplayPropertiesStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).LogicalDpiChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).LogicalDpiChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| DisplayPropertiesEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveLogicalDpiChanged(token: i64) -> windows_core::Result<()> {
@@ -933,13 +933,13 @@ impl DisplayProperties {
             (windows_core::Interface::vtable(this).StereoEnabled)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         })
     }
-    pub fn StereoEnabledChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn StereoEnabledChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<DisplayPropertiesEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IDisplayPropertiesStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StereoEnabledChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StereoEnabledChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| DisplayPropertiesEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveStereoEnabledChanged(token: i64) -> windows_core::Result<()> {
@@ -952,25 +952,25 @@ impl DisplayProperties {
             (windows_core::Interface::vtable(this).GetColorProfileAsync)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn ColorProfileChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn ColorProfileChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<DisplayPropertiesEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IDisplayPropertiesStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ColorProfileChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ColorProfileChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| DisplayPropertiesEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveColorProfileChanged(token: i64) -> windows_core::Result<()> {
         Self::IDisplayPropertiesStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveColorProfileChanged)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn DisplayContentsInvalidated<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn DisplayContentsInvalidated<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<DisplayPropertiesEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IDisplayPropertiesStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DisplayContentsInvalidated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DisplayContentsInvalidated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| DisplayPropertiesEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveDisplayContentsInvalidated(token: i64) -> windows_core::Result<()> {

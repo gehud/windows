@@ -75,14 +75,14 @@ impl BarcodeScanner {
             (windows_core::Interface::vtable(this).IsProfileSupported)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(profile), &mut result__).map(|| result__)
         }
     }
-    pub fn StatusUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StatusUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<BarcodeScanner, BarcodeScannerStatusUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<BarcodeScanner>, windows_core::Ref<BarcodeScannerStatusUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StatusUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StatusUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<BarcodeScanner, BarcodeScannerStatusUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStatusUpdated(&self, token: i64) -> windows_core::Result<()> {
@@ -1157,14 +1157,14 @@ impl CashDrawer {
             (windows_core::Interface::vtable(this).GetStatisticsAsync)(windows_core::Interface::as_raw(this), statisticscategories.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn StatusUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StatusUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<CashDrawer, CashDrawerStatusUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CashDrawer>, windows_core::Ref<CashDrawerStatusUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StatusUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StatusUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<CashDrawer, CashDrawerStatusUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStatusUpdated(&self, token: i64) -> windows_core::Result<()> {
@@ -1329,14 +1329,14 @@ impl CashDrawerCloseAlarm {
             (windows_core::Interface::vtable(this).BeepDelay)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn AlarmTimeoutExpired<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AlarmTimeoutExpired<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<CashDrawerCloseAlarm, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<CashDrawerCloseAlarm>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AlarmTimeoutExpired)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AlarmTimeoutExpired)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<CashDrawerCloseAlarm, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAlarmTimeoutExpired(&self, token: i64) -> windows_core::Result<()> {
@@ -1393,28 +1393,28 @@ unsafe impl Sync for CashDrawerClosedEventArgs {}
 pub struct CashDrawerEventSource(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(CashDrawerEventSource, windows_core::IUnknown, windows_core::IInspectable);
 impl CashDrawerEventSource {
-    pub fn DrawerClosed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DrawerClosed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<CashDrawerEventSource, CashDrawerClosedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CashDrawerEventSource>, windows_core::Ref<CashDrawerClosedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DrawerClosed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DrawerClosed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<CashDrawerEventSource, CashDrawerClosedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDrawerClosed(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDrawerClosed)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DrawerOpened<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DrawerOpened<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<CashDrawerEventSource, CashDrawerOpenedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CashDrawerEventSource>, windows_core::Ref<CashDrawerOpenedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DrawerOpened)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DrawerOpened)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<CashDrawerEventSource, CashDrawerOpenedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDrawerOpened(&self, token: i64) -> windows_core::Result<()> {
@@ -1632,84 +1632,84 @@ impl ClaimedBarcodeScanner {
             (windows_core::Interface::vtable(this).SetActiveProfileAsync)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(profile), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn DataReceived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DataReceived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedBarcodeScanner, BarcodeScannerDataReceivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedBarcodeScanner>, windows_core::Ref<BarcodeScannerDataReceivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DataReceived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DataReceived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedBarcodeScanner, BarcodeScannerDataReceivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDataReceived(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDataReceived)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn TriggerPressed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn TriggerPressed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<ClaimedBarcodeScanner>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<ClaimedBarcodeScanner>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TriggerPressed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TriggerPressed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<ClaimedBarcodeScanner>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTriggerPressed(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveTriggerPressed)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn TriggerReleased<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn TriggerReleased<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<ClaimedBarcodeScanner>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<ClaimedBarcodeScanner>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TriggerReleased)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TriggerReleased)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<ClaimedBarcodeScanner>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTriggerReleased(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveTriggerReleased)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ReleaseDeviceRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ReleaseDeviceRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<ClaimedBarcodeScanner>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<ClaimedBarcodeScanner>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ReleaseDeviceRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ReleaseDeviceRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<ClaimedBarcodeScanner>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveReleaseDeviceRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveReleaseDeviceRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ImagePreviewReceived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ImagePreviewReceived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedBarcodeScanner, BarcodeScannerImagePreviewReceivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedBarcodeScanner>, windows_core::Ref<BarcodeScannerImagePreviewReceivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ImagePreviewReceived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ImagePreviewReceived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedBarcodeScanner, BarcodeScannerImagePreviewReceivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveImagePreviewReceived(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveImagePreviewReceived)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ErrorOccurred<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ErrorOccurred<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedBarcodeScanner, BarcodeScannerErrorOccurredEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedBarcodeScanner>, windows_core::Ref<BarcodeScannerErrorOccurredEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ErrorOccurred)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ErrorOccurred)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedBarcodeScanner, BarcodeScannerErrorOccurredEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveErrorOccurred(&self, token: i64) -> windows_core::Result<()> {
@@ -1769,14 +1769,14 @@ impl ClaimedBarcodeScanner {
             (windows_core::Interface::vtable(this).IsVideoPreviewShownOnEnable)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn Closed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Closed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedBarcodeScanner, ClaimedBarcodeScannerClosedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedBarcodeScanner>, windows_core::Ref<ClaimedBarcodeScannerClosedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IClaimedBarcodeScanner4>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedBarcodeScanner, ClaimedBarcodeScannerClosedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveClosed(&self, token: i64) -> windows_core::Result<()> {
@@ -1901,28 +1901,28 @@ impl ClaimedCashDrawer {
             (windows_core::Interface::vtable(this).UpdateStatisticsAsync)(windows_core::Interface::as_raw(this), statistics.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn ReleaseDeviceRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ReleaseDeviceRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedCashDrawer, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<ClaimedCashDrawer>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ReleaseDeviceRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ReleaseDeviceRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedCashDrawer, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveReleaseDeviceRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveReleaseDeviceRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Closed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Closed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedCashDrawer, ClaimedCashDrawerClosedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedCashDrawer>, windows_core::Ref<ClaimedCashDrawerClosedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IClaimedCashDrawer2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedCashDrawer, ClaimedCashDrawerClosedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveClosed(&self, token: i64) -> windows_core::Result<()> {
@@ -2173,14 +2173,14 @@ impl ClaimedLineDisplay {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RetainDevice)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn ReleaseDeviceRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ReleaseDeviceRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedLineDisplay, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<ClaimedLineDisplay>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ReleaseDeviceRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ReleaseDeviceRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedLineDisplay, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveReleaseDeviceRequested(&self, token: i64) -> windows_core::Result<()> {
@@ -2212,14 +2212,14 @@ impl ClaimedLineDisplay {
             (windows_core::Interface::vtable(this).CheckPowerStatusAsync)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn StatusUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StatusUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedLineDisplay, LineDisplayStatusUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedLineDisplay>, windows_core::Ref<LineDisplayStatusUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IClaimedLineDisplay2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StatusUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StatusUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedLineDisplay, LineDisplayStatusUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStatusUpdated(&self, token: i64) -> windows_core::Result<()> {
@@ -2327,14 +2327,14 @@ impl ClaimedLineDisplay {
             (windows_core::Interface::vtable(this).TryStoreStorageFileBitmapWithAlignmentAndWidthAsync)(windows_core::Interface::as_raw(this), bitmap.param().abi(), horizontalalignment, verticalalignment, widthinpixels, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn Closed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Closed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedLineDisplay, ClaimedLineDisplayClosedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedLineDisplay>, windows_core::Ref<ClaimedLineDisplayClosedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IClaimedLineDisplay3>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedLineDisplay, ClaimedLineDisplayClosedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveClosed(&self, token: i64) -> windows_core::Result<()> {
@@ -2552,84 +2552,84 @@ impl ClaimedMagneticStripeReader {
             (windows_core::Interface::vtable(this).UpdateStatisticsAsync)(windows_core::Interface::as_raw(this), statistics.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn BankCardDataReceived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn BankCardDataReceived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderBankCardDataReceivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedMagneticStripeReader>, windows_core::Ref<MagneticStripeReaderBankCardDataReceivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).BankCardDataReceived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).BankCardDataReceived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedMagneticStripeReader, MagneticStripeReaderBankCardDataReceivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveBankCardDataReceived(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveBankCardDataReceived)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn AamvaCardDataReceived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AamvaCardDataReceived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderAamvaCardDataReceivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedMagneticStripeReader>, windows_core::Ref<MagneticStripeReaderAamvaCardDataReceivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AamvaCardDataReceived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AamvaCardDataReceived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedMagneticStripeReader, MagneticStripeReaderAamvaCardDataReceivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAamvaCardDataReceived(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAamvaCardDataReceived)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn VendorSpecificDataReceived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn VendorSpecificDataReceived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderVendorSpecificCardDataReceivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedMagneticStripeReader>, windows_core::Ref<MagneticStripeReaderVendorSpecificCardDataReceivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).VendorSpecificDataReceived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).VendorSpecificDataReceived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedMagneticStripeReader, MagneticStripeReaderVendorSpecificCardDataReceivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveVendorSpecificDataReceived(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveVendorSpecificDataReceived)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ReleaseDeviceRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ReleaseDeviceRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<ClaimedMagneticStripeReader>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<ClaimedMagneticStripeReader>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ReleaseDeviceRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ReleaseDeviceRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<ClaimedMagneticStripeReader>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveReleaseDeviceRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveReleaseDeviceRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ErrorOccurred<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ErrorOccurred<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedMagneticStripeReader, MagneticStripeReaderErrorOccurredEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedMagneticStripeReader>, windows_core::Ref<MagneticStripeReaderErrorOccurredEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ErrorOccurred)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ErrorOccurred)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedMagneticStripeReader, MagneticStripeReaderErrorOccurredEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveErrorOccurred(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveErrorOccurred)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Closed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Closed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedMagneticStripeReader, ClaimedMagneticStripeReaderClosedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedMagneticStripeReader>, windows_core::Ref<ClaimedMagneticStripeReaderClosedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IClaimedMagneticStripeReader2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedMagneticStripeReader, ClaimedMagneticStripeReaderClosedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveClosed(&self, token: i64) -> windows_core::Result<()> {
@@ -2794,28 +2794,28 @@ impl ClaimedPosPrinter {
             (windows_core::Interface::vtable(this).UpdateStatisticsAsync)(windows_core::Interface::as_raw(this), statistics.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn ReleaseDeviceRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ReleaseDeviceRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedPosPrinter, PosPrinterReleaseDeviceRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedPosPrinter>, windows_core::Ref<PosPrinterReleaseDeviceRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ReleaseDeviceRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ReleaseDeviceRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedPosPrinter, PosPrinterReleaseDeviceRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveReleaseDeviceRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveReleaseDeviceRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Closed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Closed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ClaimedPosPrinter, ClaimedPosPrinterClosedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ClaimedPosPrinter>, windows_core::Ref<ClaimedPosPrinterClosedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IClaimedPosPrinter2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ClaimedPosPrinter, ClaimedPosPrinterClosedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveClosed(&self, token: i64) -> windows_core::Result<()> {
@@ -7562,14 +7562,14 @@ impl MagneticStripeReader {
             (windows_core::Interface::vtable(this).GetErrorReportingType)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn StatusUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StatusUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MagneticStripeReader, MagneticStripeReaderStatusUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MagneticStripeReader>, windows_core::Ref<MagneticStripeReaderStatusUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StatusUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StatusUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MagneticStripeReader, MagneticStripeReaderStatusUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStatusUpdated(&self, token: i64) -> windows_core::Result<()> {
@@ -8460,14 +8460,14 @@ impl PosPrinter {
             (windows_core::Interface::vtable(this).GetStatisticsAsync)(windows_core::Interface::as_raw(this), statisticscategories.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn StatusUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StatusUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PosPrinter, PosPrinterStatusUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PosPrinter>, windows_core::Ref<PosPrinterStatusUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StatusUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StatusUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PosPrinter, PosPrinterStatusUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStatusUpdated(&self, token: i64) -> windows_core::Result<()> {

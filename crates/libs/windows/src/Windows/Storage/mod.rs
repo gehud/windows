@@ -128,14 +128,14 @@ impl ApplicationData {
             (windows_core::Interface::vtable(this).Version)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn SetVersionAsync<P1>(&self, desiredversion: u32, handler: P1) -> windows_core::Result<super::Foundation::IAsyncAction>
+    pub fn SetVersionAsync<P1>(&self, desiredversion: u32, handler: Option<P1>) -> windows_core::Result<super::Foundation::IAsyncAction>
     where
-        P1: windows_core::Param<ApplicationDataSetVersionHandler>,
+        P1: FnMut(windows_core::Ref<SetVersionRequest>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SetVersionAsync)(windows_core::Interface::as_raw(this), desiredversion, handler.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).SetVersionAsync)(windows_core::Interface::as_raw(this), desiredversion, core::mem::transmute_copy(&handler.map(|closure| ApplicationDataSetVersionHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
     pub fn ClearAllAsync(&self) -> windows_core::Result<super::Foundation::IAsyncAction> {
@@ -190,14 +190,14 @@ impl ApplicationData {
             (windows_core::Interface::vtable(this).TemporaryFolder)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn DataChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DataChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<ApplicationData, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<ApplicationData>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DataChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DataChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<ApplicationData, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDataChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -357,14 +357,14 @@ impl ApplicationDataCompositeValue {
         let this = &windows_core::Interface::cast::<super::Foundation::Collections::IMap<windows_core::HSTRING, windows_core::IInspectable>>(self)?;
         unsafe { (windows_core::Interface::vtable(this).Clear)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn MapChanged<P0>(&self, vhnd: P0) -> windows_core::Result<i64>
+    pub fn MapChanged<P0>(&self, vhnd: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::Collections::MapChangedEventHandler<windows_core::HSTRING, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<super::Foundation::Collections::IObservableMap<windows_core::HSTRING, windows_core::IInspectable>>, windows_core::Ref<super::Foundation::Collections::IMapChangedEventArgs<windows_core::HSTRING>>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::Foundation::Collections::IObservableMap<windows_core::HSTRING, windows_core::IInspectable>>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MapChanged)(windows_core::Interface::as_raw(this), vhnd.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MapChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&vhnd.map(|closure| super::Foundation::Collections::MapChangedEventHandler::<windows_core::HSTRING, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMapChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -532,14 +532,14 @@ impl ApplicationDataContainerSettings {
         let this = &windows_core::Interface::cast::<super::Foundation::Collections::IMap<windows_core::HSTRING, windows_core::IInspectable>>(self)?;
         unsafe { (windows_core::Interface::vtable(this).Clear)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn MapChanged<P0>(&self, vhnd: P0) -> windows_core::Result<i64>
+    pub fn MapChanged<P0>(&self, vhnd: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::Collections::MapChangedEventHandler<windows_core::HSTRING, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<super::Foundation::Collections::IObservableMap<windows_core::HSTRING, windows_core::IInspectable>>, windows_core::Ref<super::Foundation::Collections::IMapChangedEventArgs<windows_core::HSTRING>>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<super::Foundation::Collections::IObservableMap<windows_core::HSTRING, windows_core::IInspectable>>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MapChanged)(windows_core::Interface::as_raw(this), vhnd.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MapChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&vhnd.map(|closure| super::Foundation::Collections::MapChangedEventHandler::<windows_core::HSTRING, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMapChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -4407,25 +4407,25 @@ impl StorageFile {
             (windows_core::Interface::vtable(this).GetFileFromApplicationUriAsync)(windows_core::Interface::as_raw(this), uri.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn CreateStreamedFileAsync<P1, P2>(displaynamewithextension: &windows_core::HSTRING, datarequested: P1, thumbnail: P2) -> windows_core::Result<super::Foundation::IAsyncOperation<StorageFile>>
+    pub fn CreateStreamedFileAsync<P1, P2>(displaynamewithextension: &windows_core::HSTRING, datarequested: Option<P1>, thumbnail: P2) -> windows_core::Result<super::Foundation::IAsyncOperation<StorageFile>>
     where
-        P1: windows_core::Param<StreamedFileDataRequestedHandler>,
+        P1: FnMut(windows_core::Ref<StreamedFileDataRequest>) -> windows_core::Result<()> + Send + 'static,
         P2: windows_core::Param<Streams::IRandomAccessStreamReference>,
     {
         Self::IStorageFileStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateStreamedFileAsync)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(displaynamewithextension), datarequested.param().abi(), thumbnail.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateStreamedFileAsync)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(displaynamewithextension), core::mem::transmute_copy(&datarequested.map(|closure| StreamedFileDataRequestedHandler::new(closure))), thumbnail.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn ReplaceWithStreamedFileAsync<P0, P1, P2>(filetoreplace: P0, datarequested: P1, thumbnail: P2) -> windows_core::Result<super::Foundation::IAsyncOperation<StorageFile>>
+    pub fn ReplaceWithStreamedFileAsync<P0, P1, P2>(filetoreplace: P0, datarequested: Option<P1>, thumbnail: P2) -> windows_core::Result<super::Foundation::IAsyncOperation<StorageFile>>
     where
         P0: windows_core::Param<IStorageFile>,
-        P1: windows_core::Param<StreamedFileDataRequestedHandler>,
+        P1: FnMut(windows_core::Ref<StreamedFileDataRequest>) -> windows_core::Result<()> + Send + 'static,
         P2: windows_core::Param<Streams::IRandomAccessStreamReference>,
     {
         Self::IStorageFileStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ReplaceWithStreamedFileAsync)(windows_core::Interface::as_raw(this), filetoreplace.param().abi(), datarequested.param().abi(), thumbnail.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).ReplaceWithStreamedFileAsync)(windows_core::Interface::as_raw(this), filetoreplace.param().abi(), core::mem::transmute_copy(&datarequested.map(|closure| StreamedFileDataRequestedHandler::new(closure))), thumbnail.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
     pub fn CreateStreamedFileFromUriAsync<P1, P2>(displaynamewithextension: &windows_core::HSTRING, uri: P1, thumbnail: P2) -> windows_core::Result<super::Foundation::IAsyncOperation<StorageFile>>
@@ -5187,14 +5187,14 @@ impl StorageLibrary {
             (windows_core::Interface::vtable(this).SaveFolder)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn DefinitionChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DefinitionChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::Foundation::TypedEventHandler<StorageLibrary, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<StorageLibrary>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DefinitionChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DefinitionChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::Foundation::TypedEventHandler::<StorageLibrary, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDefinitionChanged(&self, eventcookie: i64) -> windows_core::Result<()> {

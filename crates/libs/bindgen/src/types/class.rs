@@ -234,7 +234,7 @@ impl Class {
     }
 
     pub fn write_name(&self, writer: &Writer) -> TokenStream {
-        self.type_name().write(writer, &[])
+        self.type_name().write(writer, &[] ,false)
     }
 
     fn default_interface(&self) -> Option<Type> {

@@ -1,16 +1,16 @@
-use windows::{core::*, Devices::Enumeration::*, Foundation::*};
+use windows::{core::*, Devices::Enumeration::*};
 
 fn main() -> Result<()> {
     let watcher = DeviceInformation::CreateWatcher()?;
 
-    watcher.Added(&TypedEventHandler::<DeviceWatcher, DeviceInformation>::new(
-        |_, info| {
+    watcher.Added(Some(
+        |_, info: Ref<DeviceInformation>| {
             println!("{}", info.as_ref().expect("info").Name()?);
             Ok(())
         },
     ))?;
 
-    watcher.EnumerationCompleted(&TypedEventHandler::new(|_, _| {
+    watcher.EnumerationCompleted(Some(|_, _| {
         println!("done!");
         Ok(())
     }))?;

@@ -151,126 +151,126 @@ impl CoreTextEditContext {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).SetInputPaneDisplayPolicy)(windows_core::Interface::as_raw(this), value).ok() }
     }
-    pub fn TextRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn TextRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreTextEditContext, CoreTextTextRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreTextEditContext>, windows_core::Ref<CoreTextTextRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TextRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TextRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreTextEditContext, CoreTextTextRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTextRequested(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveTextRequested)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn SelectionRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SelectionRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreTextEditContext, CoreTextSelectionRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreTextEditContext>, windows_core::Ref<CoreTextSelectionRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SelectionRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SelectionRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreTextEditContext, CoreTextSelectionRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSelectionRequested(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSelectionRequested)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn LayoutRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn LayoutRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreTextEditContext, CoreTextLayoutRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreTextEditContext>, windows_core::Ref<CoreTextLayoutRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).LayoutRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).LayoutRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreTextEditContext, CoreTextLayoutRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveLayoutRequested(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveLayoutRequested)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn TextUpdating<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn TextUpdating<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreTextEditContext, CoreTextTextUpdatingEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreTextEditContext>, windows_core::Ref<CoreTextTextUpdatingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TextUpdating)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TextUpdating)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreTextEditContext, CoreTextTextUpdatingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTextUpdating(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveTextUpdating)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn SelectionUpdating<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SelectionUpdating<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreTextEditContext, CoreTextSelectionUpdatingEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreTextEditContext>, windows_core::Ref<CoreTextSelectionUpdatingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SelectionUpdating)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SelectionUpdating)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreTextEditContext, CoreTextSelectionUpdatingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSelectionUpdating(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSelectionUpdating)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn FormatUpdating<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FormatUpdating<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreTextEditContext, CoreTextFormatUpdatingEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreTextEditContext>, windows_core::Ref<CoreTextFormatUpdatingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FormatUpdating)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FormatUpdating)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreTextEditContext, CoreTextFormatUpdatingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFormatUpdating(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveFormatUpdating)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn CompositionStarted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CompositionStarted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreTextEditContext, CoreTextCompositionStartedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreTextEditContext>, windows_core::Ref<CoreTextCompositionStartedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CompositionStarted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CompositionStarted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreTextEditContext, CoreTextCompositionStartedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCompositionStarted(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCompositionStarted)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn CompositionCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CompositionCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreTextEditContext, CoreTextCompositionCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreTextEditContext>, windows_core::Ref<CoreTextCompositionCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CompositionCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CompositionCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreTextEditContext, CoreTextCompositionCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCompositionCompleted(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCompositionCompleted)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn FocusRemoved<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FocusRemoved<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreTextEditContext, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<CoreTextEditContext>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FocusRemoved)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FocusRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreTextEditContext, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFocusRemoved(&self, cookie: i64) -> windows_core::Result<()> {
@@ -297,14 +297,14 @@ impl CoreTextEditContext {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).NotifyLayoutChanged)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn NotifyFocusLeaveCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NotifyFocusLeaveCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreTextEditContext, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<CoreTextEditContext>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<ICoreTextEditContext2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NotifyFocusLeaveCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NotifyFocusLeaveCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreTextEditContext, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNotifyFocusLeaveCompleted(&self, cookie: i64) -> windows_core::Result<()> {
@@ -822,14 +822,14 @@ impl CoreTextServicesManager {
             (windows_core::Interface::vtable(this).InputLanguage)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn InputLanguageChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn InputLanguageChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreTextServicesManager, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<CoreTextServicesManager>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).InputLanguageChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).InputLanguageChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreTextServicesManager, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveInputLanguageChanged(&self, cookie: i64) -> windows_core::Result<()> {

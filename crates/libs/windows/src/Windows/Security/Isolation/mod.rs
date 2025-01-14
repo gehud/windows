@@ -609,12 +609,12 @@ impl IsolatedWindowsEnvironment {
         }
     }
     #[cfg(feature = "Foundation_Collections")]
-    pub fn RegisterMessageReceiver<P1>(&self, receiverid: windows_core::GUID, messagereceivedcallback: P1) -> windows_core::Result<()>
+    pub fn RegisterMessageReceiver<P1>(&self, receiverid: windows_core::GUID, messagereceivedcallback: Option<P1>) -> windows_core::Result<()>
     where
-        P1: windows_core::Param<MessageReceivedCallback>,
+        P1: FnMut(&windows_core::GUID, windows_core::Ref<super::super::Foundation::Collections::IVectorView<windows_core::IInspectable>>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
-        unsafe { (windows_core::Interface::vtable(this).RegisterMessageReceiver)(windows_core::Interface::as_raw(this), receiverid, messagereceivedcallback.param().abi()).ok() }
+        unsafe { (windows_core::Interface::vtable(this).RegisterMessageReceiver)(windows_core::Interface::as_raw(this), receiverid, core::mem::transmute_copy(&messagereceivedcallback.map(|closure| MessageReceivedCallback::new(closure)))).ok() }
     }
     pub fn UnregisterMessageReceiver(&self, receiverid: windows_core::GUID) -> windows_core::Result<()> {
         let this = self;
@@ -2003,11 +2003,11 @@ impl IsolatedWindowsHostMessenger {
         })
     }
     #[cfg(feature = "Foundation_Collections")]
-    pub fn RegisterHostMessageReceiver<P1>(receiverid: windows_core::GUID, hostmessagereceivedcallback: P1) -> windows_core::Result<()>
+    pub fn RegisterHostMessageReceiver<P1>(receiverid: windows_core::GUID, hostmessagereceivedcallback: Option<P1>) -> windows_core::Result<()>
     where
-        P1: windows_core::Param<HostMessageReceivedCallback>,
+        P1: FnMut(&windows_core::GUID, windows_core::Ref<super::super::Foundation::Collections::IVectorView<windows_core::IInspectable>>) -> windows_core::Result<()> + Send + 'static,
     {
-        Self::IIsolatedWindowsHostMessengerStatics2(|this| unsafe { (windows_core::Interface::vtable(this).RegisterHostMessageReceiver)(windows_core::Interface::as_raw(this), receiverid, hostmessagereceivedcallback.param().abi()).ok() })
+        Self::IIsolatedWindowsHostMessengerStatics2(|this| unsafe { (windows_core::Interface::vtable(this).RegisterHostMessageReceiver)(windows_core::Interface::as_raw(this), receiverid, core::mem::transmute_copy(&hostmessagereceivedcallback.map(|closure| HostMessageReceivedCallback::new(closure)))).ok() })
     }
     pub fn UnregisterHostMessageReceiver(receiverid: windows_core::GUID) -> windows_core::Result<()> {
         Self::IIsolatedWindowsHostMessengerStatics2(|this| unsafe { (windows_core::Interface::vtable(this).UnregisterHostMessageReceiver)(windows_core::Interface::as_raw(this), receiverid).ok() })

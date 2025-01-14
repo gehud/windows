@@ -44,14 +44,14 @@ unsafe impl Sync for DeviceAccessChangedEventArgs {}
 pub struct DeviceAccessInformation(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(DeviceAccessInformation, windows_core::IUnknown, windows_core::IInspectable);
 impl DeviceAccessInformation {
-    pub fn AccessChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AccessChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DeviceAccessInformation, DeviceAccessChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DeviceAccessInformation>, windows_core::Ref<DeviceAccessChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AccessChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AccessChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DeviceAccessInformation, DeviceAccessChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAccessChanged(&self, cookie: i64) -> windows_core::Result<()> {
@@ -555,14 +555,14 @@ impl DeviceInformationCustomPairing {
             (windows_core::Interface::vtable(this).PairWithProtectionLevelAndSettingsAsync)(windows_core::Interface::as_raw(this), pairingkindssupported, minprotectionlevel, devicepairingsettings.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn PairingRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PairingRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DeviceInformationCustomPairing, DevicePairingRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DeviceInformationCustomPairing>, windows_core::Ref<DevicePairingRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PairingRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PairingRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DeviceInformationCustomPairing, DevicePairingRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePairingRequested(&self, token: i64) -> windows_core::Result<()> {
@@ -576,14 +576,14 @@ impl DeviceInformationCustomPairing {
         let this = &windows_core::Interface::cast::<IDeviceInformationCustomPairing2>(self)?;
         unsafe { (windows_core::Interface::vtable(this).AddPairingSetMember)(windows_core::Interface::as_raw(this), device.param().abi()).ok() }
     }
-    pub fn PairingSetMembersRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PairingSetMembersRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DeviceInformationCustomPairing, DevicePairingSetMembersRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DeviceInformationCustomPairing>, windows_core::Ref<DevicePairingSetMembersRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IDeviceInformationCustomPairing2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PairingSetMembersRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PairingSetMembersRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DeviceInformationCustomPairing, DevicePairingSetMembersRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePairingSetMembersRequested(&self, token: i64) -> windows_core::Result<()> {
@@ -1047,42 +1047,42 @@ impl DevicePicker {
             (windows_core::Interface::vtable(this).RequestedProperties)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn DeviceSelected<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DeviceSelected<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DevicePicker, DeviceSelectedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DevicePicker>, windows_core::Ref<DeviceSelectedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DeviceSelected)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DeviceSelected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DevicePicker, DeviceSelectedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDeviceSelected(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDeviceSelected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DisconnectButtonClicked<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DisconnectButtonClicked<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DevicePicker, DeviceDisconnectButtonClickedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DevicePicker>, windows_core::Ref<DeviceDisconnectButtonClickedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DisconnectButtonClicked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DisconnectButtonClicked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DevicePicker, DeviceDisconnectButtonClickedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDisconnectButtonClicked(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDisconnectButtonClicked)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DevicePickerDismissed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DevicePickerDismissed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DevicePicker, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DevicePicker>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DevicePickerDismissed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DevicePickerDismissed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DevicePicker, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDevicePickerDismissed(&self, token: i64) -> windows_core::Result<()> {
@@ -1520,70 +1520,70 @@ impl windows_core::RuntimeType for DeviceUnpairingResultStatus {
 pub struct DeviceWatcher(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(DeviceWatcher, windows_core::IUnknown, windows_core::IInspectable);
 impl DeviceWatcher {
-    pub fn Added<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Added<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DeviceWatcher, DeviceInformation>>,
+        P0: FnMut(windows_core::Ref<DeviceWatcher>, windows_core::Ref<DeviceInformation>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Added)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DeviceWatcher, DeviceInformation>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAdded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAdded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Updated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Updated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DeviceWatcher, DeviceInformationUpdate>>,
+        P0: FnMut(windows_core::Ref<DeviceWatcher>, windows_core::Ref<DeviceInformationUpdate>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DeviceWatcher, DeviceInformationUpdate>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Removed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Removed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DeviceWatcher, DeviceInformationUpdate>>,
+        P0: FnMut(windows_core::Ref<DeviceWatcher>, windows_core::Ref<DeviceInformationUpdate>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DeviceWatcher, DeviceInformationUpdate>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoved(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRemoved)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn EnumerationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn EnumerationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DeviceWatcher, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DeviceWatcher>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).EnumerationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DeviceWatcher, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveEnumerationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveEnumerationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Stopped<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Stopped<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DeviceWatcher, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DeviceWatcher>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Stopped)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Stopped)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DeviceWatcher, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStopped(&self, token: i64) -> windows_core::Result<()> {

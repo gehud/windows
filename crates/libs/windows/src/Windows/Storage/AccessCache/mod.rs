@@ -922,14 +922,14 @@ impl StorageItemMostRecentlyUsedList {
             (windows_core::Interface::vtable(this).MaximumItemsAllowed)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn ItemRemoved<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ItemRemoved<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<StorageItemMostRecentlyUsedList, ItemRemovedEventArgs>>,
+        P0: FnMut(windows_core::Ref<StorageItemMostRecentlyUsedList>, windows_core::Ref<ItemRemovedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ItemRemoved)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ItemRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<StorageItemMostRecentlyUsedList, ItemRemovedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveItemRemoved(&self, eventcookie: i64) -> windows_core::Result<()> {

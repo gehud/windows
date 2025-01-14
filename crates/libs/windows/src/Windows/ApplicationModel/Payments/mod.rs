@@ -1017,15 +1017,15 @@ impl PaymentMediator {
             (windows_core::Interface::vtable(this).SubmitPaymentRequestAsync)(windows_core::Interface::as_raw(this), paymentrequest.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn SubmitPaymentRequestWithChangeHandlerAsync<P0, P1>(&self, paymentrequest: P0, changehandler: P1) -> windows_core::Result<super::super::Foundation::IAsyncOperation<PaymentRequestSubmitResult>>
+    pub fn SubmitPaymentRequestWithChangeHandlerAsync<P0, P1>(&self, paymentrequest: P0, changehandler: Option<P1>) -> windows_core::Result<super::super::Foundation::IAsyncOperation<PaymentRequestSubmitResult>>
     where
         P0: windows_core::Param<PaymentRequest>,
-        P1: windows_core::Param<PaymentRequestChangedHandler>,
+        P1: FnMut(windows_core::Ref<PaymentRequest>, windows_core::Ref<PaymentRequestChangedArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SubmitPaymentRequestWithChangeHandlerAsync)(windows_core::Interface::as_raw(this), paymentrequest.param().abi(), changehandler.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).SubmitPaymentRequestWithChangeHandlerAsync)(windows_core::Interface::as_raw(this), paymentrequest.param().abi(), core::mem::transmute_copy(&changehandler.map(|closure| PaymentRequestChangedHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
     pub fn CanMakePaymentAsync<P0>(&self, paymentrequest: P0) -> windows_core::Result<super::super::Foundation::IAsyncOperation<PaymentCanMakePaymentResult>>

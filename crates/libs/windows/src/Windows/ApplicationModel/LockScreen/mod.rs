@@ -97,14 +97,14 @@ impl LockApplicationHost {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RequestUnlock)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn Unlocking<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Unlocking<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<LockApplicationHost, LockScreenUnlockingEventArgs>>,
+        P0: FnMut(windows_core::Ref<LockApplicationHost>, windows_core::Ref<LockScreenUnlockingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Unlocking)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Unlocking)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<LockApplicationHost, LockScreenUnlockingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUnlocking(&self, token: i64) -> windows_core::Result<()> {
@@ -191,14 +191,14 @@ unsafe impl Sync for LockScreenBadge {}
 pub struct LockScreenInfo(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(LockScreenInfo, windows_core::IUnknown, windows_core::IInspectable);
 impl LockScreenInfo {
-    pub fn LockScreenImageChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn LockScreenImageChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<LockScreenInfo, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<LockScreenInfo>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).LockScreenImageChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).LockScreenImageChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<LockScreenInfo, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveLockScreenImageChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -213,14 +213,14 @@ impl LockScreenInfo {
             (windows_core::Interface::vtable(this).LockScreenImage)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn BadgesChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn BadgesChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<LockScreenInfo, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<LockScreenInfo>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).BadgesChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).BadgesChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<LockScreenInfo, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveBadgesChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -235,14 +235,14 @@ impl LockScreenInfo {
             (windows_core::Interface::vtable(this).Badges)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn DetailTextChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DetailTextChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<LockScreenInfo, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<LockScreenInfo>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DetailTextChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DetailTextChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<LockScreenInfo, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDetailTextChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -257,14 +257,14 @@ impl LockScreenInfo {
             (windows_core::Interface::vtable(this).DetailText)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn AlarmIconChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AlarmIconChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<LockScreenInfo, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<LockScreenInfo>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AlarmIconChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AlarmIconChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<LockScreenInfo, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAlarmIconChanged(&self, token: i64) -> windows_core::Result<()> {

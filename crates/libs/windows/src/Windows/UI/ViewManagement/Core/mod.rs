@@ -3,28 +3,28 @@
 pub struct CoreFrameworkInputView(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(CoreFrameworkInputView, windows_core::IUnknown, windows_core::IInspectable);
 impl CoreFrameworkInputView {
-    pub fn PrimaryViewAnimationStarting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PrimaryViewAnimationStarting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreFrameworkInputView, CoreFrameworkInputViewAnimationStartingEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreFrameworkInputView>, windows_core::Ref<CoreFrameworkInputViewAnimationStartingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PrimaryViewAnimationStarting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PrimaryViewAnimationStarting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreFrameworkInputView, CoreFrameworkInputViewAnimationStartingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePrimaryViewAnimationStarting(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemovePrimaryViewAnimationStarting)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn OcclusionsChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn OcclusionsChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreFrameworkInputView, CoreFrameworkInputViewOcclusionsChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreFrameworkInputView>, windows_core::Ref<CoreFrameworkInputViewOcclusionsChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).OcclusionsChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).OcclusionsChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreFrameworkInputView, CoreFrameworkInputViewOcclusionsChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveOcclusionsChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -141,14 +141,14 @@ unsafe impl Sync for CoreFrameworkInputViewOcclusionsChangedEventArgs {}
 pub struct CoreInputView(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(CoreInputView, windows_core::IUnknown, windows_core::IInspectable);
 impl CoreInputView {
-    pub fn OcclusionsChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn OcclusionsChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreInputView, CoreInputViewOcclusionsChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInputView>, windows_core::Ref<CoreInputViewOcclusionsChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).OcclusionsChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).OcclusionsChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreInputView, CoreInputViewOcclusionsChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveOcclusionsChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -177,28 +177,28 @@ impl CoreInputView {
             (windows_core::Interface::vtable(this).TryHidePrimaryView)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn XYFocusTransferringFromPrimaryView<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn XYFocusTransferringFromPrimaryView<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreInputView, CoreInputViewTransferringXYFocusEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInputView>, windows_core::Ref<CoreInputViewTransferringXYFocusEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<ICoreInputView2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).XYFocusTransferringFromPrimaryView)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).XYFocusTransferringFromPrimaryView)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreInputView, CoreInputViewTransferringXYFocusEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveXYFocusTransferringFromPrimaryView(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<ICoreInputView2>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveXYFocusTransferringFromPrimaryView)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn XYFocusTransferredToPrimaryView<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn XYFocusTransferredToPrimaryView<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreInputView, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<CoreInputView>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<ICoreInputView2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).XYFocusTransferredToPrimaryView)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).XYFocusTransferredToPrimaryView)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreInputView, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveXYFocusTransferredToPrimaryView(&self, token: i64) -> windows_core::Result<()> {
@@ -233,28 +233,28 @@ impl CoreInputView {
             (windows_core::Interface::vtable(this).TryHide)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn PrimaryViewShowing<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PrimaryViewShowing<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreInputView, CoreInputViewShowingEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInputView>, windows_core::Ref<CoreInputViewShowingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<ICoreInputView4>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PrimaryViewShowing)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PrimaryViewShowing)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreInputView, CoreInputViewShowingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePrimaryViewShowing(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<ICoreInputView4>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemovePrimaryViewShowing)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn PrimaryViewHiding<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PrimaryViewHiding<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreInputView, CoreInputViewHidingEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInputView>, windows_core::Ref<CoreInputViewHidingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<ICoreInputView4>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PrimaryViewHiding)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PrimaryViewHiding)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreInputView, CoreInputViewHidingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePrimaryViewHiding(&self, token: i64) -> windows_core::Result<()> {
@@ -268,28 +268,28 @@ impl CoreInputView {
             (windows_core::Interface::vtable(this).IsKindSupported)(windows_core::Interface::as_raw(this), r#type, &mut result__).map(|| result__)
         }
     }
-    pub fn SupportedKindsChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SupportedKindsChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreInputView, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<CoreInputView>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<ICoreInputView5>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SupportedKindsChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SupportedKindsChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreInputView, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSupportedKindsChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<ICoreInputView5>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveSupportedKindsChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn PrimaryViewAnimationStarting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PrimaryViewAnimationStarting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<CoreInputView, CoreInputViewAnimationStartingEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInputView>, windows_core::Ref<CoreInputViewAnimationStartingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<ICoreInputView5>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PrimaryViewAnimationStarting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PrimaryViewAnimationStarting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<CoreInputView, CoreInputViewAnimationStartingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePrimaryViewAnimationStarting(&self, token: i64) -> windows_core::Result<()> {

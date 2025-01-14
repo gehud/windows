@@ -24,25 +24,25 @@ impl ArcadeStick {
             (windows_core::Interface::vtable(this).GetCurrentReading)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn ArcadeStickAdded<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn ArcadeStickAdded<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<ArcadeStick>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<ArcadeStick>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IArcadeStickStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ArcadeStickAdded)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ArcadeStickAdded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<ArcadeStick>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveArcadeStickAdded(token: i64) -> windows_core::Result<()> {
         Self::IArcadeStickStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveArcadeStickAdded)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn ArcadeStickRemoved<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn ArcadeStickRemoved<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<ArcadeStick>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<ArcadeStick>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IArcadeStickStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ArcadeStickRemoved)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ArcadeStickRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<ArcadeStick>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveArcadeStickRemoved(token: i64) -> windows_core::Result<()> {
@@ -64,28 +64,28 @@ impl ArcadeStick {
             (windows_core::Interface::vtable(this).FromGameController)(windows_core::Interface::as_raw(this), gamecontroller.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn HeadsetConnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetConnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetConnected(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetConnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn HeadsetDisconnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetDisconnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetDisconnected(&self, token: i64) -> windows_core::Result<()> {
@@ -93,14 +93,14 @@ impl ArcadeStick {
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetDisconnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
     #[cfg(feature = "System")]
-    pub fn UserChanged<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn UserChanged<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, super::super::System::UserChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<super::super::System::UserChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, super::super::System::UserChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUserChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -254,25 +254,25 @@ impl FlightStick {
             (windows_core::Interface::vtable(this).GetCurrentReading)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn FlightStickAdded<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn FlightStickAdded<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<FlightStick>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<FlightStick>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IFlightStickStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FlightStickAdded)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FlightStickAdded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<FlightStick>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveFlightStickAdded(token: i64) -> windows_core::Result<()> {
         Self::IFlightStickStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveFlightStickAdded)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn FlightStickRemoved<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn FlightStickRemoved<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<FlightStick>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<FlightStick>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IFlightStickStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FlightStickRemoved)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FlightStickRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<FlightStick>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveFlightStickRemoved(token: i64) -> windows_core::Result<()> {
@@ -294,28 +294,28 @@ impl FlightStick {
             (windows_core::Interface::vtable(this).FromGameController)(windows_core::Interface::as_raw(this), gamecontroller.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn HeadsetConnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetConnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetConnected(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetConnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn HeadsetDisconnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetDisconnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetDisconnected(&self, token: i64) -> windows_core::Result<()> {
@@ -323,14 +323,14 @@ impl FlightStick {
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetDisconnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
     #[cfg(feature = "System")]
-    pub fn UserChanged<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn UserChanged<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, super::super::System::UserChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<super::super::System::UserChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, super::super::System::UserChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUserChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -568,28 +568,28 @@ pub struct Gamepad(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(Gamepad, windows_core::IUnknown, windows_core::IInspectable);
 windows_core::imp::required_hierarchy!(Gamepad, IGameController, IGameControllerBatteryInfo);
 impl Gamepad {
-    pub fn HeadsetConnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetConnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetConnected(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetConnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn HeadsetDisconnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetDisconnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetDisconnected(&self, token: i64) -> windows_core::Result<()> {
@@ -597,14 +597,14 @@ impl Gamepad {
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetDisconnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
     #[cfg(feature = "System")]
-    pub fn UserChanged<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn UserChanged<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, super::super::System::UserChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<super::super::System::UserChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, super::super::System::UserChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUserChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -666,25 +666,25 @@ impl Gamepad {
             (windows_core::Interface::vtable(this).GetButtonLabel)(windows_core::Interface::as_raw(this), button, &mut result__).map(|| result__)
         }
     }
-    pub fn GamepadAdded<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn GamepadAdded<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<Gamepad>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<Gamepad>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IGamepadStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).GamepadAdded)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).GamepadAdded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<Gamepad>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveGamepadAdded(token: i64) -> windows_core::Result<()> {
         Self::IGamepadStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveGamepadAdded)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn GamepadRemoved<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn GamepadRemoved<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<Gamepad>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<Gamepad>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IGamepadStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).GamepadRemoved)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).GamepadRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<Gamepad>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveGamepadRemoved(token: i64) -> windows_core::Result<()> {
@@ -932,28 +932,28 @@ impl windows_core::RuntimeType for IGameController {
 }
 windows_core::imp::interface_hierarchy!(IGameController, windows_core::IUnknown, windows_core::IInspectable);
 impl IGameController {
-    pub fn HeadsetConnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetConnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetConnected(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetConnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn HeadsetDisconnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetDisconnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetDisconnected(&self, token: i64) -> windows_core::Result<()> {
@@ -961,14 +961,14 @@ impl IGameController {
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetDisconnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
     #[cfg(feature = "System")]
-    pub fn UserChanged<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn UserChanged<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, super::super::System::UserChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<super::super::System::UserChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, super::super::System::UserChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUserChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -1450,28 +1450,28 @@ pub struct RacingWheel(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(RacingWheel, windows_core::IUnknown, windows_core::IInspectable);
 windows_core::imp::required_hierarchy!(RacingWheel, IGameController, IGameControllerBatteryInfo);
 impl RacingWheel {
-    pub fn HeadsetConnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetConnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetConnected(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetConnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn HeadsetDisconnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetDisconnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetDisconnected(&self, token: i64) -> windows_core::Result<()> {
@@ -1479,14 +1479,14 @@ impl RacingWheel {
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetDisconnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
     #[cfg(feature = "System")]
-    pub fn UserChanged<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn UserChanged<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, super::super::System::UserChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<super::super::System::UserChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, super::super::System::UserChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUserChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -1580,25 +1580,25 @@ impl RacingWheel {
             (windows_core::Interface::vtable(this).GetCurrentReading)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn RacingWheelAdded<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn RacingWheelAdded<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<RacingWheel>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<RacingWheel>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IRacingWheelStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RacingWheelAdded)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RacingWheelAdded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<RacingWheel>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveRacingWheelAdded(token: i64) -> windows_core::Result<()> {
         Self::IRacingWheelStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveRacingWheelAdded)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn RacingWheelRemoved<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn RacingWheelRemoved<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<RacingWheel>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<RacingWheel>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IRacingWheelStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RacingWheelRemoved)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RacingWheelRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<RacingWheel>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveRacingWheelRemoved(token: i64) -> windows_core::Result<()> {
@@ -1732,28 +1732,28 @@ pub struct RawGameController(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(RawGameController, windows_core::IUnknown, windows_core::IInspectable);
 windows_core::imp::required_hierarchy!(RawGameController, IGameController, IGameControllerBatteryInfo);
 impl RawGameController {
-    pub fn HeadsetConnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetConnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetConnected(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetConnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn HeadsetDisconnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetDisconnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetDisconnected(&self, token: i64) -> windows_core::Result<()> {
@@ -1761,14 +1761,14 @@ impl RawGameController {
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetDisconnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
     #[cfg(feature = "System")]
-    pub fn UserChanged<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn UserChanged<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, super::super::System::UserChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<super::super::System::UserChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, super::super::System::UserChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUserChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -1891,25 +1891,25 @@ impl RawGameController {
             (windows_core::Interface::vtable(this).DisplayName)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn RawGameControllerAdded<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn RawGameControllerAdded<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<RawGameController>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<RawGameController>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IRawGameControllerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RawGameControllerAdded)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RawGameControllerAdded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<RawGameController>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveRawGameControllerAdded(token: i64) -> windows_core::Result<()> {
         Self::IRawGameControllerStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveRawGameControllerAdded)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn RawGameControllerRemoved<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn RawGameControllerRemoved<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<RawGameController>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<RawGameController>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IRawGameControllerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RawGameControllerRemoved)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RawGameControllerRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<RawGameController>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveRawGameControllerRemoved(token: i64) -> windows_core::Result<()> {
@@ -2007,28 +2007,28 @@ pub struct UINavigationController(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(UINavigationController, windows_core::IUnknown, windows_core::IInspectable);
 windows_core::imp::required_hierarchy!(UINavigationController, IGameController, IGameControllerBatteryInfo);
 impl UINavigationController {
-    pub fn HeadsetConnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetConnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetConnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetConnected(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetConnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn HeadsetDisconnected<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn HeadsetDisconnected<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, Headset>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<Headset>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HeadsetDisconnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, Headset>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHeadsetDisconnected(&self, token: i64) -> windows_core::Result<()> {
@@ -2036,14 +2036,14 @@ impl UINavigationController {
         unsafe { (windows_core::Interface::vtable(this).RemoveHeadsetDisconnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
     #[cfg(feature = "System")]
-    pub fn UserChanged<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn UserChanged<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<IGameController, super::super::System::UserChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<IGameController>, windows_core::Ref<super::super::System::UserChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGameController>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UserChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::TypedEventHandler::<IGameController, super::super::System::UserChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUserChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -2101,25 +2101,25 @@ impl UINavigationController {
             (windows_core::Interface::vtable(this).GetRequiredButtonLabel)(windows_core::Interface::as_raw(this), button, &mut result__).map(|| result__)
         }
     }
-    pub fn UINavigationControllerAdded<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn UINavigationControllerAdded<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<UINavigationController>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<UINavigationController>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IUINavigationControllerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UINavigationControllerAdded)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UINavigationControllerAdded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<UINavigationController>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveUINavigationControllerAdded(token: i64) -> windows_core::Result<()> {
         Self::IUINavigationControllerStatics(|this| unsafe { (windows_core::Interface::vtable(this).RemoveUINavigationControllerAdded)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn UINavigationControllerRemoved<P0>(value: P0) -> windows_core::Result<i64>
+    pub fn UINavigationControllerRemoved<P0>(value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<UINavigationController>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<UINavigationController>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IUINavigationControllerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UINavigationControllerRemoved)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UINavigationControllerRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::Foundation::EventHandler::<UINavigationController>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveUINavigationControllerRemoved(token: i64) -> windows_core::Result<()> {

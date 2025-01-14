@@ -846,14 +846,14 @@ impl SecondaryTile {
             (windows_core::Interface::vtable(this).RoamingEnabled)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn VisualElementsRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn VisualElementsRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SecondaryTile, VisualElementsRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SecondaryTile>, windows_core::Ref<VisualElementsRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<ISecondaryTile2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).VisualElementsRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).VisualElementsRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<SecondaryTile, VisualElementsRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveVisualElementsRequested(&self, token: i64) -> windows_core::Result<()> {

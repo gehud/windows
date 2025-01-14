@@ -6,22 +6,22 @@ use windows::{core::*, Foundation::*};
 fn test() -> Result<()> {
     let a = IAsyncActionWithProgress::<i32>::ready(Ok(()));
     a.get()?;
-    a.SetProgress(&AsyncActionProgressHandler::new(|_, _| Ok(())))?;
+    a.SetProgress(Some(|_, _| Ok(())))?;
     assert_eq!(a.Progress(), Err(Error::empty()));
 
     let a = IAsyncOperationWithProgress::<i32, i32>::ready(Ok(1));
     a.get()?;
-    a.SetProgress(&AsyncOperationProgressHandler::new(|_, _| Ok(())))?;
+    a.SetProgress(Some(|_, _| Ok(())))?;
     assert_eq!(a.Progress(), Err(Error::empty()));
 
     let a = IAsyncActionWithProgress::<i32>::spawn(|| Ok(()));
     a.get()?;
-    a.SetProgress(&AsyncActionProgressHandler::new(|_, _| Ok(())))?;
+    a.SetProgress(Some(|_, _| Ok(())))?;
     assert_eq!(a.Progress(), Err(Error::empty()));
 
     let a = IAsyncOperationWithProgress::<i32, i32>::spawn(|| Ok(123));
     a.get()?;
-    a.SetProgress(&AsyncOperationProgressHandler::new(|_, _| Ok(())))?;
+    a.SetProgress(Some(|_, _| Ok(())))?;
     assert_eq!(a.Progress(), Err(Error::empty()));
 
     Ok(())

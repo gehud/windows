@@ -108,28 +108,28 @@ impl AppServiceConnection {
             (windows_core::Interface::vtable(this).SendMessageAsync)(windows_core::Interface::as_raw(this), message.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn RequestReceived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RequestReceived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AppServiceConnection, AppServiceRequestReceivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppServiceConnection>, windows_core::Ref<AppServiceRequestReceivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RequestReceived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RequestReceived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AppServiceConnection, AppServiceRequestReceivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRequestReceived(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRequestReceived)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ServiceClosed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ServiceClosed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AppServiceConnection, AppServiceClosedEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppServiceConnection>, windows_core::Ref<AppServiceClosedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ServiceClosed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ServiceClosed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AppServiceConnection, AppServiceClosedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveServiceClosed(&self, token: i64) -> windows_core::Result<()> {

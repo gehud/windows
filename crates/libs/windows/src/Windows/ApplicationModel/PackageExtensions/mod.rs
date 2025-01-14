@@ -234,70 +234,70 @@ impl PackageExtensionCatalog {
             (windows_core::Interface::vtable(this).RequestRemovePackageAsync)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(packagefullname), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn PackageInstalled<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PackageInstalled<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PackageExtensionCatalog, PackageExtensionPackageInstalledEventArgs>>,
+        P0: FnMut(windows_core::Ref<PackageExtensionCatalog>, windows_core::Ref<PackageExtensionPackageInstalledEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PackageInstalled)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PackageInstalled)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PackageExtensionCatalog, PackageExtensionPackageInstalledEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePackageInstalled(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemovePackageInstalled)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn PackageUpdating<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PackageUpdating<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PackageExtensionCatalog, PackageExtensionPackageUpdatingEventArgs>>,
+        P0: FnMut(windows_core::Ref<PackageExtensionCatalog>, windows_core::Ref<PackageExtensionPackageUpdatingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PackageUpdating)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PackageUpdating)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PackageExtensionCatalog, PackageExtensionPackageUpdatingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePackageUpdating(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemovePackageUpdating)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn PackageUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PackageUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PackageExtensionCatalog, PackageExtensionPackageUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PackageExtensionCatalog>, windows_core::Ref<PackageExtensionPackageUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PackageUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PackageUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PackageExtensionCatalog, PackageExtensionPackageUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePackageUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemovePackageUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn PackageUninstalling<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PackageUninstalling<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PackageExtensionCatalog, PackageExtensionPackageUninstallingEventArgs>>,
+        P0: FnMut(windows_core::Ref<PackageExtensionCatalog>, windows_core::Ref<PackageExtensionPackageUninstallingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PackageUninstalling)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PackageUninstalling)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PackageExtensionCatalog, PackageExtensionPackageUninstallingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePackageUninstalling(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemovePackageUninstalling)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn PackageStatusChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PackageStatusChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PackageExtensionCatalog, PackageExtensionPackageStatusChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PackageExtensionCatalog>, windows_core::Ref<PackageExtensionPackageStatusChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PackageStatusChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PackageStatusChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PackageExtensionCatalog, PackageExtensionPackageStatusChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePackageStatusChanged(&self, token: i64) -> windows_core::Result<()> {

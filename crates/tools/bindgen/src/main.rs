@@ -126,7 +126,6 @@ fn main() {
     test("--out reference_async_info_status_reference.rs --filter IAsyncInfo --reference windows,skip-root,Windows");
     test("--out reference_async_action.rs --filter IAsyncAction");
     test("--out reference_async_action_reference_type.rs --filter IAsyncAction --reference windows,skip-root,IAsyncInfo");
-    test("--out reference_async_action_reference_namespace.rs --filter IAsyncAction --reference windows,skip-root,Windows");
     test("--out reference_class_ref_static.rs --filter Windows.Foundation.Uri --reference windows,skip-root,Windows");
 
     // Tests for struct references

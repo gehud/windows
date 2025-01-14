@@ -238,42 +238,42 @@ impl DialDevicePicker {
             (windows_core::Interface::vtable(this).Appearance)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn DialDeviceSelected<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DialDeviceSelected<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DialDevicePicker, DialDeviceSelectedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DialDevicePicker>, windows_core::Ref<DialDeviceSelectedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DialDeviceSelected)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DialDeviceSelected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DialDevicePicker, DialDeviceSelectedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDialDeviceSelected(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDialDeviceSelected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DisconnectButtonClicked<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DisconnectButtonClicked<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DialDevicePicker, DialDisconnectButtonClickedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DialDevicePicker>, windows_core::Ref<DialDisconnectButtonClickedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DisconnectButtonClicked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DisconnectButtonClicked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DialDevicePicker, DialDisconnectButtonClickedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDisconnectButtonClicked(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDisconnectButtonClicked)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DialDevicePickerDismissed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DialDevicePickerDismissed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DialDevicePicker, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DialDevicePicker>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DialDevicePickerDismissed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DialDevicePickerDismissed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DialDevicePicker, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDialDevicePickerDismissed(&self, token: i64) -> windows_core::Result<()> {

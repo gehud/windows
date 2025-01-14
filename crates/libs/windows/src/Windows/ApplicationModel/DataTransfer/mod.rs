@@ -22,13 +22,13 @@ impl Clipboard {
     pub fn Clear() -> windows_core::Result<()> {
         Self::IClipboardStatics(|this| unsafe { (windows_core::Interface::vtable(this).Clear)(windows_core::Interface::as_raw(this)).ok() })
     }
-    pub fn ContentChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn ContentChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IClipboardStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ContentChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ContentChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveContentChanged(token: i64) -> windows_core::Result<()> {
@@ -86,37 +86,37 @@ impl Clipboard {
             (windows_core::Interface::vtable(this).SetContentWithOptions)(windows_core::Interface::as_raw(this), content.param().abi(), options.param().abi(), &mut result__).map(|| result__)
         })
     }
-    pub fn HistoryChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn HistoryChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<ClipboardHistoryChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<ClipboardHistoryChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IClipboardStatics2(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HistoryChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HistoryChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<ClipboardHistoryChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveHistoryChanged(token: i64) -> windows_core::Result<()> {
         Self::IClipboardStatics2(|this| unsafe { (windows_core::Interface::vtable(this).RemoveHistoryChanged)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn RoamingEnabledChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn RoamingEnabledChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IClipboardStatics2(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RoamingEnabledChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RoamingEnabledChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveRoamingEnabledChanged(token: i64) -> windows_core::Result<()> {
         Self::IClipboardStatics2(|this| unsafe { (windows_core::Interface::vtable(this).RemoveRoamingEnabledChanged)(windows_core::Interface::as_raw(this), token).ok() })
     }
-    pub fn HistoryEnabledChanged<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn HistoryEnabledChanged<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IClipboardStatics2(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HistoryEnabledChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HistoryEnabledChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveHistoryEnabledChanged(token: i64) -> windows_core::Result<()> {
@@ -338,28 +338,28 @@ impl DataPackage {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).SetRequestedOperation)(windows_core::Interface::as_raw(this), value).ok() }
     }
-    pub fn OperationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn OperationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DataPackage, OperationCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DataPackage>, windows_core::Ref<OperationCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).OperationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).OperationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DataPackage, OperationCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveOperationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveOperationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Destroyed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Destroyed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DataPackage, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DataPackage>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Destroyed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Destroyed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DataPackage, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDestroyed(&self, token: i64) -> windows_core::Result<()> {
@@ -373,12 +373,12 @@ impl DataPackage {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).SetData)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(formatid), value.param().abi()).ok() }
     }
-    pub fn SetDataProvider<P1>(&self, formatid: &windows_core::HSTRING, delayrenderer: P1) -> windows_core::Result<()>
+    pub fn SetDataProvider<P1>(&self, formatid: &windows_core::HSTRING, delayrenderer: Option<P1>) -> windows_core::Result<()>
     where
-        P1: windows_core::Param<DataProviderHandler>,
+        P1: FnMut(windows_core::Ref<DataProviderRequest>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
-        unsafe { (windows_core::Interface::vtable(this).SetDataProvider)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(formatid), delayrenderer.param().abi()).ok() }
+        unsafe { (windows_core::Interface::vtable(this).SetDataProvider)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(formatid), core::mem::transmute_copy(&delayrenderer.map(|closure| DataProviderHandler::new(closure)))).ok() }
     }
     pub fn SetText(&self, value: &windows_core::HSTRING) -> windows_core::Result<()> {
         let this = self;
@@ -446,28 +446,28 @@ impl DataPackage {
         let this = &windows_core::Interface::cast::<IDataPackage2>(self)?;
         unsafe { (windows_core::Interface::vtable(this).SetWebLink)(windows_core::Interface::as_raw(this), value.param().abi()).ok() }
     }
-    pub fn ShareCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ShareCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DataPackage, ShareCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DataPackage>, windows_core::Ref<ShareCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IDataPackage3>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ShareCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ShareCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DataPackage, ShareCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveShareCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = &windows_core::Interface::cast::<IDataPackage3>(self)?;
         unsafe { (windows_core::Interface::vtable(this).RemoveShareCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ShareCanceled<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ShareCanceled<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DataPackage, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<DataPackage>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IDataPackage4>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ShareCanceled)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ShareCanceled)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DataPackage, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveShareCanceled(&self, token: i64) -> windows_core::Result<()> {
@@ -1368,42 +1368,42 @@ unsafe impl Sync for DataRequestedEventArgs {}
 pub struct DataTransferManager(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(DataTransferManager, windows_core::IUnknown, windows_core::IInspectable);
 impl DataTransferManager {
-    pub fn DataRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DataRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DataTransferManager, DataRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DataTransferManager>, windows_core::Ref<DataRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DataRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DataRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DataTransferManager, DataRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDataRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDataRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn TargetApplicationChosen<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn TargetApplicationChosen<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DataTransferManager, TargetApplicationChosenEventArgs>>,
+        P0: FnMut(windows_core::Ref<DataTransferManager>, windows_core::Ref<TargetApplicationChosenEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TargetApplicationChosen)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TargetApplicationChosen)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DataTransferManager, TargetApplicationChosenEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTargetApplicationChosen(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveTargetApplicationChosen)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ShareProvidersRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ShareProvidersRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<DataTransferManager, ShareProvidersRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<DataTransferManager>, windows_core::Ref<ShareProvidersRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IDataTransferManager2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ShareProvidersRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ShareProvidersRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<DataTransferManager, ShareProvidersRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveShareProvidersRequested(&self, token: i64) -> windows_core::Result<()> {
@@ -2253,14 +2253,14 @@ impl ShareProvider {
         unsafe { (windows_core::Interface::vtable(this).SetTag)(windows_core::Interface::as_raw(this), value.param().abi()).ok() }
     }
     #[cfg(all(feature = "Storage_Streams", feature = "UI"))]
-    pub fn Create<P1, P3>(title: &windows_core::HSTRING, displayicon: P1, backgroundcolor: super::super::UI::Color, handler: P3) -> windows_core::Result<ShareProvider>
+    pub fn Create<P1, P3>(title: &windows_core::HSTRING, displayicon: P1, backgroundcolor: super::super::UI::Color, handler: Option<P3>) -> windows_core::Result<ShareProvider>
     where
         P1: windows_core::Param<super::super::Storage::Streams::RandomAccessStreamReference>,
-        P3: windows_core::Param<ShareProviderHandler>,
+        P3: FnMut(windows_core::Ref<ShareProviderOperation>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IShareProviderFactory(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Create)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(title), displayicon.param().abi(), backgroundcolor, handler.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).Create)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(title), displayicon.param().abi(), backgroundcolor, core::mem::transmute_copy(&handler.map(|closure| ShareProviderHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
     fn IShareProviderFactory<R, F: FnOnce(&IShareProviderFactory) -> windows_core::Result<R>>(callback: F) -> windows_core::Result<R> {

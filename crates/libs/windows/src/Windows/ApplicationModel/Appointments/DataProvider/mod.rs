@@ -616,84 +616,84 @@ unsafe impl Sync for AppointmentCalendarUpdateMeetingResponseRequestEventArgs {}
 pub struct AppointmentDataProviderConnection(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(AppointmentDataProviderConnection, windows_core::IUnknown, windows_core::IInspectable);
 impl AppointmentDataProviderConnection {
-    pub fn SyncRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SyncRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<AppointmentDataProviderConnection, AppointmentCalendarSyncManagerSyncRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppointmentDataProviderConnection>, windows_core::Ref<AppointmentCalendarSyncManagerSyncRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SyncRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SyncRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<AppointmentDataProviderConnection, AppointmentCalendarSyncManagerSyncRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSyncRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSyncRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn CreateOrUpdateAppointmentRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CreateOrUpdateAppointmentRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<AppointmentDataProviderConnection, AppointmentCalendarCreateOrUpdateAppointmentRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppointmentDataProviderConnection>, windows_core::Ref<AppointmentCalendarCreateOrUpdateAppointmentRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateOrUpdateAppointmentRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CreateOrUpdateAppointmentRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<AppointmentDataProviderConnection, AppointmentCalendarCreateOrUpdateAppointmentRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCreateOrUpdateAppointmentRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCreateOrUpdateAppointmentRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn CancelMeetingRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CancelMeetingRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<AppointmentDataProviderConnection, AppointmentCalendarCancelMeetingRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppointmentDataProviderConnection>, windows_core::Ref<AppointmentCalendarCancelMeetingRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CancelMeetingRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CancelMeetingRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<AppointmentDataProviderConnection, AppointmentCalendarCancelMeetingRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCancelMeetingRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCancelMeetingRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ForwardMeetingRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ForwardMeetingRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<AppointmentDataProviderConnection, AppointmentCalendarForwardMeetingRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppointmentDataProviderConnection>, windows_core::Ref<AppointmentCalendarForwardMeetingRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ForwardMeetingRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ForwardMeetingRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<AppointmentDataProviderConnection, AppointmentCalendarForwardMeetingRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveForwardMeetingRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveForwardMeetingRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ProposeNewTimeForMeetingRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ProposeNewTimeForMeetingRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<AppointmentDataProviderConnection, AppointmentCalendarProposeNewTimeForMeetingRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppointmentDataProviderConnection>, windows_core::Ref<AppointmentCalendarProposeNewTimeForMeetingRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ProposeNewTimeForMeetingRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ProposeNewTimeForMeetingRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<AppointmentDataProviderConnection, AppointmentCalendarProposeNewTimeForMeetingRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveProposeNewTimeForMeetingRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveProposeNewTimeForMeetingRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn UpdateMeetingResponseRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UpdateMeetingResponseRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<AppointmentDataProviderConnection, AppointmentCalendarUpdateMeetingResponseRequestEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppointmentDataProviderConnection>, windows_core::Ref<AppointmentCalendarUpdateMeetingResponseRequestEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UpdateMeetingResponseRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UpdateMeetingResponseRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<AppointmentDataProviderConnection, AppointmentCalendarUpdateMeetingResponseRequestEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUpdateMeetingResponseRequested(&self, token: i64) -> windows_core::Result<()> {

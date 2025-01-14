@@ -210,14 +210,14 @@ impl UserDataProtectionManager {
             (windows_core::Interface::vtable(this).IsContinuedDataAvailabilityExpected)(windows_core::Interface::as_raw(this), availability, &mut result__).map(|| result__)
         }
     }
-    pub fn DataAvailabilityStateChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DataAvailabilityStateChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<UserDataProtectionManager, UserDataAvailabilityStateChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserDataProtectionManager>, windows_core::Ref<UserDataAvailabilityStateChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DataAvailabilityStateChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DataAvailabilityStateChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<UserDataProtectionManager, UserDataAvailabilityStateChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDataAvailabilityStateChanged(&self, token: i64) -> windows_core::Result<()> {

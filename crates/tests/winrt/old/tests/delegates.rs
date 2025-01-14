@@ -1,8 +1,6 @@
 use core::convert::*;
-
 use windows::{Foundation::Collections::*, Foundation::*};
-
-use windows::core::Interface;
+use windows::core::*;
 
 #[test]
 fn non_generic() -> windows::core::Result<()> {
@@ -65,12 +63,7 @@ fn event() -> windows::core::Result<()> {
     let (tx, rx) = std::sync::mpsc::channel();
 
     let set_clone = set.clone();
-    // TODO: Should be able to elide the delegate construction and simply say:
-    // set.MapChanged(|sender, args| {...})?;
-    set.MapChanged(&MapChangedEventHandler::<
-        windows::core::HSTRING,
-        windows::core::IInspectable,
-    >::new(move |_, args| {
+    set.MapChanged(Some(move |_, args: Ref<IMapChangedEventArgs<_>>| {
         let args = args.as_ref().unwrap();
         tx.send(true).unwrap();
         let set = set_clone.clone();

@@ -310,28 +310,28 @@ impl SerialDevice {
             (windows_core::Interface::vtable(this).OutputStream)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn ErrorReceived<P0>(&self, reporthandler: P0) -> windows_core::Result<i64>
+    pub fn ErrorReceived<P0>(&self, reporthandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SerialDevice, ErrorReceivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SerialDevice>, windows_core::Ref<ErrorReceivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ErrorReceived)(windows_core::Interface::as_raw(this), reporthandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ErrorReceived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&reporthandler.map(|closure| super::super::Foundation::TypedEventHandler::<SerialDevice, ErrorReceivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveErrorReceived(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveErrorReceived)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn PinChanged<P0>(&self, reporthandler: P0) -> windows_core::Result<i64>
+    pub fn PinChanged<P0>(&self, reporthandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SerialDevice, PinChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SerialDevice>, windows_core::Ref<PinChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PinChanged)(windows_core::Interface::as_raw(this), reporthandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PinChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&reporthandler.map(|closure| super::super::Foundation::TypedEventHandler::<SerialDevice, PinChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePinChanged(&self, token: i64) -> windows_core::Result<()> {

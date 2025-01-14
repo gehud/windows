@@ -36,31 +36,31 @@ pub struct IThreadPoolTimerStatics_Vtbl {
 }
 pub struct ThreadPool;
 impl ThreadPool {
-    pub fn RunAsync<P0>(handler: P0) -> windows_core::Result<super::super::Foundation::IAsyncAction>
+    pub fn RunAsync<P0>(handler: Option<P0>) -> windows_core::Result<super::super::Foundation::IAsyncAction>
     where
-        P0: windows_core::Param<WorkItemHandler>,
+        P0: FnMut(windows_core::Ref<super::super::Foundation::IAsyncAction>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IThreadPoolStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RunAsync)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).RunAsync)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| WorkItemHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn RunWithPriorityAsync<P0>(handler: P0, priority: WorkItemPriority) -> windows_core::Result<super::super::Foundation::IAsyncAction>
+    pub fn RunWithPriorityAsync<P0>(handler: Option<P0>, priority: WorkItemPriority) -> windows_core::Result<super::super::Foundation::IAsyncAction>
     where
-        P0: windows_core::Param<WorkItemHandler>,
+        P0: FnMut(windows_core::Ref<super::super::Foundation::IAsyncAction>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IThreadPoolStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RunWithPriorityAsync)(windows_core::Interface::as_raw(this), handler.param().abi(), priority, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).RunWithPriorityAsync)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| WorkItemHandler::new(closure))), priority, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn RunWithPriorityAndOptionsAsync<P0>(handler: P0, priority: WorkItemPriority, options: WorkItemOptions) -> windows_core::Result<super::super::Foundation::IAsyncAction>
+    pub fn RunWithPriorityAndOptionsAsync<P0>(handler: Option<P0>, priority: WorkItemPriority, options: WorkItemOptions) -> windows_core::Result<super::super::Foundation::IAsyncAction>
     where
-        P0: windows_core::Param<WorkItemHandler>,
+        P0: FnMut(windows_core::Ref<super::super::Foundation::IAsyncAction>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IThreadPoolStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RunWithPriorityAndOptionsAsync)(windows_core::Interface::as_raw(this), handler.param().abi(), priority, options, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).RunWithPriorityAndOptionsAsync)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| WorkItemHandler::new(closure))), priority, options, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
     fn IThreadPoolStatics<R, F: FnOnce(&IThreadPoolStatics) -> windows_core::Result<R>>(callback: F) -> windows_core::Result<R> {
@@ -94,42 +94,42 @@ impl ThreadPoolTimer {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).Cancel)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn CreatePeriodicTimer<P0>(handler: P0, period: super::super::Foundation::TimeSpan) -> windows_core::Result<ThreadPoolTimer>
+    pub fn CreatePeriodicTimer<P0>(handler: Option<P0>, period: super::super::Foundation::TimeSpan) -> windows_core::Result<ThreadPoolTimer>
     where
-        P0: windows_core::Param<TimerElapsedHandler>,
+        P0: FnMut(windows_core::Ref<ThreadPoolTimer>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IThreadPoolTimerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreatePeriodicTimer)(windows_core::Interface::as_raw(this), handler.param().abi(), period, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreatePeriodicTimer)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| TimerElapsedHandler::new(closure))), period, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn CreateTimer<P0>(handler: P0, delay: super::super::Foundation::TimeSpan) -> windows_core::Result<ThreadPoolTimer>
+    pub fn CreateTimer<P0>(handler: Option<P0>, delay: super::super::Foundation::TimeSpan) -> windows_core::Result<ThreadPoolTimer>
     where
-        P0: windows_core::Param<TimerElapsedHandler>,
+        P0: FnMut(windows_core::Ref<ThreadPoolTimer>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IThreadPoolTimerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateTimer)(windows_core::Interface::as_raw(this), handler.param().abi(), delay, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateTimer)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| TimerElapsedHandler::new(closure))), delay, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn CreatePeriodicTimerWithCompletion<P0, P2>(handler: P0, period: super::super::Foundation::TimeSpan, destroyed: P2) -> windows_core::Result<ThreadPoolTimer>
+    pub fn CreatePeriodicTimerWithCompletion<P0, P2>(handler: Option<P0>, period: super::super::Foundation::TimeSpan, destroyed: Option<P2>) -> windows_core::Result<ThreadPoolTimer>
     where
-        P0: windows_core::Param<TimerElapsedHandler>,
-        P2: windows_core::Param<TimerDestroyedHandler>,
+        P0: FnMut(windows_core::Ref<ThreadPoolTimer>) -> windows_core::Result<()> + Send + 'static,
+        P2: FnMut(windows_core::Ref<ThreadPoolTimer>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IThreadPoolTimerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreatePeriodicTimerWithCompletion)(windows_core::Interface::as_raw(this), handler.param().abi(), period, destroyed.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreatePeriodicTimerWithCompletion)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| TimerElapsedHandler::new(closure))), period, core::mem::transmute_copy(&destroyed.map(|closure| TimerDestroyedHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn CreateTimerWithCompletion<P0, P2>(handler: P0, delay: super::super::Foundation::TimeSpan, destroyed: P2) -> windows_core::Result<ThreadPoolTimer>
+    pub fn CreateTimerWithCompletion<P0, P2>(handler: Option<P0>, delay: super::super::Foundation::TimeSpan, destroyed: Option<P2>) -> windows_core::Result<ThreadPoolTimer>
     where
-        P0: windows_core::Param<TimerElapsedHandler>,
-        P2: windows_core::Param<TimerDestroyedHandler>,
+        P0: FnMut(windows_core::Ref<ThreadPoolTimer>) -> windows_core::Result<()> + Send + 'static,
+        P2: FnMut(windows_core::Ref<ThreadPoolTimer>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IThreadPoolTimerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateTimerWithCompletion)(windows_core::Interface::as_raw(this), handler.param().abi(), delay, destroyed.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateTimerWithCompletion)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| TimerElapsedHandler::new(closure))), delay, core::mem::transmute_copy(&destroyed.map(|closure| TimerDestroyedHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
     fn IThreadPoolTimerStatics<R, F: FnOnce(&IThreadPoolTimerStatics) -> windows_core::Result<R>>(callback: F) -> windows_core::Result<R> {

@@ -9,7 +9,7 @@ fn action_ready() -> Result<()> {
     let (send, recv) = std::sync::mpsc::channel::<()>();
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncActionCompletedHandler::new(move |sender, status| {
+    a.SetCompleted(Some(move |sender, status| {
         assert_eq!(sender.unwrap(), &a_clone);
         assert_eq!(status, AsyncStatus::Completed);
         send.send(()).unwrap();
@@ -33,7 +33,7 @@ fn action_with_progress_ready() -> Result<()> {
     let (send, recv) = std::sync::mpsc::channel::<()>();
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncActionWithProgressCompletedHandler::new(
+    a.SetCompleted(Some(
         move |sender, status| {
             assert_eq!(sender.unwrap(), &a_clone);
             assert_eq!(status, AsyncStatus::Completed);
@@ -59,7 +59,7 @@ fn operation_ready() -> Result<()> {
     let (send, recv) = std::sync::mpsc::channel::<()>();
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncOperationCompletedHandler::new(
+    a.SetCompleted(Some(
         move |sender, status| {
             assert_eq!(sender.unwrap(), &a_clone);
             assert_eq!(status, AsyncStatus::Completed);
@@ -85,7 +85,7 @@ fn operation_with_progress_ready() -> Result<()> {
     let (send, recv) = std::sync::mpsc::channel::<()>();
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncOperationWithProgressCompletedHandler::new(
+    a.SetCompleted(Some(
         move |sender, status| {
             assert_eq!(sender.unwrap(), &a_clone);
             assert_eq!(status, AsyncStatus::Completed);
@@ -111,7 +111,7 @@ fn action_spawn() -> Result<()> {
     let (send, recv) = std::sync::mpsc::channel::<()>();
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncActionCompletedHandler::new(move |sender, status| {
+    a.SetCompleted(Some(move |sender, status| {
         assert_eq!(sender.unwrap(), &a_clone);
         assert_eq!(status, AsyncStatus::Completed);
         send.send(()).unwrap();
@@ -135,7 +135,7 @@ fn operation_spawn() -> Result<()> {
     let (send, recv) = std::sync::mpsc::channel::<()>();
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncOperationCompletedHandler::new(
+    a.SetCompleted(Some(
         move |sender, status| {
             assert_eq!(sender.unwrap(), &a_clone);
             assert_eq!(status, AsyncStatus::Completed);
@@ -161,7 +161,7 @@ fn action_with_progress_spawn() -> Result<()> {
     let (send, recv) = std::sync::mpsc::channel::<()>();
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncActionWithProgressCompletedHandler::new(
+    a.SetCompleted(Some(
         move |sender, status| {
             assert_eq!(sender.unwrap(), &a_clone);
             assert_eq!(status, AsyncStatus::Completed);
@@ -187,7 +187,7 @@ fn operation_with_progress_spawn() -> Result<()> {
     let (send, recv) = std::sync::mpsc::channel::<()>();
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncOperationWithProgressCompletedHandler::new(
+    a.SetCompleted(Some(
         move |sender, status| {
             assert_eq!(sender.unwrap(), &a_clone);
             assert_eq!(status, AsyncStatus::Completed);

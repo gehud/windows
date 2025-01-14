@@ -76,14 +76,14 @@ pub struct CoreInkIndependentInputSource(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(CoreInkIndependentInputSource, windows_core::IUnknown, windows_core::IInspectable);
 impl CoreInkIndependentInputSource {
     #[cfg(feature = "UI_Core")]
-    pub fn PointerEntering<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PointerEntering<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInkIndependentInputSource>, windows_core::Ref<super::super::super::Core::PointerEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PointerEntering)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PointerEntering)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePointerEntering(&self, cookie: i64) -> windows_core::Result<()> {
@@ -91,14 +91,14 @@ impl CoreInkIndependentInputSource {
         unsafe { (windows_core::Interface::vtable(this).RemovePointerEntering)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
     #[cfg(feature = "UI_Core")]
-    pub fn PointerHovering<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PointerHovering<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInkIndependentInputSource>, windows_core::Ref<super::super::super::Core::PointerEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PointerHovering)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PointerHovering)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePointerHovering(&self, cookie: i64) -> windows_core::Result<()> {
@@ -106,14 +106,14 @@ impl CoreInkIndependentInputSource {
         unsafe { (windows_core::Interface::vtable(this).RemovePointerHovering)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
     #[cfg(feature = "UI_Core")]
-    pub fn PointerExiting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PointerExiting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInkIndependentInputSource>, windows_core::Ref<super::super::super::Core::PointerEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PointerExiting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PointerExiting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePointerExiting(&self, cookie: i64) -> windows_core::Result<()> {
@@ -121,14 +121,14 @@ impl CoreInkIndependentInputSource {
         unsafe { (windows_core::Interface::vtable(this).RemovePointerExiting)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
     #[cfg(feature = "UI_Core")]
-    pub fn PointerPressing<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PointerPressing<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInkIndependentInputSource>, windows_core::Ref<super::super::super::Core::PointerEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PointerPressing)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PointerPressing)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePointerPressing(&self, cookie: i64) -> windows_core::Result<()> {
@@ -136,14 +136,14 @@ impl CoreInkIndependentInputSource {
         unsafe { (windows_core::Interface::vtable(this).RemovePointerPressing)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
     #[cfg(feature = "UI_Core")]
-    pub fn PointerMoving<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PointerMoving<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInkIndependentInputSource>, windows_core::Ref<super::super::super::Core::PointerEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PointerMoving)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PointerMoving)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePointerMoving(&self, cookie: i64) -> windows_core::Result<()> {
@@ -151,14 +151,14 @@ impl CoreInkIndependentInputSource {
         unsafe { (windows_core::Interface::vtable(this).RemovePointerMoving)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
     #[cfg(feature = "UI_Core")]
-    pub fn PointerReleasing<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PointerReleasing<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInkIndependentInputSource>, windows_core::Ref<super::super::super::Core::PointerEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PointerReleasing)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PointerReleasing)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePointerReleasing(&self, cookie: i64) -> windows_core::Result<()> {
@@ -166,14 +166,14 @@ impl CoreInkIndependentInputSource {
         unsafe { (windows_core::Interface::vtable(this).RemovePointerReleasing)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
     #[cfg(feature = "UI_Core")]
-    pub fn PointerLost<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PointerLost<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreInkIndependentInputSource>, windows_core::Ref<super::super::super::Core::PointerEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PointerLost)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PointerLost)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreInkIndependentInputSource, super::super::super::Core::PointerEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePointerLost(&self, cookie: i64) -> windows_core::Result<()> {
@@ -340,70 +340,70 @@ unsafe impl Sync for CoreWetStrokeUpdateEventArgs {}
 pub struct CoreWetStrokeUpdateSource(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(CoreWetStrokeUpdateSource, windows_core::IUnknown, windows_core::IInspectable);
 impl CoreWetStrokeUpdateSource {
-    pub fn WetStrokeStarting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn WetStrokeStarting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreWetStrokeUpdateSource, CoreWetStrokeUpdateEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreWetStrokeUpdateSource>, windows_core::Ref<CoreWetStrokeUpdateEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).WetStrokeStarting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).WetStrokeStarting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreWetStrokeUpdateSource, CoreWetStrokeUpdateEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveWetStrokeStarting(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveWetStrokeStarting)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn WetStrokeContinuing<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn WetStrokeContinuing<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreWetStrokeUpdateSource, CoreWetStrokeUpdateEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreWetStrokeUpdateSource>, windows_core::Ref<CoreWetStrokeUpdateEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).WetStrokeContinuing)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).WetStrokeContinuing)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreWetStrokeUpdateSource, CoreWetStrokeUpdateEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveWetStrokeContinuing(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveWetStrokeContinuing)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn WetStrokeStopping<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn WetStrokeStopping<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreWetStrokeUpdateSource, CoreWetStrokeUpdateEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreWetStrokeUpdateSource>, windows_core::Ref<CoreWetStrokeUpdateEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).WetStrokeStopping)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).WetStrokeStopping)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreWetStrokeUpdateSource, CoreWetStrokeUpdateEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveWetStrokeStopping(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveWetStrokeStopping)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn WetStrokeCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn WetStrokeCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreWetStrokeUpdateSource, CoreWetStrokeUpdateEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreWetStrokeUpdateSource>, windows_core::Ref<CoreWetStrokeUpdateEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).WetStrokeCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).WetStrokeCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreWetStrokeUpdateSource, CoreWetStrokeUpdateEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveWetStrokeCompleted(&self, cookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveWetStrokeCompleted)(windows_core::Interface::as_raw(this), cookie).ok() }
     }
-    pub fn WetStrokeCanceled<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn WetStrokeCanceled<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<CoreWetStrokeUpdateSource, CoreWetStrokeUpdateEventArgs>>,
+        P0: FnMut(windows_core::Ref<CoreWetStrokeUpdateSource>, windows_core::Ref<CoreWetStrokeUpdateEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).WetStrokeCanceled)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).WetStrokeCanceled)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<CoreWetStrokeUpdateSource, CoreWetStrokeUpdateEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveWetStrokeCanceled(&self, cookie: i64) -> windows_core::Result<()> {

@@ -230,14 +230,14 @@ pub struct IXboxLiveQualityOfServicePrivatePayloadResult_Vtbl {
 pub struct XboxLiveDeviceAddress(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(XboxLiveDeviceAddress, windows_core::IUnknown, windows_core::IInspectable);
 impl XboxLiveDeviceAddress {
-    pub fn SnapshotChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SnapshotChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<XboxLiveDeviceAddress, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<XboxLiveDeviceAddress>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SnapshotChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SnapshotChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<XboxLiveDeviceAddress, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSnapshotChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -350,14 +350,14 @@ unsafe impl Sync for XboxLiveDeviceAddress {}
 pub struct XboxLiveEndpointPair(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(XboxLiveEndpointPair, windows_core::IUnknown, windows_core::IInspectable);
 impl XboxLiveEndpointPair {
-    pub fn StateChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StateChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<XboxLiveEndpointPair, XboxLiveEndpointPairStateChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<XboxLiveEndpointPair>, windows_core::Ref<XboxLiveEndpointPairStateChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StateChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StateChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<XboxLiveEndpointPair, XboxLiveEndpointPairStateChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStateChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -628,14 +628,14 @@ unsafe impl Sync for XboxLiveEndpointPairStateChangedEventArgs {}
 pub struct XboxLiveEndpointPairTemplate(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(XboxLiveEndpointPairTemplate, windows_core::IUnknown, windows_core::IInspectable);
 impl XboxLiveEndpointPairTemplate {
-    pub fn InboundEndpointPairCreated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn InboundEndpointPairCreated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<XboxLiveEndpointPairTemplate, XboxLiveInboundEndpointPairCreatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<XboxLiveEndpointPairTemplate>, windows_core::Ref<XboxLiveInboundEndpointPairCreatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).InboundEndpointPairCreated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).InboundEndpointPairCreated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<XboxLiveEndpointPairTemplate, XboxLiveInboundEndpointPairCreatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveInboundEndpointPairCreated(&self, token: i64) -> windows_core::Result<()> {

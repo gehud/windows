@@ -3,14 +3,14 @@
 pub struct AccountsSettingsPane(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(AccountsSettingsPane, windows_core::IUnknown, windows_core::IInspectable);
 impl AccountsSettingsPane {
-    pub fn AccountCommandsRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AccountCommandsRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AccountsSettingsPane, AccountsSettingsPaneCommandsRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<AccountsSettingsPane>, windows_core::Ref<AccountsSettingsPaneCommandsRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AccountCommandsRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AccountCommandsRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AccountsSettingsPane, AccountsSettingsPaneCommandsRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAccountCommandsRequested(&self, cookie: i64) -> windows_core::Result<()> {
@@ -206,14 +206,14 @@ impl CredentialCommand {
         })
     }
     #[cfg(feature = "Security_Credentials")]
-    pub fn CreateCredentialCommandWithHandler<P0, P1>(passwordcredential: P0, deleted: P1) -> windows_core::Result<CredentialCommand>
+    pub fn CreateCredentialCommandWithHandler<P0, P1>(passwordcredential: P0, deleted: Option<P1>) -> windows_core::Result<CredentialCommand>
     where
         P0: windows_core::Param<super::super::Security::Credentials::PasswordCredential>,
-        P1: windows_core::Param<CredentialCommandCredentialDeletedHandler>,
+        P1: FnMut(windows_core::Ref<CredentialCommand>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::ICredentialCommandFactory(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateCredentialCommandWithHandler)(windows_core::Interface::as_raw(this), passwordcredential.param().abi(), deleted.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateCredentialCommandWithHandler)(windows_core::Interface::as_raw(this), passwordcredential.param().abi(), core::mem::transmute_copy(&deleted.map(|closure| CredentialCommandCredentialDeletedHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
     fn ICredentialCommandFactory<R, F: FnOnce(&ICredentialCommandFactory) -> windows_core::Result<R>>(callback: F) -> windows_core::Result<R> {
@@ -568,14 +568,14 @@ pub struct SettingsCommand(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(SettingsCommand, windows_core::IUnknown, windows_core::IInspectable, super::Popups::IUICommand);
 #[cfg(feature = "UI_Popups")]
 impl SettingsCommand {
-    pub fn CreateSettingsCommand<P0, P2>(settingscommandid: P0, label: &windows_core::HSTRING, handler: P2) -> windows_core::Result<SettingsCommand>
+    pub fn CreateSettingsCommand<P0, P2>(settingscommandid: P0, label: &windows_core::HSTRING, handler: Option<P2>) -> windows_core::Result<SettingsCommand>
     where
         P0: windows_core::Param<windows_core::IInspectable>,
-        P2: windows_core::Param<super::Popups::UICommandInvokedHandler>,
+        P2: FnMut(windows_core::Ref<super::Popups::IUICommand>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::ISettingsCommandFactory(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateSettingsCommand)(windows_core::Interface::as_raw(this), settingscommandid.param().abi(), core::mem::transmute_copy(label), handler.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateSettingsCommand)(windows_core::Interface::as_raw(this), settingscommandid.param().abi(), core::mem::transmute_copy(label), core::mem::transmute_copy(&handler.map(|closure| super::Popups::UICommandInvokedHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
     pub fn AccountsCommand() -> windows_core::Result<SettingsCommand> {
@@ -602,12 +602,12 @@ impl SettingsCommand {
             (windows_core::Interface::vtable(this).Invoked)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn SetInvoked<P0>(&self, value: P0) -> windows_core::Result<()>
+    pub fn SetInvoked<P0>(&self, value: Option<P0>) -> windows_core::Result<()>
     where
-        P0: windows_core::Param<super::Popups::UICommandInvokedHandler>,
+        P0: FnMut(windows_core::Ref<super::Popups::IUICommand>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
-        unsafe { (windows_core::Interface::vtable(this).SetInvoked)(windows_core::Interface::as_raw(this), value.param().abi()).ok() }
+        unsafe { (windows_core::Interface::vtable(this).SetInvoked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::Popups::UICommandInvokedHandler::new(closure)))).ok() }
     }
     pub fn Id(&self) -> windows_core::Result<windows_core::IInspectable> {
         let this = self;
@@ -666,14 +666,14 @@ pub struct SettingsPane(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(SettingsPane, windows_core::IUnknown, windows_core::IInspectable);
 #[cfg(feature = "deprecated")]
 impl SettingsPane {
-    pub fn CommandsRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CommandsRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SettingsPane, SettingsPaneCommandsRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SettingsPane>, windows_core::Ref<SettingsPaneCommandsRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CommandsRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CommandsRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<SettingsPane, SettingsPaneCommandsRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCommandsRequested(&self, cookie: i64) -> windows_core::Result<()> {
@@ -866,14 +866,14 @@ impl WebAccountCommand {
         }
     }
     #[cfg(feature = "Security_Credentials")]
-    pub fn CreateWebAccountCommand<P0, P1>(webaccount: P0, invoked: P1, actions: SupportedWebAccountActions) -> windows_core::Result<WebAccountCommand>
+    pub fn CreateWebAccountCommand<P0, P1>(webaccount: P0, invoked: Option<P1>, actions: SupportedWebAccountActions) -> windows_core::Result<WebAccountCommand>
     where
         P0: windows_core::Param<super::super::Security::Credentials::WebAccount>,
-        P1: windows_core::Param<WebAccountCommandInvokedHandler>,
+        P1: FnMut(windows_core::Ref<WebAccountCommand>, windows_core::Ref<WebAccountInvokedArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IWebAccountCommandFactory(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateWebAccountCommand)(windows_core::Interface::as_raw(this), webaccount.param().abi(), invoked.param().abi(), actions, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateWebAccountCommand)(windows_core::Interface::as_raw(this), webaccount.param().abi(), core::mem::transmute_copy(&invoked.map(|closure| WebAccountCommandInvokedHandler::new(closure))), actions, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
     fn IWebAccountCommandFactory<R, F: FnOnce(&IWebAccountCommandFactory) -> windows_core::Result<R>>(callback: F) -> windows_core::Result<R> {
@@ -1004,14 +1004,14 @@ impl WebAccountProviderCommand {
         }
     }
     #[cfg(feature = "Security_Credentials")]
-    pub fn CreateWebAccountProviderCommand<P0, P1>(webaccountprovider: P0, invoked: P1) -> windows_core::Result<WebAccountProviderCommand>
+    pub fn CreateWebAccountProviderCommand<P0, P1>(webaccountprovider: P0, invoked: Option<P1>) -> windows_core::Result<WebAccountProviderCommand>
     where
         P0: windows_core::Param<super::super::Security::Credentials::WebAccountProvider>,
-        P1: windows_core::Param<WebAccountProviderCommandInvokedHandler>,
+        P1: FnMut(windows_core::Ref<WebAccountProviderCommand>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IWebAccountProviderCommandFactory(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateWebAccountProviderCommand)(windows_core::Interface::as_raw(this), webaccountprovider.param().abi(), invoked.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateWebAccountProviderCommand)(windows_core::Interface::as_raw(this), webaccountprovider.param().abi(), core::mem::transmute_copy(&invoked.map(|closure| WebAccountProviderCommandInvokedHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
     fn IWebAccountProviderCommandFactory<R, F: FnOnce(&IWebAccountProviderCommandFactory) -> windows_core::Result<R>>(callback: F) -> windows_core::Result<R> {

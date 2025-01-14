@@ -26,13 +26,13 @@ impl PowerManager {
             (windows_core::Interface::vtable(this).PowerSavingMode)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         })
     }
-    pub fn PowerSavingModeChanged<P0>(changehandler: P0) -> windows_core::Result<i64>
+    pub fn PowerSavingModeChanged<P0>(changehandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::EventHandler<windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IPowerManagerStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PowerSavingModeChanged)(windows_core::Interface::as_raw(this), changehandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PowerSavingModeChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&changehandler.map(|closure| super::super::super::Foundation::EventHandler::<windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemovePowerSavingModeChanged(token: i64) -> windows_core::Result<()> {

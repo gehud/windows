@@ -150,14 +150,14 @@ unsafe impl Sync for AudioStreamDescriptor {}
 pub struct AudioTrack(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(AudioTrack, windows_core::IUnknown, windows_core::IInspectable, IMediaTrack);
 impl AudioTrack {
-    pub fn OpenFailed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn OpenFailed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioTrack, AudioTrackOpenFailedEventArgs>>,
+        P0: FnMut(windows_core::Ref<AudioTrack>, windows_core::Ref<AudioTrackOpenFailedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IAudioTrack>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).OpenFailed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).OpenFailed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioTrack, AudioTrackOpenFailedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveOpenFailed(&self, token: i64) -> windows_core::Result<()> {
@@ -945,14 +945,14 @@ impl FaceDetectionEffect {
             (windows_core::Interface::vtable(this).DesiredDetectionInterval)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn FaceDetected<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FaceDetected<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<FaceDetectionEffect, FaceDetectedEventArgs>>,
+        P0: FnMut(windows_core::Ref<FaceDetectionEffect>, windows_core::Ref<FaceDetectedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FaceDetected)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FaceDetected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<FaceDetectionEffect, FaceDetectedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFaceDetected(&self, cookie: i64) -> windows_core::Result<()> {
@@ -2790,14 +2790,14 @@ impl windows_core::RuntimeType for ISingleSelectMediaTrackList {
 }
 windows_core::imp::interface_hierarchy!(ISingleSelectMediaTrackList, windows_core::IUnknown, windows_core::IInspectable);
 impl ISingleSelectMediaTrackList {
-    pub fn SelectedIndexChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SelectedIndexChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ISingleSelectMediaTrackList, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<ISingleSelectMediaTrackList>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SelectedIndexChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SelectedIndexChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ISingleSelectMediaTrackList, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSelectedIndexChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -3612,14 +3612,14 @@ impl MediaBinder {
         static SHARED: windows_core::imp::FactoryCache<MediaBinder, windows_core::imp::IGenericFactory> = windows_core::imp::FactoryCache::new();
         SHARED.call(callback)
     }
-    pub fn Binding<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Binding<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaBinder, MediaBindingEventArgs>>,
+        P0: FnMut(windows_core::Ref<MediaBinder>, windows_core::Ref<MediaBindingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Binding)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Binding)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaBinder, MediaBindingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveBinding(&self, token: i64) -> windows_core::Result<()> {
@@ -3663,14 +3663,14 @@ unsafe impl Sync for MediaBinder {}
 pub struct MediaBindingEventArgs(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(MediaBindingEventArgs, windows_core::IUnknown, windows_core::IInspectable);
 impl MediaBindingEventArgs {
-    pub fn Canceled<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Canceled<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaBindingEventArgs, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MediaBindingEventArgs>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Canceled)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Canceled)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaBindingEventArgs, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCanceled(&self, token: i64) -> windows_core::Result<()> {
@@ -3805,14 +3805,14 @@ impl MediaSource {
         let this = &windows_core::Interface::cast::<super::super::Foundation::IClosable>(self)?;
         unsafe { (windows_core::Interface::vtable(this).Close)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn OpenOperationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn OpenOperationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaSource, MediaSourceOpenOperationCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MediaSource>, windows_core::Ref<MediaSourceOpenOperationCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).OpenOperationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).OpenOperationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaSource, MediaSourceOpenOperationCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveOpenOperationCompleted(&self, token: i64) -> windows_core::Result<()> {
@@ -3857,14 +3857,14 @@ impl MediaSource {
             (windows_core::Interface::vtable(this).ExternalTimedMetadataTracks)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn StateChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn StateChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaSource, MediaSourceStateChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MediaSource>, windows_core::Ref<MediaSourceStateChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IMediaSource3>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).StateChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).StateChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaSource, MediaSourceStateChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStateChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -4070,14 +4070,14 @@ unsafe impl Sync for MediaSource {}
 pub struct MediaSourceAppServiceConnection(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(MediaSourceAppServiceConnection, windows_core::IUnknown, windows_core::IInspectable);
 impl MediaSourceAppServiceConnection {
-    pub fn InitializeMediaStreamSourceRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn InitializeMediaStreamSourceRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaSourceAppServiceConnection, InitializeMediaStreamSourceRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MediaSourceAppServiceConnection>, windows_core::Ref<InitializeMediaStreamSourceRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).InitializeMediaStreamSourceRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).InitializeMediaStreamSourceRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaSourceAppServiceConnection, InitializeMediaStreamSourceRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveInitializeMediaStreamSourceRequested(&self, token: i64) -> windows_core::Result<()> {
@@ -4229,14 +4229,14 @@ impl windows_core::RuntimeType for MediaSourceStatus {
 pub struct MediaStreamSample(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(MediaStreamSample, windows_core::IUnknown, windows_core::IInspectable);
 impl MediaStreamSample {
-    pub fn Processed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Processed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaStreamSample, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MediaStreamSample>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Processed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Processed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaStreamSample, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveProcessed(&self, token: i64) -> windows_core::Result<()> {
@@ -4521,70 +4521,70 @@ pub struct MediaStreamSource(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(MediaStreamSource, windows_core::IUnknown, windows_core::IInspectable);
 windows_core::imp::required_hierarchy!(MediaStreamSource, IMediaSource);
 impl MediaStreamSource {
-    pub fn Closed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Closed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaStreamSource, MediaStreamSourceClosedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MediaStreamSource>, windows_core::Ref<MediaStreamSourceClosedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaStreamSource, MediaStreamSourceClosedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveClosed(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveClosed)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Starting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Starting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaStreamSource, MediaStreamSourceStartingEventArgs>>,
+        P0: FnMut(windows_core::Ref<MediaStreamSource>, windows_core::Ref<MediaStreamSourceStartingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Starting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Starting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaStreamSource, MediaStreamSourceStartingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveStarting(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveStarting)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Paused<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Paused<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaStreamSource, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MediaStreamSource>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Paused)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Paused)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaStreamSource, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePaused(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemovePaused)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SampleRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SampleRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaStreamSource, MediaStreamSourceSampleRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MediaStreamSource>, windows_core::Ref<MediaStreamSourceSampleRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SampleRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SampleRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaStreamSource, MediaStreamSourceSampleRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSampleRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSampleRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SwitchStreamsRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SwitchStreamsRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaStreamSource, MediaStreamSourceSwitchStreamsRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MediaStreamSource>, windows_core::Ref<MediaStreamSourceSwitchStreamsRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SwitchStreamsRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SwitchStreamsRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaStreamSource, MediaStreamSourceSwitchStreamsRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSwitchStreamsRequested(&self, token: i64) -> windows_core::Result<()> {
@@ -4694,14 +4694,14 @@ impl MediaStreamSource {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).AddProtectionKey)(windows_core::Interface::as_raw(this), streamdescriptor.param().abi(), keyidentifier.len().try_into().unwrap(), keyidentifier.as_ptr(), licensedata.len().try_into().unwrap(), licensedata.as_ptr()).ok() }
     }
-    pub fn SampleRendered<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SampleRendered<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MediaStreamSource, MediaStreamSourceSampleRenderedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MediaStreamSource>, windows_core::Ref<MediaStreamSourceSampleRenderedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IMediaStreamSource2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SampleRendered)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SampleRendered)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MediaStreamSource, MediaStreamSourceSampleRenderedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSampleRendered(&self, token: i64) -> windows_core::Result<()> {
@@ -5208,70 +5208,70 @@ impl windows_core::RuntimeType for MseReadyState {
 pub struct MseSourceBuffer(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(MseSourceBuffer, windows_core::IUnknown, windows_core::IInspectable);
 impl MseSourceBuffer {
-    pub fn UpdateStarting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UpdateStarting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MseSourceBuffer, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MseSourceBuffer>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UpdateStarting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UpdateStarting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MseSourceBuffer, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUpdateStarting(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveUpdateStarting)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Updated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Updated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MseSourceBuffer, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MseSourceBuffer>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MseSourceBuffer, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn UpdateEnded<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UpdateEnded<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MseSourceBuffer, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MseSourceBuffer>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UpdateEnded)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UpdateEnded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MseSourceBuffer, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUpdateEnded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveUpdateEnded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ErrorOccurred<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ErrorOccurred<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MseSourceBuffer, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MseSourceBuffer>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ErrorOccurred)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ErrorOccurred)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MseSourceBuffer, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveErrorOccurred(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveErrorOccurred)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Aborted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Aborted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MseSourceBuffer, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MseSourceBuffer>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Aborted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Aborted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MseSourceBuffer, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAborted(&self, token: i64) -> windows_core::Result<()> {
@@ -5393,28 +5393,28 @@ unsafe impl Sync for MseSourceBuffer {}
 pub struct MseSourceBufferList(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(MseSourceBufferList, windows_core::IUnknown, windows_core::IInspectable);
 impl MseSourceBufferList {
-    pub fn SourceBufferAdded<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SourceBufferAdded<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MseSourceBufferList, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MseSourceBufferList>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SourceBufferAdded)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SourceBufferAdded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MseSourceBufferList, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSourceBufferAdded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSourceBufferAdded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SourceBufferRemoved<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SourceBufferRemoved<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MseSourceBufferList, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MseSourceBufferList>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SourceBufferRemoved)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SourceBufferRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MseSourceBufferList, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSourceBufferRemoved(&self, token: i64) -> windows_core::Result<()> {
@@ -5455,42 +5455,42 @@ impl MseStreamSource {
         static SHARED: windows_core::imp::FactoryCache<MseStreamSource, windows_core::imp::IGenericFactory> = windows_core::imp::FactoryCache::new();
         SHARED.call(callback)
     }
-    pub fn Opened<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Opened<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MseStreamSource, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MseStreamSource>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Opened)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Opened)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MseStreamSource, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveOpened(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveOpened)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Ended<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Ended<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MseStreamSource, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MseStreamSource>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Ended)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Ended)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MseStreamSource, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveEnded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveEnded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Closed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Closed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MseStreamSource, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<MseStreamSource>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Closed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MseStreamSource, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveClosed(&self, token: i64) -> windows_core::Result<()> {
@@ -5631,14 +5631,14 @@ impl SceneAnalysisEffect {
             (windows_core::Interface::vtable(this).DesiredAnalysisInterval)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn SceneAnalyzed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SceneAnalyzed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<SceneAnalysisEffect, SceneAnalyzedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SceneAnalysisEffect>, windows_core::Ref<SceneAnalyzedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SceneAnalyzed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SceneAnalyzed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<SceneAnalysisEffect, SceneAnalyzedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSceneAnalyzed(&self, cookie: i64) -> windows_core::Result<()> {
@@ -6108,42 +6108,42 @@ impl TimedMetadataTrack {
             (windows_core::Interface::vtable(this).Label)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn CueEntered<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CueEntered<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<TimedMetadataTrack, MediaCueEventArgs>>,
+        P0: FnMut(windows_core::Ref<TimedMetadataTrack>, windows_core::Ref<MediaCueEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CueEntered)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CueEntered)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<TimedMetadataTrack, MediaCueEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCueEntered(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCueEntered)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn CueExited<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn CueExited<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<TimedMetadataTrack, MediaCueEventArgs>>,
+        P0: FnMut(windows_core::Ref<TimedMetadataTrack>, windows_core::Ref<MediaCueEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CueExited)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).CueExited)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<TimedMetadataTrack, MediaCueEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveCueExited(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveCueExited)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn TrackFailed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn TrackFailed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<TimedMetadataTrack, TimedMetadataTrackFailedEventArgs>>,
+        P0: FnMut(windows_core::Ref<TimedMetadataTrack>, windows_core::Ref<TimedMetadataTrackFailedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TrackFailed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TrackFailed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<TimedMetadataTrack, TimedMetadataTrackFailedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTrackFailed(&self, token: i64) -> windows_core::Result<()> {
@@ -6923,14 +6923,14 @@ impl windows_core::RuntimeType for TimedTextSize {
 pub struct TimedTextSource(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(TimedTextSource, windows_core::IUnknown, windows_core::IInspectable);
 impl TimedTextSource {
-    pub fn Resolved<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Resolved<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<TimedTextSource, TimedTextSourceResolveResultEventArgs>>,
+        P0: FnMut(windows_core::Ref<TimedTextSource>, windows_core::Ref<TimedTextSourceResolveResultEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Resolved)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Resolved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<TimedTextSource, TimedTextSourceResolveResultEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveResolved(&self, token: i64) -> windows_core::Result<()> {
@@ -7457,14 +7457,14 @@ impl VideoStabilizationEffect {
             (windows_core::Interface::vtable(this).Enabled)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn EnabledChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn EnabledChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<VideoStabilizationEffect, VideoStabilizationEffectEnabledChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<VideoStabilizationEffect>, windows_core::Ref<VideoStabilizationEffectEnabledChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).EnabledChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).EnabledChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<VideoStabilizationEffect, VideoStabilizationEffectEnabledChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveEnabledChanged(&self, cookie: i64) -> windows_core::Result<()> {
@@ -7708,14 +7708,14 @@ impl VideoTrack {
             (windows_core::Interface::vtable(this).Label)(windows_core::Interface::as_raw(this), &mut result__).map(|| core::mem::transmute(result__))
         }
     }
-    pub fn OpenFailed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn OpenFailed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<VideoTrack, VideoTrackOpenFailedEventArgs>>,
+        P0: FnMut(windows_core::Ref<VideoTrack>, windows_core::Ref<VideoTrackOpenFailedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IVideoTrack>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).OpenFailed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).OpenFailed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<VideoTrack, VideoTrackOpenFailedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveOpenFailed(&self, token: i64) -> windows_core::Result<()> {

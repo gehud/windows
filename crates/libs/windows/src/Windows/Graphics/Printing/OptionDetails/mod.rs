@@ -2734,28 +2734,28 @@ impl PrintTaskOptionDetails {
             (windows_core::Interface::vtable(this).CreateTextOption)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(optionid), core::mem::transmute_copy(displayname), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn OptionChanged<P0>(&self, eventhandler: P0) -> windows_core::Result<i64>
+    pub fn OptionChanged<P0>(&self, eventhandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<PrintTaskOptionDetails, PrintTaskOptionChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PrintTaskOptionDetails>, windows_core::Ref<PrintTaskOptionChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).OptionChanged)(windows_core::Interface::as_raw(this), eventhandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).OptionChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&eventhandler.map(|closure| super::super::super::Foundation::TypedEventHandler::<PrintTaskOptionDetails, PrintTaskOptionChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveOptionChanged(&self, eventcookie: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveOptionChanged)(windows_core::Interface::as_raw(this), eventcookie).ok() }
     }
-    pub fn BeginValidation<P0>(&self, eventhandler: P0) -> windows_core::Result<i64>
+    pub fn BeginValidation<P0>(&self, eventhandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<PrintTaskOptionDetails, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<PrintTaskOptionDetails>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).BeginValidation)(windows_core::Interface::as_raw(this), eventhandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).BeginValidation)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&eventhandler.map(|closure| super::super::super::Foundation::TypedEventHandler::<PrintTaskOptionDetails, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveBeginValidation(&self, eventcookie: i64) -> windows_core::Result<()> {

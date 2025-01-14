@@ -438,56 +438,56 @@ unsafe impl Sync for WebAccountEventArgs {}
 pub struct WebAccountMonitor(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(WebAccountMonitor, windows_core::IUnknown, windows_core::IInspectable);
 impl WebAccountMonitor {
-    pub fn Updated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Updated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<WebAccountMonitor, WebAccountEventArgs>>,
+        P0: FnMut(windows_core::Ref<WebAccountMonitor>, windows_core::Ref<WebAccountEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Updated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<WebAccountMonitor, WebAccountEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Removed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Removed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<WebAccountMonitor, WebAccountEventArgs>>,
+        P0: FnMut(windows_core::Ref<WebAccountMonitor>, windows_core::Ref<WebAccountEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Removed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<WebAccountMonitor, WebAccountEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemoved(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRemoved)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DefaultSignInAccountChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DefaultSignInAccountChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<WebAccountMonitor, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<WebAccountMonitor>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DefaultSignInAccountChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DefaultSignInAccountChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<WebAccountMonitor, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDefaultSignInAccountChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDefaultSignInAccountChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn AccountPictureUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AccountPictureUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::super::Foundation::TypedEventHandler<WebAccountMonitor, WebAccountEventArgs>>,
+        P0: FnMut(windows_core::Ref<WebAccountMonitor>, windows_core::Ref<WebAccountEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IWebAccountMonitor2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AccountPictureUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AccountPictureUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::super::Foundation::TypedEventHandler::<WebAccountMonitor, WebAccountEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAccountPictureUpdated(&self, token: i64) -> windows_core::Result<()> {

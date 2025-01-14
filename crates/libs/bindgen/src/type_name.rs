@@ -75,7 +75,7 @@ impl TypeName {
         self.1
     }
 
-    pub fn write(&self, writer: &Writer, generics: &[Type]) -> TokenStream {
+    pub fn write(&self, writer: &Writer, generics: &[Type], fish: bool) -> TokenStream {
         let name = to_ident(self.name());
         let namespace = writer.write_namespace(*self);
 
@@ -83,7 +83,8 @@ impl TypeName {
             quote! { #namespace #name }
         } else {
             let generics = generics.iter().map(|ty| ty.write_name(writer));
-            quote! { #namespace #name < #(#generics),* > }
+            let fish = fish.then(||quote! { :: });
+            quote! { #namespace #name #fish < #(#generics),* > }
         }
     }
 }

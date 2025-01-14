@@ -92,14 +92,14 @@ impl ExtendedExecutionForegroundSession {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).SetDescription)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(value)).ok() }
     }
-    pub fn Revoked<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Revoked<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<windows_core::IInspectable, ExtendedExecutionForegroundRevokedEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<ExtendedExecutionForegroundRevokedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Revoked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Revoked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<windows_core::IInspectable, ExtendedExecutionForegroundRevokedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRevoked(&self, token: i64) -> windows_core::Result<()> {

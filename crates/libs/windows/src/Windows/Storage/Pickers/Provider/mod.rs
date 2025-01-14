@@ -85,14 +85,14 @@ impl FileOpenPickerUI {
         unsafe { (windows_core::Interface::vtable(this).SetTitle)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(value)).ok() }
     }
     #[cfg(feature = "deprecated")]
-    pub fn FileRemoved<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FileRemoved<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<FileOpenPickerUI, FileRemovedEventArgs>>,
+        P0: FnMut(windows_core::Ref<FileOpenPickerUI>, windows_core::Ref<FileRemovedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FileRemoved)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FileRemoved)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<FileOpenPickerUI, FileRemovedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     #[cfg(feature = "deprecated")]
@@ -100,14 +100,14 @@ impl FileOpenPickerUI {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveFileRemoved)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Closing<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Closing<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<FileOpenPickerUI, PickerClosingEventArgs>>,
+        P0: FnMut(windows_core::Ref<FileOpenPickerUI>, windows_core::Ref<PickerClosingEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Closing)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Closing)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<FileOpenPickerUI, PickerClosingEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveClosing(&self, token: i64) -> windows_core::Result<()> {
@@ -199,28 +199,28 @@ impl FileSavePickerUI {
             (windows_core::Interface::vtable(this).TrySetFileName)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(value), &mut result__).map(|| result__)
         }
     }
-    pub fn FileNameChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn FileNameChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<FileSavePickerUI, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<FileSavePickerUI>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).FileNameChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).FileNameChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<FileSavePickerUI, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveFileNameChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveFileNameChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn TargetFileRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn TargetFileRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<FileSavePickerUI, TargetFileRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<FileSavePickerUI>, windows_core::Ref<TargetFileRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).TargetFileRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).TargetFileRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<FileSavePickerUI, TargetFileRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTargetFileRequested(&self, token: i64) -> windows_core::Result<()> {

@@ -499,98 +499,98 @@ impl GuidanceNavigator {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).SetAudioNotifications)(windows_core::Interface::as_raw(this), value).ok() }
     }
-    pub fn GuidanceUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn GuidanceUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GuidanceNavigator, GuidanceUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<GuidanceNavigator>, windows_core::Ref<GuidanceUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).GuidanceUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).GuidanceUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GuidanceNavigator, GuidanceUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveGuidanceUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveGuidanceUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn DestinationReached<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn DestinationReached<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GuidanceNavigator, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<GuidanceNavigator>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).DestinationReached)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).DestinationReached)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GuidanceNavigator, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveDestinationReached(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveDestinationReached)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Rerouting<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Rerouting<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GuidanceNavigator, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<GuidanceNavigator>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Rerouting)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Rerouting)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GuidanceNavigator, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRerouting(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRerouting)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Rerouted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Rerouted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GuidanceNavigator, GuidanceReroutedEventArgs>>,
+        P0: FnMut(windows_core::Ref<GuidanceNavigator>, windows_core::Ref<GuidanceReroutedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Rerouted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Rerouted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GuidanceNavigator, GuidanceReroutedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRerouted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRerouted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn RerouteFailed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RerouteFailed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GuidanceNavigator, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<GuidanceNavigator>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RerouteFailed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RerouteFailed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GuidanceNavigator, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRerouteFailed(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRerouteFailed)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn UserLocationLost<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UserLocationLost<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GuidanceNavigator, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<GuidanceNavigator>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UserLocationLost)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UserLocationLost)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GuidanceNavigator, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUserLocationLost(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveUserLocationLost)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn UserLocationRestored<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UserLocationRestored<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GuidanceNavigator, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<GuidanceNavigator>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UserLocationRestored)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UserLocationRestored)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<GuidanceNavigator, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUserLocationRestored(&self, token: i64) -> windows_core::Result<()> {
@@ -617,14 +617,14 @@ impl GuidanceNavigator {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).UpdateUserLocationWithPositionOverride)(windows_core::Interface::as_raw(this), userlocation.param().abi(), positionoverride).ok() }
     }
-    pub fn AudioNotificationRequested<P0>(&self, value: P0) -> windows_core::Result<i64>
+    pub fn AudioNotificationRequested<P0>(&self, value: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<GuidanceNavigator, GuidanceAudioNotificationRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<GuidanceNavigator>, windows_core::Ref<GuidanceAudioNotificationRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IGuidanceNavigator2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AudioNotificationRequested)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AudioNotificationRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&value.map(|closure| super::super::super::Foundation::TypedEventHandler::<GuidanceNavigator, GuidanceAudioNotificationRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAudioNotificationRequested(&self, token: i64) -> windows_core::Result<()> {

@@ -116,7 +116,7 @@ impl Async for IAsyncAction {
     type CompletedHandler = AsyncActionCompletedHandler;
 
     fn set_completed<F: Fn() + Send + 'static>(&self, handler: F) -> Result<()> {
-        self.SetCompleted(&AsyncActionCompletedHandler::new(move |_, _| {
+        self.SetCompleted(Some(move |_, _| {
             handler();
             Ok(())
         }))
@@ -136,7 +136,7 @@ impl<T: RuntimeType> Async for IAsyncOperation<T> {
     type CompletedHandler = AsyncOperationCompletedHandler<T>;
 
     fn set_completed<F: Fn() + Send + 'static>(&self, handler: F) -> Result<()> {
-        self.SetCompleted(&AsyncOperationCompletedHandler::new(move |_, _| {
+        self.SetCompleted(Some(move |_, _| {
             handler();
             Ok(())
         }))
@@ -156,7 +156,7 @@ impl<P: RuntimeType> Async for IAsyncActionWithProgress<P> {
     type CompletedHandler = AsyncActionWithProgressCompletedHandler<P>;
 
     fn set_completed<F: Fn() + Send + 'static>(&self, handler: F) -> Result<()> {
-        self.SetCompleted(&AsyncActionWithProgressCompletedHandler::new(move |_, _| {
+        self.SetCompleted(Some(move |_, _| {
             handler();
             Ok(())
         }))
@@ -176,7 +176,7 @@ impl<T: RuntimeType, P: RuntimeType> Async for IAsyncOperationWithProgress<T, P>
     type CompletedHandler = AsyncOperationWithProgressCompletedHandler<T, P>;
 
     fn set_completed<F: Fn() + Send + 'static>(&self, handler: F) -> Result<()> {
-        self.SetCompleted(&AsyncOperationWithProgressCompletedHandler::new(move |_, _| {
+        self.SetCompleted(Some(move |_, _| {
             handler();
             Ok(())
         }))
@@ -240,7 +240,7 @@ impl IAsyncAction {
     pub fn get(&self) -> Result<()> {
         if self.Status()? == AsyncStatus::Started {
             let (_waiter, signaler) = Waiter::new()?;
-            self.SetCompleted(&AsyncActionCompletedHandler::new(move |_, _| {
+            self.SetCompleted(Some(move |_, _| {
                 // This is safe because the waiter will only be dropped after being signaled.
                 unsafe {
                     signaler.signal();
@@ -257,7 +257,7 @@ impl<T: RuntimeType> IAsyncOperation<T> {
     pub fn get(&self) -> Result<T> {
         if self.Status()? == AsyncStatus::Started {
             let (_waiter, signaler) = Waiter::new()?;
-            self.SetCompleted(&AsyncOperationCompletedHandler::new(move |_, _| {
+            self.SetCompleted(Some(move |_, _| {
                 // This is safe because the waiter will only be dropped after being signaled.
                 unsafe {
                     signaler.signal();
@@ -274,7 +274,7 @@ impl<P: RuntimeType> IAsyncActionWithProgress<P> {
     pub fn get(&self) -> Result<()> {
         if self.Status()? == AsyncStatus::Started {
             let (_waiter, signaler) = Waiter::new()?;
-            self.SetCompleted(&AsyncActionWithProgressCompletedHandler::new(move |_, _| {
+            self.SetCompleted(Some(move |_, _| {
                 // This is safe because the waiter will only be dropped after being signaled.
                 unsafe {
                     signaler.signal();
@@ -291,7 +291,7 @@ impl<T: RuntimeType, P: RuntimeType> IAsyncOperationWithProgress<T, P> {
     pub fn get(&self) -> Result<T> {
         if self.Status()? == AsyncStatus::Started {
             let (_waiter, signaler) = Waiter::new()?;
-            self.SetCompleted(&AsyncOperationWithProgressCompletedHandler::new(move |_, _| {
+            self.SetCompleted(Some(move |_, _| {
                 // This is safe because the waiter will only be dropped after being signaled.
                 unsafe {
                     signaler.signal();

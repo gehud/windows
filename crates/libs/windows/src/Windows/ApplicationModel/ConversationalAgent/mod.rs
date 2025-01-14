@@ -50,14 +50,14 @@ impl ActivationSignalDetectionConfiguration {
             (windows_core::Interface::vtable(this).AvailabilityInfo)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn AvailabilityChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AvailabilityChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ActivationSignalDetectionConfiguration, DetectionConfigurationAvailabilityChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ActivationSignalDetectionConfiguration>, windows_core::Ref<DetectionConfigurationAvailabilityChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AvailabilityChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AvailabilityChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ActivationSignalDetectionConfiguration, DetectionConfigurationAvailabilityChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAvailabilityChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -681,42 +681,42 @@ impl ConversationalAgentSession {
         let this = &windows_core::Interface::cast::<super::super::Foundation::IClosable>(self)?;
         unsafe { (windows_core::Interface::vtable(this).Close)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn SessionInterrupted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SessionInterrupted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ConversationalAgentSession, ConversationalAgentSessionInterruptedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ConversationalAgentSession>, windows_core::Ref<ConversationalAgentSessionInterruptedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SessionInterrupted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SessionInterrupted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ConversationalAgentSession, ConversationalAgentSessionInterruptedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSessionInterrupted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSessionInterrupted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SignalDetected<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SignalDetected<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ConversationalAgentSession, ConversationalAgentSignalDetectedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ConversationalAgentSession>, windows_core::Ref<ConversationalAgentSignalDetectedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SignalDetected)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SignalDetected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ConversationalAgentSession, ConversationalAgentSignalDetectedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSignalDetected(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSignalDetected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SystemStateChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SystemStateChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<ConversationalAgentSession, ConversationalAgentSystemStateChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<ConversationalAgentSession>, windows_core::Ref<ConversationalAgentSystemStateChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SystemStateChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SystemStateChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<ConversationalAgentSession, ConversationalAgentSystemStateChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSystemStateChanged(&self, token: i64) -> windows_core::Result<()> {

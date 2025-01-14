@@ -272,14 +272,14 @@ impl WiFiDirectService {
             (windows_core::Interface::vtable(this).ServiceError)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn SessionDeferred<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SessionDeferred<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<WiFiDirectService, WiFiDirectServiceSessionDeferredEventArgs>>,
+        P0: FnMut(windows_core::Ref<WiFiDirectService>, windows_core::Ref<WiFiDirectServiceSessionDeferredEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SessionDeferred)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SessionDeferred)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<WiFiDirectService, WiFiDirectServiceSessionDeferredEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSessionDeferred(&self, token: i64) -> windows_core::Result<()> {
@@ -479,42 +479,42 @@ impl WiFiDirectServiceAdvertiser {
             (windows_core::Interface::vtable(this).ServiceError)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn SessionRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SessionRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<WiFiDirectServiceAdvertiser, WiFiDirectServiceSessionRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<WiFiDirectServiceAdvertiser>, windows_core::Ref<WiFiDirectServiceSessionRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SessionRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SessionRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<WiFiDirectServiceAdvertiser, WiFiDirectServiceSessionRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSessionRequested(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSessionRequested)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn AutoAcceptSessionConnected<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AutoAcceptSessionConnected<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<WiFiDirectServiceAdvertiser, WiFiDirectServiceAutoAcceptSessionConnectedEventArgs>>,
+        P0: FnMut(windows_core::Ref<WiFiDirectServiceAdvertiser>, windows_core::Ref<WiFiDirectServiceAutoAcceptSessionConnectedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AutoAcceptSessionConnected)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AutoAcceptSessionConnected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<WiFiDirectServiceAdvertiser, WiFiDirectServiceAutoAcceptSessionConnectedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAutoAcceptSessionConnected(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveAutoAcceptSessionConnected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn AdvertisementStatusChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AdvertisementStatusChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<WiFiDirectServiceAdvertiser, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<WiFiDirectServiceAdvertiser>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AdvertisementStatusChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AdvertisementStatusChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<WiFiDirectServiceAdvertiser, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAdvertisementStatusChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -782,14 +782,14 @@ impl WiFiDirectServiceSession {
             (windows_core::Interface::vtable(this).GetConnectionEndpointPairs)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn SessionStatusChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SessionStatusChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<WiFiDirectServiceSession, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<WiFiDirectServiceSession>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SessionStatusChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SessionStatusChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<WiFiDirectServiceSession, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSessionStatusChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -818,14 +818,14 @@ impl WiFiDirectServiceSession {
             (windows_core::Interface::vtable(this).AddDatagramSocketAsync)(windows_core::Interface::as_raw(this), value.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn RemotePortAdded<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RemotePortAdded<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<WiFiDirectServiceSession, WiFiDirectServiceRemotePortAddedEventArgs>>,
+        P0: FnMut(windows_core::Ref<WiFiDirectServiceSession>, windows_core::Ref<WiFiDirectServiceRemotePortAddedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RemotePortAdded)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RemotePortAdded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<WiFiDirectServiceSession, WiFiDirectServiceRemotePortAddedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRemotePortAdded(&self, token: i64) -> windows_core::Result<()> {

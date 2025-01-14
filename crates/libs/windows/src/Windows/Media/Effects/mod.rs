@@ -25,14 +25,14 @@ unsafe impl Sync for AcousticEchoCancellationConfiguration {}
 pub struct AudioCaptureEffectsManager(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(AudioCaptureEffectsManager, windows_core::IUnknown, windows_core::IInspectable);
 impl AudioCaptureEffectsManager {
-    pub fn AudioCaptureEffectsChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AudioCaptureEffectsChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioCaptureEffectsManager, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AudioCaptureEffectsManager>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AudioCaptureEffectsChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AudioCaptureEffectsChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioCaptureEffectsManager, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAudioCaptureEffectsChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -250,14 +250,14 @@ impl windows_core::RuntimeName for AudioEffectsManager {
 pub struct AudioRenderEffectsManager(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(AudioRenderEffectsManager, windows_core::IUnknown, windows_core::IInspectable);
 impl AudioRenderEffectsManager {
-    pub fn AudioRenderEffectsChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AudioRenderEffectsChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<AudioRenderEffectsManager, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<AudioRenderEffectsManager>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AudioRenderEffectsChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AudioRenderEffectsChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<AudioRenderEffectsManager, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAudioRenderEffectsChanged(&self, token: i64) -> windows_core::Result<()> {

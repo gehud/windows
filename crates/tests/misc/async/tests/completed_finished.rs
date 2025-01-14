@@ -29,7 +29,7 @@ fn action() -> Result<()> {
     assert_eq!(a.Status()?, AsyncStatus::Completed);
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncActionCompletedHandler::new(move |sender, status| {
+    a.SetCompleted(Some(move |sender, status| {
         let completed_thread = thread::current().id();
 
         assert_eq!(sender.unwrap(), &a_clone);
@@ -72,7 +72,7 @@ fn operation() -> Result<()> {
     assert_eq!(a.Status()?, AsyncStatus::Completed);
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncOperationCompletedHandler::new(
+    a.SetCompleted(Some(
         move |sender, status| {
             let completed_thread = thread::current().id();
 
@@ -117,7 +117,7 @@ fn action_with_progress() -> Result<()> {
     assert_eq!(a.Status()?, AsyncStatus::Completed);
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncActionWithProgressCompletedHandler::new(
+    a.SetCompleted(Some(
         move |sender, status| {
             let completed_thread = thread::current().id();
 
@@ -162,7 +162,7 @@ fn operation_with_progress() -> Result<()> {
     assert_eq!(a.Status()?, AsyncStatus::Completed);
     let a_clone = a.clone();
 
-    a.SetCompleted(&AsyncOperationWithProgressCompletedHandler::new(
+    a.SetCompleted(Some(
         move |sender, status| {
             let completed_thread = thread::current().id();
 

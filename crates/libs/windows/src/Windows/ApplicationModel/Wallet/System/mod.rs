@@ -116,14 +116,14 @@ impl WalletItemSystemStore {
             (windows_core::Interface::vtable(this).LaunchAppForItemAsync)(windows_core::Interface::as_raw(this), item.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn ItemsChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ItemsChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<WalletItemSystemStore, windows_core::IInspectable>>,
+        P0: FnMut(windows_core::Ref<WalletItemSystemStore>, windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = &windows_core::Interface::cast::<IWalletItemSystemStore2>(self)?;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ItemsChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ItemsChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<WalletItemSystemStore, windows_core::IInspectable>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveItemsChanged(&self, cookie: i64) -> windows_core::Result<()> {

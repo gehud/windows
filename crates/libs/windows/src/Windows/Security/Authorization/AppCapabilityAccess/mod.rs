@@ -32,14 +32,14 @@ impl AppCapability {
             (windows_core::Interface::vtable(this).CheckAccess)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn AccessChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn AccessChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<AppCapability, AppCapabilityAccessChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<AppCapability>, windows_core::Ref<AppCapabilityAccessChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).AccessChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).AccessChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<AppCapability, AppCapabilityAccessChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveAccessChanged(&self, token: i64) -> windows_core::Result<()> {

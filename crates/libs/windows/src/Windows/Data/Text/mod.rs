@@ -448,12 +448,12 @@ impl SelectableWordsSegmenter {
         }
     }
     #[cfg(feature = "Foundation_Collections")]
-    pub fn Tokenize<P2>(&self, text: &windows_core::HSTRING, startindex: u32, handler: P2) -> windows_core::Result<()>
+    pub fn Tokenize<P2>(&self, text: &windows_core::HSTRING, startindex: u32, handler: Option<P2>) -> windows_core::Result<()>
     where
-        P2: windows_core::Param<SelectableWordSegmentsTokenizingHandler>,
+        P2: FnMut(windows_core::Ref<super::super::Foundation::Collections::IIterable<SelectableWordSegment>>, windows_core::Ref<super::super::Foundation::Collections::IIterable<SelectableWordSegment>>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
-        unsafe { (windows_core::Interface::vtable(this).Tokenize)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(text), startindex, handler.param().abi()).ok() }
+        unsafe { (windows_core::Interface::vtable(this).Tokenize)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(text), startindex, core::mem::transmute_copy(&handler.map(|closure| SelectableWordSegmentsTokenizingHandler::new(closure)))).ok() }
     }
     pub fn CreateWithLanguage(language: &windows_core::HSTRING) -> windows_core::Result<SelectableWordsSegmenter> {
         Self::ISelectableWordsSegmenterFactory(|this| unsafe {
@@ -1135,12 +1135,12 @@ impl WordsSegmenter {
         }
     }
     #[cfg(feature = "Foundation_Collections")]
-    pub fn Tokenize<P2>(&self, text: &windows_core::HSTRING, startindex: u32, handler: P2) -> windows_core::Result<()>
+    pub fn Tokenize<P2>(&self, text: &windows_core::HSTRING, startindex: u32, handler: Option<P2>) -> windows_core::Result<()>
     where
-        P2: windows_core::Param<WordSegmentsTokenizingHandler>,
+        P2: FnMut(windows_core::Ref<super::super::Foundation::Collections::IIterable<WordSegment>>, windows_core::Ref<super::super::Foundation::Collections::IIterable<WordSegment>>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
-        unsafe { (windows_core::Interface::vtable(this).Tokenize)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(text), startindex, handler.param().abi()).ok() }
+        unsafe { (windows_core::Interface::vtable(this).Tokenize)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(text), startindex, core::mem::transmute_copy(&handler.map(|closure| WordSegmentsTokenizingHandler::new(closure)))).ok() }
     }
     pub fn CreateWithLanguage(language: &windows_core::HSTRING) -> windows_core::Result<WordsSegmenter> {
         Self::IWordsSegmenterFactory(|this| unsafe {

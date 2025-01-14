@@ -124,22 +124,22 @@ impl RemoteTextConnection {
         let this = &windows_core::Interface::cast::<IRemoteTextConnection2>(self)?;
         unsafe { (windows_core::Interface::vtable(this).ReportPredictedKeyEvent)(windows_core::Interface::as_raw(this), scancode, attributes).ok() }
     }
-    pub fn CreateInstance<P1>(connectionid: windows_core::GUID, pduforwarder: P1) -> windows_core::Result<RemoteTextConnection>
+    pub fn CreateInstance<P1>(connectionid: windows_core::GUID, pduforwarder: Option<P1>) -> windows_core::Result<RemoteTextConnection>
     where
-        P1: windows_core::Param<RemoteTextConnectionDataHandler>,
+        P1: FnMut(&[u8]) -> windows_core::Result<bool> + Send + 'static,
     {
         Self::IRemoteTextConnectionFactory(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateInstance)(windows_core::Interface::as_raw(this), connectionid, pduforwarder.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateInstance)(windows_core::Interface::as_raw(this), connectionid, core::mem::transmute_copy(&pduforwarder.map(|closure| RemoteTextConnectionDataHandler::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn CreateInstance2<P1>(connectionid: windows_core::GUID, pduforwarder: P1, options: RemoteTextConnectionOptions) -> windows_core::Result<RemoteTextConnection>
+    pub fn CreateInstance2<P1>(connectionid: windows_core::GUID, pduforwarder: Option<P1>, options: RemoteTextConnectionOptions) -> windows_core::Result<RemoteTextConnection>
     where
-        P1: windows_core::Param<RemoteTextConnectionDataHandler>,
+        P1: FnMut(&[u8]) -> windows_core::Result<bool> + Send + 'static,
     {
         Self::IRemoteTextConnectionFactory2(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).CreateInstance)(windows_core::Interface::as_raw(this), connectionid, pduforwarder.param().abi(), options, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).CreateInstance)(windows_core::Interface::as_raw(this), connectionid, core::mem::transmute_copy(&pduforwarder.map(|closure| RemoteTextConnectionDataHandler::new(closure))), options, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
     fn IRemoteTextConnectionFactory<R, F: FnOnce(&IRemoteTextConnectionFactory) -> windows_core::Result<R>>(callback: F) -> windows_core::Result<R> {

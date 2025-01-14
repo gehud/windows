@@ -707,28 +707,28 @@ impl MachineProvisioningProgressReporter {
             (windows_core::Interface::vtable(this).SessionState)(windows_core::Interface::as_raw(this), &mut result__).map(|| result__)
         }
     }
-    pub fn SessionStateChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SessionStateChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MachineProvisioningProgressReporter, DeploymentSessionStateChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MachineProvisioningProgressReporter>, windows_core::Ref<DeploymentSessionStateChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SessionStateChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SessionStateChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MachineProvisioningProgressReporter, DeploymentSessionStateChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSessionStateChanged(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSessionStateChanged)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SessionConnectionChanged<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SessionConnectionChanged<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<MachineProvisioningProgressReporter, DeploymentSessionConnectionChangedEventArgs>>,
+        P0: FnMut(windows_core::Ref<MachineProvisioningProgressReporter>, windows_core::Ref<DeploymentSessionConnectionChangedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SessionConnectionChanged)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SessionConnectionChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<MachineProvisioningProgressReporter, DeploymentSessionConnectionChangedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSessionConnectionChanged(&self, token: i64) -> windows_core::Result<()> {
@@ -749,14 +749,14 @@ impl MachineProvisioningProgressReporter {
             (windows_core::Interface::vtable(this).GetDevicePreparationExecutionContextAsync)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         }
     }
-    pub fn GetForLaunchUri<P0, P1>(launchuri: P0, heartbeathandler: P1) -> windows_core::Result<MachineProvisioningProgressReporter>
+    pub fn GetForLaunchUri<P0, P1>(launchuri: P0, heartbeathandler: Option<P1>) -> windows_core::Result<MachineProvisioningProgressReporter>
     where
         P0: windows_core::Param<super::super::Foundation::Uri>,
-        P1: windows_core::Param<DeploymentSessionHeartbeatRequested>,
+        P1: FnMut(windows_core::Ref<DeploymentSessionHeartbeatRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IMachineProvisioningProgressReporterStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).GetForLaunchUri)(windows_core::Interface::as_raw(this), launchuri.param().abi(), heartbeathandler.param().abi(), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
+            (windows_core::Interface::vtable(this).GetForLaunchUri)(windows_core::Interface::as_raw(this), launchuri.param().abi(), core::mem::transmute_copy(&heartbeathandler.map(|closure| DeploymentSessionHeartbeatRequested::new(closure))), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
     fn IMachineProvisioningProgressReporterStatics<R, F: FnOnce(&IMachineProvisioningProgressReporterStatics) -> windows_core::Result<R>>(callback: F) -> windows_core::Result<R> {

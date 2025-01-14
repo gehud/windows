@@ -1622,13 +1622,13 @@ impl NetworkInformation {
             (windows_core::Interface::vtable(this).GetSortedEndpointPairs)(windows_core::Interface::as_raw(this), destinationlist.param().abi(), sortoptions, &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn NetworkStatusChanged<P0>(networkstatushandler: P0) -> windows_core::Result<i64>
+    pub fn NetworkStatusChanged<P0>(networkstatushandler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<NetworkStatusChangedEventHandler>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::INetworkInformationStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NetworkStatusChanged)(windows_core::Interface::as_raw(this), networkstatushandler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NetworkStatusChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&networkstatushandler.map(|closure| NetworkStatusChangedEventHandler::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveNetworkStatusChanged(eventcookie: i64) -> windows_core::Result<()> {

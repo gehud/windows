@@ -715,14 +715,14 @@ unsafe impl Sync for UserActivityRequest {}
 pub struct UserActivityRequestManager(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(UserActivityRequestManager, windows_core::IUnknown, windows_core::IInspectable);
 impl UserActivityRequestManager {
-    pub fn UserActivityRequested<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn UserActivityRequested<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<UserActivityRequestManager, UserActivityRequestedEventArgs>>,
+        P0: FnMut(windows_core::Ref<UserActivityRequestManager>, windows_core::Ref<UserActivityRequestedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).UserActivityRequested)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).UserActivityRequested)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<UserActivityRequestManager, UserActivityRequestedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveUserActivityRequested(&self, token: i64) -> windows_core::Result<()> {

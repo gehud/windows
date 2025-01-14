@@ -1273,14 +1273,14 @@ impl ResourceQualifierObservableMap {
         let this = &windows_core::Interface::cast::<super::super::super::Foundation::Collections::IMap<windows_core::HSTRING, windows_core::HSTRING>>(self)?;
         unsafe { (windows_core::Interface::vtable(this).Clear)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn MapChanged<P0>(&self, vhnd: P0) -> windows_core::Result<i64>
+    pub fn MapChanged<P0>(&self, vhnd: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::Collections::MapChangedEventHandler<windows_core::HSTRING, windows_core::HSTRING>>,
+        P0: FnMut(windows_core::Ref<super::super::super::Foundation::Collections::IObservableMap<windows_core::HSTRING, windows_core::HSTRING>>, windows_core::Ref<super::super::super::Foundation::Collections::IMapChangedEventArgs<windows_core::HSTRING>>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).MapChanged)(windows_core::Interface::as_raw(this), vhnd.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).MapChanged)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&vhnd.map(|closure| super::super::super::Foundation::Collections::MapChangedEventHandler::<windows_core::HSTRING, windows_core::HSTRING>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveMapChanged(&self, token: i64) -> windows_core::Result<()> {

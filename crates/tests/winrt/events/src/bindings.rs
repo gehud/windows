@@ -36,16 +36,18 @@ impl Class {
             .map(|| result__)
         }
     }
-    pub fn Event<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Event<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<windows::Foundation::TypedEventHandler<Class, i32>>,
+        P0: FnMut(windows_core::Ref<Class>, i32) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
             (windows_core::Interface::vtable(this).Event)(
                 windows_core::Interface::as_raw(this),
-                handler.param().abi(),
+                core::mem::transmute_copy(&handler.map(|closure| {
+                    windows::Foundation::TypedEventHandler::<Class, i32>::new(closure)
+                })),
                 &mut result__,
             )
             .map(|| result__)
@@ -72,15 +74,19 @@ impl Class {
             .map(|| result__)
         })
     }
-    pub fn StaticEvent<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn StaticEvent<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<windows::Foundation::EventHandler<i32>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, i32) -> windows_core::Result<()>
+            + Send
+            + 'static,
     {
         Self::IClassStatics(|this| unsafe {
             let mut result__ = core::mem::zeroed();
             (windows_core::Interface::vtable(this).StaticEvent)(
                 windows_core::Interface::as_raw(this),
-                handler.param().abi(),
+                core::mem::transmute_copy(
+                    &handler.map(|closure| windows::Foundation::EventHandler::<i32>::new(closure)),
+                ),
                 &mut result__,
             )
             .map(|| result__)

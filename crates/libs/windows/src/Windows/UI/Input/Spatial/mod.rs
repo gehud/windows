@@ -616,196 +616,196 @@ pub struct ISpatialTappedEventArgs_Vtbl {
 pub struct SpatialGestureRecognizer(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(SpatialGestureRecognizer, windows_core::IUnknown, windows_core::IInspectable);
 impl SpatialGestureRecognizer {
-    pub fn RecognitionStarted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RecognitionStarted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialRecognitionStartedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialRecognitionStartedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RecognitionStarted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RecognitionStarted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialRecognitionStartedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRecognitionStarted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRecognitionStarted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn RecognitionEnded<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn RecognitionEnded<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialRecognitionEndedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialRecognitionEndedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).RecognitionEnded)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).RecognitionEnded)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialRecognitionEndedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveRecognitionEnded(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveRecognitionEnded)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn Tapped<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn Tapped<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialTappedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialTappedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).Tapped)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).Tapped)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialTappedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveTapped(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveTapped)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn HoldStarted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn HoldStarted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialHoldStartedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialHoldStartedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HoldStarted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HoldStarted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialHoldStartedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHoldStarted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveHoldStarted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn HoldCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn HoldCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialHoldCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialHoldCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HoldCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HoldCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialHoldCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHoldCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveHoldCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn HoldCanceled<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn HoldCanceled<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialHoldCanceledEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialHoldCanceledEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).HoldCanceled)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).HoldCanceled)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialHoldCanceledEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveHoldCanceled(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveHoldCanceled)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ManipulationStarted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ManipulationStarted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialManipulationStartedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialManipulationStartedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ManipulationStarted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ManipulationStarted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialManipulationStartedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveManipulationStarted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveManipulationStarted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ManipulationUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ManipulationUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialManipulationUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialManipulationUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ManipulationUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ManipulationUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialManipulationUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveManipulationUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveManipulationUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ManipulationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ManipulationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialManipulationCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialManipulationCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ManipulationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ManipulationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialManipulationCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveManipulationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveManipulationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn ManipulationCanceled<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn ManipulationCanceled<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialManipulationCanceledEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialManipulationCanceledEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ManipulationCanceled)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ManipulationCanceled)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialManipulationCanceledEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveManipulationCanceled(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveManipulationCanceled)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn NavigationStarted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NavigationStarted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialNavigationStartedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialNavigationStartedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NavigationStarted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NavigationStarted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialNavigationStartedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNavigationStarted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveNavigationStarted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn NavigationUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NavigationUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialNavigationUpdatedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialNavigationUpdatedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NavigationUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NavigationUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialNavigationUpdatedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNavigationUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveNavigationUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn NavigationCompleted<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NavigationCompleted<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialNavigationCompletedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialNavigationCompletedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NavigationCompleted)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NavigationCompleted)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialNavigationCompletedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNavigationCompleted(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveNavigationCompleted)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn NavigationCanceled<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn NavigationCanceled<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialGestureRecognizer, SpatialNavigationCanceledEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialGestureRecognizer>, windows_core::Ref<SpatialNavigationCanceledEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).NavigationCanceled)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).NavigationCanceled)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialGestureRecognizer, SpatialNavigationCanceledEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveNavigationCanceled(&self, token: i64) -> windows_core::Result<()> {
@@ -1225,84 +1225,84 @@ unsafe impl Sync for SpatialInteractionDetectedEventArgs {}
 pub struct SpatialInteractionManager(windows_core::IUnknown);
 windows_core::imp::interface_hierarchy!(SpatialInteractionManager, windows_core::IUnknown, windows_core::IInspectable);
 impl SpatialInteractionManager {
-    pub fn SourceDetected<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SourceDetected<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialInteractionManager, SpatialInteractionSourceEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialInteractionManager>, windows_core::Ref<SpatialInteractionSourceEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SourceDetected)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SourceDetected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialInteractionManager, SpatialInteractionSourceEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSourceDetected(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSourceDetected)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SourceLost<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SourceLost<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialInteractionManager, SpatialInteractionSourceEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialInteractionManager>, windows_core::Ref<SpatialInteractionSourceEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SourceLost)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SourceLost)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialInteractionManager, SpatialInteractionSourceEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSourceLost(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSourceLost)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SourceUpdated<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SourceUpdated<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialInteractionManager, SpatialInteractionSourceEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialInteractionManager>, windows_core::Ref<SpatialInteractionSourceEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SourceUpdated)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SourceUpdated)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialInteractionManager, SpatialInteractionSourceEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSourceUpdated(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSourceUpdated)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SourcePressed<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SourcePressed<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialInteractionManager, SpatialInteractionSourceEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialInteractionManager>, windows_core::Ref<SpatialInteractionSourceEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SourcePressed)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SourcePressed)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialInteractionManager, SpatialInteractionSourceEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSourcePressed(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSourcePressed)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn SourceReleased<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn SourceReleased<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialInteractionManager, SpatialInteractionSourceEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialInteractionManager>, windows_core::Ref<SpatialInteractionSourceEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).SourceReleased)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).SourceReleased)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialInteractionManager, SpatialInteractionSourceEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveSourceReleased(&self, token: i64) -> windows_core::Result<()> {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).RemoveSourceReleased)(windows_core::Interface::as_raw(this), token).ok() }
     }
-    pub fn InteractionDetected<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn InteractionDetected<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::super::Foundation::TypedEventHandler<SpatialInteractionManager, SpatialInteractionDetectedEventArgs>>,
+        P0: FnMut(windows_core::Ref<SpatialInteractionManager>, windows_core::Ref<SpatialInteractionDetectedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).InteractionDetected)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).InteractionDetected)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::super::Foundation::TypedEventHandler::<SpatialInteractionManager, SpatialInteractionDetectedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemoveInteractionDetected(&self, token: i64) -> windows_core::Result<()> {

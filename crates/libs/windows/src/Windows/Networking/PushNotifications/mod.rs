@@ -173,14 +173,14 @@ impl PushNotificationChannel {
         let this = self;
         unsafe { (windows_core::Interface::vtable(this).Close)(windows_core::Interface::as_raw(this)).ok() }
     }
-    pub fn PushNotificationReceived<P0>(&self, handler: P0) -> windows_core::Result<i64>
+    pub fn PushNotificationReceived<P0>(&self, handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::TypedEventHandler<PushNotificationChannel, PushNotificationReceivedEventArgs>>,
+        P0: FnMut(windows_core::Ref<PushNotificationChannel>, windows_core::Ref<PushNotificationReceivedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         let this = self;
         unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).PushNotificationReceived)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).PushNotificationReceived)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::TypedEventHandler::<PushNotificationChannel, PushNotificationReceivedEventArgs>::new(closure))), &mut result__).map(|| result__)
         }
     }
     pub fn RemovePushNotificationReceived(&self, token: i64) -> windows_core::Result<()> {
@@ -236,13 +236,13 @@ impl PushNotificationChannelManager {
             (windows_core::Interface::vtable(this).GetDefault)(windows_core::Interface::as_raw(this), &mut result__).and_then(|| windows_core::Type::from_abi(result__))
         })
     }
-    pub fn ChannelsRevoked<P0>(handler: P0) -> windows_core::Result<i64>
+    pub fn ChannelsRevoked<P0>(handler: Option<P0>) -> windows_core::Result<i64>
     where
-        P0: windows_core::Param<super::super::Foundation::EventHandler<PushNotificationChannelsRevokedEventArgs>>,
+        P0: FnMut(windows_core::Ref<windows_core::IInspectable>, windows_core::Ref<PushNotificationChannelsRevokedEventArgs>) -> windows_core::Result<()> + Send + 'static,
     {
         Self::IPushNotificationChannelManagerStatics4(|this| unsafe {
             let mut result__ = core::mem::zeroed();
-            (windows_core::Interface::vtable(this).ChannelsRevoked)(windows_core::Interface::as_raw(this), handler.param().abi(), &mut result__).map(|| result__)
+            (windows_core::Interface::vtable(this).ChannelsRevoked)(windows_core::Interface::as_raw(this), core::mem::transmute_copy(&handler.map(|closure| super::super::Foundation::EventHandler::<PushNotificationChannelsRevokedEventArgs>::new(closure))), &mut result__).map(|| result__)
         })
     }
     pub fn RemoveChannelsRevoked(token: i64) -> windows_core::Result<()> {

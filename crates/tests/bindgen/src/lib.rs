@@ -64,7 +64,6 @@ pub mod multi;
 pub mod multi_sys;
 pub mod ref_params;
 pub mod reference_async_action;
-pub mod reference_async_action_reference_namespace;
 pub mod reference_async_action_reference_type;
 pub mod reference_async_info_no_status;
 pub mod reference_async_info_status_filter;

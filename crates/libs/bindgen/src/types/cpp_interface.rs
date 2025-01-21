@@ -35,7 +35,7 @@ impl CppInterface {
             .methods()
             .map(|def| {
                 let method = CppMethod::new(def, namespace);
-                if method.dependencies.included(writer.config) {
+                if method.dependencies.included(writer.config, self.def, def) {
                     CppMethodOrName::Method(method)
                 } else {
                     CppMethodOrName::Name(method.def.name())

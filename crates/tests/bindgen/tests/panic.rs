@@ -157,3 +157,11 @@ fn failed_to_write_file() {
 
     bindgen(&format!("--out {test_path} --in default --filter POINT",));
 }
+
+#[test]
+#[should_panic(
+    expected = "`Windows.Win32.System.Com.IPersistFile.Load` requires `Windows.Win32.System.Com.STGM`"
+)]
+fn all_methods() {
+    bindgen("--out out.txt --all-methods --filter IPersistFile");
+}

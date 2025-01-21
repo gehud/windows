@@ -71,7 +71,7 @@ impl TypeMap {
         }
     }
 
-    pub fn included(&self, config: &Config) -> bool {
+    pub fn included(&self, config: &Config, interface: TypeDef, method: MethodDef) -> bool {
         self.0.iter().all(|(tn, _)| {
             // An empty namespace covers core types like `HRESULT`. This way we don't exclude methods
             // that depend on core types that aren't explicitly included in the filter.
@@ -85,6 +85,14 @@ impl TypeMap {
 
             if config.references.contains(*tn).is_some() {
                 return true;
+            }
+
+            if config.all_methods {
+                panic!(
+                    "`{}.{}` requires `{tn}`",
+                    interface.type_name(),
+                    method.name()
+                );
             }
 
             false

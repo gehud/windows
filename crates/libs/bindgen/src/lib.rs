@@ -64,6 +64,7 @@ struct Config {
     pub implement: bool,
     pub derive: Derive,
     pub link: String,
+    pub all_methods: bool,
 }
 
 /// The Windows code generator.
@@ -92,6 +93,7 @@ where
     let mut output = String::new();
     let mut sys = false;
     let mut link = "windows_link".to_string();
+    let mut all_methods = false;
 
     for arg in &args {
         if arg.starts_with('-') {
@@ -114,6 +116,7 @@ where
                 "--package" => package = true,
                 "--sys" => sys = true,
                 "--implement" => implement = true,
+                "--all-methods" => all_methods = true,
                 "--link" => kind = ArgKind::Link,
                 _ => panic!("invalid option `{arg}`"),
             },
@@ -186,6 +189,7 @@ where
         sys,
         implement,
         link,
+        all_methods,
     }));
 
     let tree = TypeTree::new(&config.types);

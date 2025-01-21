@@ -58,7 +58,7 @@ impl Interface {
             .methods()
             .map(|def| {
                 let method = Method::new(def, &self.generics);
-                if method.dependencies.included(writer.config) {
+                if method.dependencies.included(writer.config, self.def, def) {
                     MethodOrName::Method(method)
                 } else {
                     MethodOrName::Name(method.def.name())
